@@ -3,11 +3,15 @@ using namespace std;
 
 // Function to calculate GCD
 int gcd(int a, int b) {
-    return b == 0 ? a : gcd(b, a % b);
+    if(b==0){
+        return a;
+    }else{
+        return gcd(b,a%b);
+    }
 }
 
 // Function to calculate LCM
-int lcm(int a, int b) {
+int lcm(int a, int b) { // We know that a*b = lcm*hcf
     return (a / gcd(a, b)) * b;
 }
 
@@ -22,7 +26,7 @@ int smallestNumberDivisible(int n) {
 
 int main() {
     int n;
-    cout << "Enter n: ";
+    cout << "Enter n: ";// for example :5 
     cin >> n;
 
     cout << "Smallest number divisible by all numbers from 1 to " << n << ": " << smallestNumberDivisible(n) << endl;
