@@ -31,7 +31,7 @@ void generateCombinations(unordered_map<string, vector<string>>& mapping,
 
 vector<string> getCombinations(string digits, unordered_map<string, vector<string>>& mapping) {
     vector<string> result;
-    if (digits.empty()) {
+    if (digits.empty()) {//termination of recursion
         return result;
     }
     generateCombinations(mapping, digits, 0, "", result);
