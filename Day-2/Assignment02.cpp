@@ -8,8 +8,10 @@ vector<vector<int>> findTriplets(vector<int> nums, int targetSum) {
 
     sort(nums.begin(), nums.end()); // Sort the array to simplify finding triplets
 
-    for (int i = 0; i < nums.size() - 2; ++i) {
-        if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicate values
+    for (int i = 0; i < nums.size() - 2; ++i) {// Skiping duplicate values
+        if (i > 0 && nums[i] == nums[i - 1]){
+            continue; 
+        } 
 
         int left = i + 1, right = nums.size() - 1;
         while (left < right) {
@@ -34,7 +36,7 @@ vector<vector<int>> findTriplets(vector<int> nums, int targetSum) {
 }
 
 int main() {
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> nums = {1, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     int targetSum = 6;
 
     vector<vector<int>> result = findTriplets(nums, targetSum);
