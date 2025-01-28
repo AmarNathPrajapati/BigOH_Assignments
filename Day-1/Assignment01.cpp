@@ -3,9 +3,9 @@ using namespace std;
 
 bool isNameValid(string name)
 {
-    for (int i = 0; i < name.length(); ++i) {
-        name[i] = toupper(name[i]);
-    }
+    // for (int i = 0; i < name.length(); ++i) {
+    //     name[i] = toupper(name[i]);
+    // }
 
     int vowels[26] = {0}; // Array to count vowels
     for (int i = 0; i < name.length(); i++)
