@@ -39,7 +39,7 @@ vector<vector<int>> findTriplets(vector<int> nums, int targetSum) {
 }
 
 int main() {
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector<int> nums = {1, -1,-6};
     int targetSum = 6;
 
     vector<vector<int>> result = findTriplets(nums, targetSum);
@@ -56,3 +56,7 @@ int main() {
 
     return 0;
 }
+/*
+    Time Complexity: O(n^2) (kyunki outer loop O(n) hai aur har iteration ke liye inner two-pointer loop O(n) hai)
+    Space Complexity: O(n^2) (result vector me triplets store hone ki wajah se)
+*/

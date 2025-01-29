@@ -3,10 +3,6 @@ using namespace std;
 
 bool isNameValid(string name)
 {
-    // for (int i = 0; i < name.length(); ++i) {
-    //     name[i] = toupper(name[i]);
-    // }
-
     int vowels[26] = {0}; // Array to count vowels
     for (int i = 0; i < name.length(); i++)
     {
@@ -52,3 +48,9 @@ int main()
         cout << "Invalid name\n";
     return 0;
 }
+/*
+    Time complexity: 
+        worst case: O(N^2)
+        best case: O(N) ho sakta hai (agar 'S' na ho ya 'T' jaldi mil jaye)
+    Space complexity:
+*/

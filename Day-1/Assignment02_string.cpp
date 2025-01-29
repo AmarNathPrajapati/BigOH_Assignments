@@ -26,6 +26,9 @@ int main() {
     } else {
         cout << "After swapping: " << swapFirstAndLast(num) << endl; // Output: "210"
     }
-    
     return 0;
 }
+/*
+    Time complexity: O(1)
+    Space complexity: O(1)
+*/

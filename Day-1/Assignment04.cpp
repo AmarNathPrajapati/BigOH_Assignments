@@ -35,3 +35,9 @@ int main() {
     } 
     return 0;
 }
+/*
+    Time complexity:
+        Best case: O(1) (agar invalid URL mila start me hi reject ho gaya).
+        Worst case: O(N) (agar valid URL ho ya space check karna pade).
+    Space complexity: O(1)
+*/

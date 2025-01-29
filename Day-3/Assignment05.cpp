@@ -40,3 +40,7 @@ int main() {
     }
     return 0;
 }
+/*
+    Time Complexity: O(n^2), kyunki transpose aur row reversal dono operations matrix ke har element ko touch karte hain. ✅
+    Space Complexity: O(n^2), kyunki input matrix ko store karna padta hai. ✅
+*/

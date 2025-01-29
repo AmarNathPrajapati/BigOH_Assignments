@@ -42,3 +42,7 @@ int main() {
     cout <<"Number of islands are: "<< numIslands(grid);
     return 0;
 }
+/*
+    Time Complexity: O(n * m) (har cell ko ek baar visit karna hota hai).
+    Space Complexity: O(n * m) (recursion stack size ke liye).
+*/

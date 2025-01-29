@@ -34,3 +34,7 @@ int main() {
     cout << (searchMatrix(matrix, target) ? "Target is found" : "Target not found");
     return 0;
 }
+/*
+    Time Complexity: O(log(m * n)) (binary search ki wajah se jo 2D matrix ko 1D array mein flatten karke search karta hai).
+    Space Complexity: O(1)
+*/
