@@ -4,23 +4,25 @@
 
 using namespace std;
 
-// Function to check if the Sudoku board is valid
 bool isValidSudoku(vector<vector<char>>& board) {
-    vector<unordered_set<char>> rows(9), cols(9), boxes(9);
+
+    vector<unordered_set<char>> rows(9);
+    vector<unordered_set<char>> cols(9);
+    vector<unordered_set<char>> boxes(9);
 
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             char num = board[i][j];
-            if (num == '.') continue; // Ignore empty cells
-
+            if (num == '.'){
+                continue; 
+            } 
             int boxIndex = (i / 3) * 3 + j / 3;
-
+            cout<<"boxIndex: "<<boxIndex<<endl;
             // Check row, column, and 3x3 box
             if (rows[i].count(num) || cols[j].count(num) || boxes[boxIndex].count(num)) {
-                return false;
+                return false;// if num is already exist
             }
-
-            // Insert into sets
+            // Insert into sets 
             rows[i].insert(num);
             cols[j].insert(num);
             boxes[boxIndex].insert(num);
@@ -29,12 +31,11 @@ bool isValidSudoku(vector<vector<char>>& board) {
     return true;
 }
 
-// Main function with default input
 int main() {
     vector<vector<char>> board = {
         {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
         {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-        {'.', '8', '8', '.', '.', '.', '.', '6', '.'},
+        {'.', '8', '9', '.', '.', '.', '.', '6', '.'},
         {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
         {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
         {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
@@ -51,4 +52,3 @@ int main() {
 
     return 0;
 }
-

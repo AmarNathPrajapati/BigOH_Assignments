@@ -3,8 +3,7 @@
 
 using namespace std;
 
-// Function to check if position is within the board
-bool isValid(int x, int y) {
+bool isValid(int x, int y) {//checking valid position
     return x >= 0 && x < 8 && y >= 0 && y < 8;
 }
 
@@ -23,14 +22,17 @@ bool isKingSafe(vector<vector<char>>& board) {
         }
     }
 
-    if (kingX == -1) return false; // King not found
-
-    // Knight (Horse) Moves
-    int knightMoves[8][2] = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, 
+    if (kingX == -1){
+        return false; // King not found
+    }
+    //Horse Moves
+    int horseMoves[8][2] = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, 
                              {-1, -2}, {-1, 2}, {1, -2}, {1, 2}};
-    for (auto move : knightMoves) {
+    for (auto move : horseMoves) {
         int x = kingX + move[0], y = kingY + move[1];
-        if (isValid(x, y) && board[x][y] == 'N') return false;
+        if (isValid(x, y) && board[x][y] == 'N'){
+            return false;
+        } 
     }
 
     //Bishop & Queen (Diagonal)
@@ -38,7 +40,9 @@ bool isKingSafe(vector<vector<char>>& board) {
     for (auto move : diagonalMoves) {
         int x = kingX, y = kingY;
         while (isValid(x += move[0], y += move[1])) {
-            if (board[x][y] == 'B' || board[x][y] == 'Q') return false;
+            if (board[x][y] == 'B' || board[x][y] == 'Q'){
+                return false;
+            } 
             if (board[x][y] != '.') break; // Blocked by another piece
         }
     }
@@ -52,16 +56,14 @@ bool isKingSafe(vector<vector<char>>& board) {
             if (board[x][y] != '.') break; // Blocked by another piece
         }
     }
-
     return true; // King is safe
 }
 
-// Main function with default input
 int main() {
     vector<vector<char>> board = {
         {'.', '.', '.', '.', '.', '.', '.', '.'},
         {'.', '.', '.', '.', '.', 'N', '.', '.'},
-        {'.', '.', 'Q', '.', '.', '.', '.', '.'},
+        {'.', '.', '.', '.', '.', '.', '.', '.'},
         {'.', '.', '.', 'K', '.', '.', '.', '.'},
         {'.', '.', '.', '.', '.', '.', '.', '.'},
         {'.', '.', '.', '.', '.', '.', 'Q', '.'},
