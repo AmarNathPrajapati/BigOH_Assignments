@@ -60,3 +60,7 @@ int main() {
     printArray(arr);
     return 0;
 }
+/*
+    Time Complexity: O(n * m), kyunki clockwise aur anti-clockwise traversals dono matrix ke sabhi elements ko cover karte hain.
+    Space Complexity: O(n * m), matrix ko store karne ke liye.
+*/

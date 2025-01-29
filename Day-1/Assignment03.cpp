@@ -32,3 +32,9 @@ int main() {
     cout << "Largest number with all prime digits less than N: " << largestPrimeDigitNumber(n) << endl;// final output: 377
     return 0;
 }
+/*
+    Time complexity: 
+        Best-case Time Complexity: O(log N) (early termination ho jaye toh fast)
+        Worst-case Time Complexity: O(N log N) (loop pura chalne par slow ho sakta hai)
+    Space complexity: O(1)
+*/

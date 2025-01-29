@@ -25,8 +25,6 @@ void generateCombinations(unordered_map<string, vector<string>>& mapping,
             }
         }
     }
-    
-   
 }
 
 vector<string> getCombinations(string digits, unordered_map<string, vector<string>>& mapping) {
@@ -46,7 +44,7 @@ int main() {
         {"3", {"U", "P"}}
     };
     
-    string input = "123";
+    string input = "12";
     vector<string> combinations = getCombinations(input, mapping);
     for (string combination : combinations) {
         cout << combination << " ";
@@ -54,3 +52,8 @@ int main() {
 
     return 0;
 }
+/*
+    ime Complexity: O(k^d), jahan k hai average number of possible characters per digit, aur d hai digits ki total length. Har recursion step mein k possibilities ko explore kiya ja raha hai.
+
+    Space Complexity: O(k^d), kyunki recursion ke through har possible combination ko store karna padta hai, jisme total combinations k^d hote hain.
+*/

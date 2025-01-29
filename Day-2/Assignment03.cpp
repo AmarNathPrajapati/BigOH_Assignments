@@ -25,3 +25,7 @@ int main() {
     printPattern(n);
     return 0;
 }
+/*
+    Time Complexity: O(n^2) (Outer aur inner loops ke liye)
+    Space Complexity: O(1) (Koi extra space nahi)
+*/

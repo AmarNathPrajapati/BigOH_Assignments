@@ -2,6 +2,7 @@
 using namespace std;
 
 // Function to calculate GCD
+// Euclidean algorithm ki time complexity O(log(min(a, b))) hoti hai.
 int gcd(int a, int b) {
     if(b==0){
         return a;
@@ -32,3 +33,8 @@ int main() {
     cout << "Smallest number divisible by all numbers from 1 to " << n << ": " << smallestNumberDivisible(n) << endl;
     return 0;
 }
+/*
+    Best-case Time Complexity: O(1) (for smallest n)
+    Worst-case Time Complexity: O(n log n) (for larger n)
+    Space Complexity: O(log n) (due to recursion stack) (not purely O(1), because of recursive GCD function)
+*/
