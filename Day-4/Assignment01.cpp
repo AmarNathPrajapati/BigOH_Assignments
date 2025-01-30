@@ -17,7 +17,6 @@ bool isValidSudoku(vector<vector<char>>& board) {
                 continue; 
             } 
             int boxIndex = (i / 3) * 3 + j / 3;
-            cout<<"boxIndex: "<<boxIndex<<endl;
             // Check row, column, and 3x3 box
             if (rows[i].count(num) || cols[j].count(num) || boxes[boxIndex].count(num)) {
                 return false;// if num is already exist
@@ -41,7 +40,7 @@ int main() {
         {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
         {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
         {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-        {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
+        {'.', '.', '.', '.', '8', '.', '9', '7', '9'}
     };
 
     if (isValidSudoku(board)) {
@@ -52,3 +51,7 @@ int main() {
 
     return 0;
 }
+/*
+    Time complexity: O(9*9) = O(1)
+    Space complexity: O(9*9*9) = O(1)
+ */
