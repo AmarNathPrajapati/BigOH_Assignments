@@ -19,14 +19,13 @@ int maxArea(vector<int>& height) {
         }
         cout<<endl;
     }
-
     return max_area;
 }
 
 int main() {
     vector<int> height = {1, 2, 6, 2, 5, 4, 8, 3, 7};
     cout << "Max Area: " << maxArea(height) << endl;
-
+    
     return 0;
 }
 
