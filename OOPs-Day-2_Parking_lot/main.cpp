@@ -25,4 +25,10 @@ int main() {
     parkingLot.displayParkingLotStatus();  // Display parking lot status
     return 0;
 }
+// to run this code
+/*
 
+g++ Admin.cpp Customer.cpp ParkingAttendant.cpp ParkingLot.cpp ParkingTicket.cpp Payment.cpp Vehicle.cpp main.cpp -o parkingLot.exe
+./parkingLot.exe
+
+*/

@@ -36,5 +36,5 @@ int main() {
     Time complexity: 
         Best-case Time Complexity: O(log N) (early termination ho jaye toh fast)
         Worst-case Time Complexity: O(N log N) (loop pura chalne par slow ho sakta hai)
-    Space complexity: O(1)
+    Spavn ce complexity: O(1)
 */
