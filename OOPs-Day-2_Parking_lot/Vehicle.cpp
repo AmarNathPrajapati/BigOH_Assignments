@@ -1,13 +1,16 @@
 #include "Vehicle.h"
 
-Vehicle::Vehicle() {
-    vehicleType = "";
+Vehicle::Vehicle()
+{
+    vehicleType = VehicleType::CAR;
     vehicleNumber = "";
-    vehicleSize = "";
+    preferredSpot = SpotType::COMPACT;
 }
 
-Vehicle::Vehicle(std::string vehicleType, std::string vehicleNumber, std::string vehicleSize) {
-    this->vehicleType = vehicleType;
-    this->vehicleNumber = vehicleNumber;
-    this->vehicleSize = vehicleSize;
+Vehicle::Vehicle(VehicleType type, std::string number, SpotType spot)
+{
+    vehicleType = type;
+    vehicleNumber = number;
+    preferredSpot = spot;
+    isElectric = (type == VehicleType::ELECTRIC);
 }

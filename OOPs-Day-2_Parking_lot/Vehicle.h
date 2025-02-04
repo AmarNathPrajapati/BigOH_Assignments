@@ -3,15 +3,38 @@
 
 #include <string>
 
-class Vehicle {
+enum class VehicleType
+{
+    CAR,
+    TRUCK,
+    VAN,
+    MOTORCYCLE,
+    ELECTRIC
+};
+
+enum class SpotType
+{
+    COMPACT,
+    LARGE,
+    HANDICAPPED,
+    MOTORCYCLE,
+    ELECTRIC
+};
+
+class Vehicle
+{
 public:
     Vehicle();
-    Vehicle(std::string vehicleType, std::string vehicleNumber, std::string vehicleSize);
+    Vehicle(VehicleType type, std::string number, SpotType preferredSpot);
+    VehicleType getType() const { return vehicleType; }
+    SpotType getPreferredSpot() const { return preferredSpot; }
+    std::string getNumber() const { return vehicleNumber; }
 
 private:
-    std::string vehicleType;
+    VehicleType vehicleType;
     std::string vehicleNumber;
-    std::string vehicleSize;
+    SpotType preferredSpot;
+    bool isElectric;
 };
 
 #endif

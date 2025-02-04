@@ -227,44 +227,7 @@ public:
     }
 };
 
-// // Function to find the most dedicated and least dedicated user
-// void findHottestAndColdestUsers(Country &country) {
-//     map<string, int> dedicationCount;
-//     map<string, int> receivedCount;
 
-//     // Counting dedications & received bricks
-//     for (auto &cityPair : country.getCity("default").getWalls()) {
-//         for (auto &brick : cityPair.getBricks()) {
-//             dedicationCount[brick.getOwner()]++;
-//             receivedCount[brick.getDedication()]++;
-//         }
-//     }
-
-//     if (receivedCount.empty()) {
-//         cout << "\nNo dedications found.\n";
-//         return;
-//     }
-
-//     // Finding max and min
-//     string hottestUser = "", coldestUser = "";
-//     int maxBricks = 0, minBricks = INT_MAX;
-
-//     for (auto &entry : receivedCount) {
-//         if (entry.second > maxBricks) {
-//             maxBricks = entry.second;
-//             hottestUser = entry.first;
-//         }
-//         if (entry.second < minBricks) {
-//             minBricks = entry.second;
-//             coldestUser = entry.first;
-//         }
-//     }
-
-//     cout << "\nHottest User (Most Dedicated): " << (hottestUser.empty() ? "No one" : hottestUser) 
-//          << " with " << maxBricks << " bricks.\n";
-//     cout << "Coldest User (Least Dedicated): " << (coldestUser.empty() ? "No one" : coldestUser) 
-//          << " with " << minBricks << " bricks.\n";
-// }
 void findHottestAndColdestUsers(Country &country) {
     map<string, int> dedicationCount;
     map<string, int> receivedCount;
