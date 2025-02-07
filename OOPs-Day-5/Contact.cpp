@@ -1,4 +1,4 @@
 #include "Contact.h"
 
-Contact::Contact(int id, std::string name, std::string phone) 
-    : contactID(id), name(name), phoneNumber(phone), profilePicture("default.jpg"), statusMessage("Hey there!") {}
+Contact::Contact(int id, std::string n, std::string p) 
+    : contactID(id), name(n), phone(p) {}

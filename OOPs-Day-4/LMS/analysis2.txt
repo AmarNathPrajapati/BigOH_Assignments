@@ -1,0 +1,110 @@
+bhai, es task ke liye hame design finalize kar liya hai...
+ab implementation phase start karate hai...
+implement these requirement using cpp
+follow Modular desing: separate file for classes Book, BookItem, Member,  and main.cpp
+apply solid principle: at least each class must have single responsibity principle
+saare files ka code different section me dena directly in chat with little exaplanation...
+give me complete code for all files... all methods must be implemented...
+
+
+The task:
+Day-4 OOPS
+A Library Management System is a software built to handle the primary housekeeping functions of a library. Libraries rely on library management systems to manage asset collections as well as relationships with their members. Library management systems help libraries keep track of the books and their checkouts, as well as members’ subscriptions and profiles.
+Library management systems also involve maintaining the database for entering new books and recording books that have been borrowed with their respective due dates.
+System Requirements
+Always clarify requirements at the beginning of the interview. Be sure to ask questions to find the exact scope of the system that the interviewer has in mind.
+We will focus on the following set of requirements while designing the Library Management System:
+Any library member should be able to search books by their title, author, subject category as well by the publication date.
+Each book will have a unique identification number and other details including a rack number which will help to physically locate the book.
+There could be more than one copy of a book, and library members should be able to check-out and reserve any copy. We will call each copy of a book, a book item.
+The system should be able to retrieve information like who took a particular book or what are the books checked-out by a specific library member.
+There should be a maximum limit (5) on how many books a member can check-out.
+There should be a maximum limit (10) on how many days a member can keep a book.
+The system should be able to collect fines for books returned after the due date.
+Members should be able to reserve books that are not currently available.
+The system should be able to send notifications whenever the reserved books become available, as well as when the book is not returned within the due date.
+Each book and member card will have a unique barcode. The system will be able to read barcodes from books and members’ library cards.
+Use case diagram
+We have three main actors in our system:
+Librarian: Mainly responsible for adding and modifying books, book items, and users. The Librarian can also issue, reserve, and return book items.
+Member: All members can search the catalog, as well as check-out, reserve, renew, and return a book.
+System: Mainly responsible for sending notifications for overdue books, canceled reservations, etc.
+Here are the top use cases of the Library Management System:
+Add/Remove/Edit book: To add, remove or modify a book or book item.
+Search catalog: To search books by title, author, subject or publication date.
+Register new account/cancel membership: To add a new member or cancel the membership of an existing member.
+Check-out book: To borrow a book from the library.
+Reserve book: To reserve a book which is not currently available.
+Renew a book: To reborrow an already checked-out book.
+Return a book: To return a book to the library which was issued to a member.
+
+
+
+The final Structure:
+📌 Finalized Architecture
+1️⃣ Data Classes (Purely for Storing Data)
+इन classes में सिर्फ attributes होंगे, कोई methods नहीं होंगे। सारा data LibrarySystem के अंदर manage होगा।
+
+Book → (bookId, title, author, subject, publicationDate, rackNumber)
+BookItem → (bookItemId, book (reference), barcode, isAvailable)
+Member → (memberId, name, contactDetails, membershipStatus, checkedOutBooks)
+Librarian → (librarianId, name, contactDetails)
+Transaction → (transactionId, member (reference), bookItem (reference), issueDate, dueDate, returnDate)
+Fine → (fineId, member (reference), amount, isPaid)
+Reservation → (reservationId, member (reference), bookItem (reference), reservationDate, status)
+Notification → (notificationId, member (reference), message, timestamp)
+📌 LibrarySystem इनका पूरा data store और manage करेगा।
+
+2️⃣ Service Classes (Only Methods, No Data)
+इनमें सिर्फ logic और operations होंगे, ये खुद कोई data store नहीं करेंगी। LibrarySystem ही data को pass करेगा।
+
+AuthenticationService
+Librarian को register करेगा
+Librarian के ज़रिए Members को register/unregister करेगा
+किसी भी user की validity check करेगा
+
+BookService
+Books को add, remove और update करेगा
+Books को search करेगा
+
+MemberService
+Librarian के ज़रिए Members की details fetch करेगा
+
+BorrowingService
+Book checkout और return करवाएगा
+Book renew करवाएगा
+
+ReservationService
+Books को reserve करेगा
+Reserved book available होने पर notification भेजेगा
+
+FineService
+Overdue books के लिए fine calculate करेगा
+Fine payment process करेगा
+
+BarcodeScannerService
+Books और Members की barcode scanning करेगा
+
+📌 LibrarySystem इन services को call करेगा जब भी कोई operation perform करना होगा।
+3️⃣ LibrarySystem (Main Controller & Data Store)
+सारा data यहीं store होगा। (सारे Books, Members, Transactions, Reservations, आदि)
+सारी services को bind करेगा। (Authentication, Book Management, Member Management, etc.)
+सभी services को access करके operation perform करेगा।
+Ensure करेगा कि unauthorized users system की functionality use न कर पाएं।
+
+
+📌 Data Flow & Working Process
+Member Registration: Librarian → AuthenticationService.registerMember() → LibrarySystem में Member store होगा
+Book Addition: Librarian → BookService.addBook() → LibrarySystem में Book store होगा
+Book Search: Member → BookService.searchBook() → LibrarySystem में से result return होगा
+Book Checkout: Member → BorrowingService.checkoutBook() → LibrarySystem में transaction record होगा
+Book Return: Member → BorrowingService.returnBook() → Fine calculate होगा (अगर overdue है)
+Fine Payment: Member → FineService.payFine() → Fine record update होगा
+Book Reservation: Member → ReservationService.reserveBook() → Reservation record LibrarySystem में store होगा
+📌 क्यों यह Design Best है?
+✔ Single Source of Truth → सारा data LibrarySystem के अंदर store होगा, जिससे data consistency बनी रहेगी।
+✔ Modular & Maintainable → Service classes independent हैं, जिससे future में easily modify किया जा सकता है।
+✔ Separation of Concerns → Data classes सिर्फ data store करेंगी, और Service classes सिर्फ operations handle करेंगी।
+✔ Secure & Scalable → Authentication हर action को validate करेगा, जिससे unauthorized access possible नहीं होगा।
+✔ Efficient Communication → Services आपस में LibrarySystem के ज़रिए communicate करेंगी, जिससे एक structured flow maintain रहेगा।
+

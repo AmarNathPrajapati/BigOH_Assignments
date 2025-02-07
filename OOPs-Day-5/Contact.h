@@ -7,11 +7,9 @@ class Contact {
 public:
     int contactID;
     std::string name;
-    std::string phoneNumber;
-    std::string profilePicture;
-    std::string statusMessage;
+    std::string phone;
 
-    Contact(int id, std::string name, std::string phone);
+    Contact(int id, std::string n, std::string p);
 };
 
 #endif

@@ -1,23 +1,43 @@
 #include "Book.h"
 #include <iostream>
 
-Book::Book(string title, string author, string subject, string pubDate, string isbn, int rack) 
-    : title(title), author(author), subject(subject), publicationDate(pubDate), isbn(isbn), rackNumber(rack), isAvailable(true) {}
-
-void Book::displayBookInfo() {
-    cout << "Title: " << title << ", Author: " << author << ", Subject: " << subject 
-         << ", Publication Date: " << publicationDate << ", ISBN: " << isbn 
-         << ", Rack: " << rackNumber << ", Available: " << (isAvailable ? "Yes" : "No") << endl;
+// Search Functions
+bool Book::searchBookByTitle(const std::vector<Book>& books, const std::string& title) {
+    for (const auto& book : books) {
+        if (book.getTitle() == title) {
+            return true;
+        }
+    }
+    return false;
 }
 
-bool Book::checkAvailability() {
-    return isAvailable;
+bool Book::searchBookByAuthor(const std::vector<Book>& books, const std::string& author) {
+    for (const auto& book : books) {
+        if (book.getAuthor() == author) {
+            return true;
+        }
+    }
+    return false;
 }
 
-void Book::setAvailability(bool status) {
-    isAvailable = status;
+bool Book::searchBookBySubject(const std::vector<Book>& books, const std::string& subject) {
+    for (const auto& book : books) {
+        if (book.getSubject() == subject) {
+            return true;
+        }
+    }
+    return false;
 }
 
-string Book::getISBN() {
-    return isbn;
+bool Book::searchBookByPublicationDate(const std::vector<Book>& books, int year) {
+    for (const auto& book : books) {
+        if (book.getPublicationYear() == year) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Book::addBookItem(const BookItem& item) {
+    copies.push_back(item);
 }

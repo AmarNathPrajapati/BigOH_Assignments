@@ -2,16 +2,29 @@
 #define STATUS_H
 
 #include <string>
+#include <ctime>
 
 class Status {
 public:
     int statusID;
     int userID;
-    std::string timestamp;
-    std::string statusType;
-    std::string statusContent;
+    std::time_t timestamp;
+    virtual ~Status() = default;
+    virtual std::string getStatusType() = 0;
+};
 
-    Status(int id, int user, std::string type, std::string content);
+class TextStatus : public Status {
+public:
+    std::string text;
+    TextStatus(int id, int user, std::string txt);
+    std::string getStatusType() override;
+};
+
+class ImageStatus : public Status {
+public:
+    std::string imagePath;
+    ImageStatus(int id, int user, std::string imgPath);
+    std::string getStatusType() override;
 };
 
 #endif

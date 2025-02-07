@@ -71,7 +71,6 @@ public:
     ParkingLot(int totalFloors, int spotsPerFloor);
     bool parkVehicle(Vehicle *vehicle, int floorNumber);
     bool removeVehicle(std::string vehicleNumber);
-    
     void displayFloorStatus(int floorNumber) const;
     void displayParkingLotStatus() const; // Added this method
     bool isFull() const;

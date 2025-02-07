@@ -1,4 +1,4 @@
 #include "User.h"
 
-User::User(int id, std::string name, std::string phone, std::string email) 
-    : userID(id), name(name), phoneNumber(phone), email(email), profilePicture("default.jpg"), statusMessage("Hey there!") {}
+User::User(int id, std::string n, std::string p, std::string e) 
+    : userID(id), name(n), phone(p), email(e) {}

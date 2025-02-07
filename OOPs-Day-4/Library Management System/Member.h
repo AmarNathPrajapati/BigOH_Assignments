@@ -1,28 +1,33 @@
 #ifndef MEMBER_H
 #define MEMBER_H
 
-#include <iostream>
+#include <string>
 #include <vector>
+#include "BookItem.h"
 #include "Book.h"
-#include "FineService.h"
-#include "Utils.h"
-
-using namespace std;
+#include "NotificationSystem.h"
 
 class Member {
 private:
-    string name;
-    string memberId;
-    vector<pair<Book*, int>> borrowedBooks; // Stores book and issue date
+    std::string name;
+    int memberID;
+    std::vector<BookItem*> checkedOutBooks;
+    int fineAmount;
 
 public:
-    Member(string name, string id);
-    
-    void borrowBook(Book* book);
-    void returnBook(string isbn);
-    void displayBorrowedBooks();
-    
-    string getMemberId() const;  
+    Member(int id, const std::string& name) : memberID(id), name(name), fineAmount(0) {}
+
+    void checkOutBook(BookItem& bookItem);
+    void returnBook(BookItem& bookItem);
+    void reserveBook(Book& book);
+    void renewBook(BookItem& bookItem);
+    bool hasOverdueBooks() const;
+    void addFine(int fine);
+    int getFineAmount() const { return fineAmount; }
+    void clearFines() { fineAmount = 0; }
+
+    std::string getName() const { return name; }
+    int getMemberID() const { return memberID; }
 };
 
 #endif

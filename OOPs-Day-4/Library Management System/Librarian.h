@@ -1,15 +1,20 @@
 #ifndef LIBRARIAN_H
 #define LIBRARIAN_H
 
-#include "Book.h"
-#include "NotificationService.h"
 #include <vector>
+#include "Member.h"
+#include "Book.h"
 
-class Librarian : public Observer {
+class Librarian {
 public:
-    void addBook(vector<Book*>& books, Book* newBook);
-    void removeBook(vector<Book*>& books, string isbn);
-    void update(string message) override; // Observer Pattern
+    void registerMember(Member& member);
+    void cancelMembership(Member& member);
+    void addBook(Book& book);
+    void removeBook(Book& book);
+    void modifyBookDetails(Book& book);
+    void issueBook(Member& member, BookItem& bookItem);
+    void reserveBook(Member& member, Book& book);
+    void returnBook(Member& member, BookItem& bookItem);
 };
 
 #endif

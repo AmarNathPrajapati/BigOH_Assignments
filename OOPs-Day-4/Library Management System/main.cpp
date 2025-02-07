@@ -1,39 +1,39 @@
-#include "Library.h"
+#include <iostream>
+#include "Book.h"
+#include "BookItem.h"
+#include "Member.h"
 #include "Librarian.h"
-#include "NotificationService.h"
+#include "NotificationSystem.h"
 
 int main() {
-    Library lib;
+    // Create Books
+    Book book1(1, "Book Title 1", "Author 1", "Subject 1", 2020);
+    Book book2(2, "Book Title 2", "Author 2", "Subject 2", 2021);
+    
+    // Add Book Items to Books
+    BookItem bookItem1(1, "Rack 1");
+    BookItem bookItem2(2, "Rack 2");
+    
+    book1.addBookItem(bookItem1);
+    book2.addBookItem(bookItem2);
+    
+    // Create Member
+    Member member(1, "John Doe");
+    
+    // Librarian actions
     Librarian librarian;
-    NotificationService notificationService;
-
-    // Adding Books
-    Book* book1 = new Book("C++ Basics", "Bjarne Stroustrup", "Programming", "1998", "12345", 1);
-    Book* book2 = new Book("Python 101", "Guido van Rossum", "Programming", "2000", "67890", 2);
-    lib.addBook(book1);
-    lib.addBook(book2);
-
-    // Register Members
-    Member* member1 = new Member("Alice", "M001");
-    Member* member2 = new Member("Bob", "M002");
-    lib.registerMember(member1);
-    lib.registerMember(member2);
-
-    // Librarian subscribes to notifications
-    notificationService.subscribe(&librarian);
-
-    // Borrow Books
-    member1->borrowBook(book1);
-    member2->borrowBook(book2);
-
-    // Show All Books
-    lib.showAllBooks();
-
-    // Return Books (Simulate overdue)
-    member1->returnBook("12345");
-
-    // Notify overdue book return
-    notificationService.notify("Overdue book returned!");
-
+    librarian.addBook(book1);
+    librarian.addBook(book2);
+    
+    librarian.issueBook(member, bookItem1);
+    member.checkOutBook(bookItem1);
+    
+    // Send notification
+    NotificationSystem notificationSystem;
+    notificationSystem.sendNotification("A new book has been issued to you!");
+    
+    // Return Book
+    librarian.returnBook(member, bookItem1);
+    
     return 0;
 }

@@ -6,17 +6,17 @@ int main()
     ATM atm;
 
     // Top up the ATM
-    atm.topUpATM(500, 5);
-    atm.topUpATM(100, 5);
-    atm.topUpATM(200, 2);
+    atm.topUpATM(500, 1);
+    atm.topUpATM(100, 10);
 
     // Display initial balance
     atm.displayBalance();
 
     // Withdraw money
-    atm.withdrawCash(2300);
-    atm.withdrawCash(700);
-    atm.withdrawCash(450000000);
+    // atm.withdrawCash(2300);
+    // atm.withdrawCash(700);
+    // atm.withdrawCash(450000000);
+    atm.withdrawCash(200);
 
     // Display balance after withdrawal
     atm.displayBalance();

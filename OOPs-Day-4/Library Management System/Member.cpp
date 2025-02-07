@@ -1,35 +1,62 @@
 #include "Member.h"
-#include "Constants.h"
+#include <iostream>
+#include <algorithm>
 
-Member::Member(string name, string id) : name(name), memberId(id) {}
-
-string Member::getMemberId() const {  
-    return memberId;  
-}
-
-void Member::borrowBook(Book* book) {
-    if (borrowedBooks.size() < MAX_BORROW_LIMIT && book->checkAvailability()) {
-        borrowedBooks.push_back({book, Utils::getCurrentDate()});
-        book->setAvailability(false);
-        cout << name << " borrowed: " << book->getISBN() << endl;
-    } else {
-        cout << "Cannot borrow more books or book unavailable!" << endl;
+void Member::checkOutBook(BookItem &bookItem)
+{
+    if (checkedOutBooks.size() < 5)
+    {
+        checkedOutBooks.push_back(&bookItem);
+        bookItem.setAvailability(false);
+        std::cout << "Book checked out successfully." << std::endl;
+    }
+    else
+    {
+        std::cout << "You cannot check out more than 5 books." << std::endl;
     }
 }
- 
-void Member::returnBook(string isbn) {
-    int currentDate = Utils::getCurrentDate();
-    for (auto it = borrowedBooks.begin(); it != borrowedBooks.end(); ++it) {
-        if (it->first->getISBN() == isbn) {
-            int overdueDays = Utils::calculateDaysBetween(it->second, currentDate) - MAX_BORROW_DAYS;
-            if (overdueDays > 0) {
-                cout << "Fine due: Rs. " << FineService::calculateFine(overdueDays) << endl;
-            }
-            it->first->setAvailability(true);
-            borrowedBooks.erase(it);
-            cout << name << " returned book: " << isbn << endl;
-            return;
-        }
+
+void Member::returnBook(BookItem &bookItem)
+{
+    auto it = std::find(checkedOutBooks.begin(), checkedOutBooks.end(), &bookItem);
+    if (it != checkedOutBooks.end())
+    {
+        checkedOutBooks.erase(it);
+        bookItem.setAvailability(true);
+        std::cout << "Book returned successfully." << std::endl;
     }
-    cout << "Book not found in borrowed list!" << endl;
+    else
+    {
+        std::cout << "You haven't checked out this book." << std::endl;
+    }
+}
+
+void Member::reserveBook(Book &book)
+{
+    std::cout << "Book has been reserved for you." << std::endl;
+}
+
+bool Member::hasOverdueBooks() const
+{
+    return fineAmount > 0;
+}
+
+void Member::addFine(int fine)
+{
+    fineAmount += fine;
+}
+
+void Member::clearFines()
+{
+    fineAmount = 0;
+}
+
+void Member::renewBook(BookItem &bookItem)
+{
+    std::cout << "Book renewed." << std::endl;
+}
+
+int Member::getFineAmount() const
+{
+    return fineAmount;
 }
