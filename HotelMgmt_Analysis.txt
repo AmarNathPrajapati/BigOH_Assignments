@@ -1,0 +1,388 @@
+bhai, ye task hai... esame ye batana ki kya kya entities possible hai... un enities ke kya kya attributes and method possible hai...aur ye entities aapas me kaise communicate karenge (means relationship between them)... entites me bich kaun sa data transfer hoga aur kaise hoga... aur ham user ko kaise authenticate kar sakate hai... 
+
+Test-OOPs
+Hotel Management system
+Problem Statement :
+Application for Hotel reservation. We will take the selection criteria from user and display the hotels list for user basing on the criteria. User can book the room if there is availability of the rooms in that particular hotel. There are three different types of user roles for the application they are administrator , hotel agent and normal user. Following are the actions provided for each user.
+
+
+Normal user :
+Can register for the site
+Search the hotel details basing on the criteria.
+Book the hotel room
+Can modify the self details.
+
+
+Hotel Agent:
+Can register for the site
+Can add/update the details of the hotel.
+
+
+Adminstrator:
+Will approve the new hotel details added to the application
+Can delete the user/hotel details.
+
+Minimal Features :
+Adding Hotel information such as hotel name, location, number of rooms , facilities etc. to the database
+
+Listing the hotels based on different criteria selected by the user.
+
+User able to select a hotel and book a room.
+
+Booking permitted only if there are rooms available
+
+Displaying the reservation status.
+
+Registration of users.
+
+Update user details.
+
+Modify hotel details.
+
+Approval of the details entered by the hotel agent.
+
+Delete user/hotel details by admin
+
+Additional Features:
+Taking Feedback from user.
+
+Rating the hotels based on the feedback.
+
+Goals:
+To complete the hotel booking flow, registration of the users, adding details of the hotels.
+
+Deliverables:
+Minimal Features and additional features provided if time permits.
+Out of scope:
+We are not embedding payment gateway in the current application we will try if time permits after completion of additional features.
+
+
+----bhai, ab ye bata ki ename data classes kya hongi... Service classes kya hongi... all service classes hotelmgmt se kaise relate karengi
+
+----bhai, discussion ke baad... final decision ye liya gaya... sare method related data classes User, Hotel, Room, Booking, Feedback...  respective Service classes UserService, HotelService, RoomService, BookingService, FeedbackService, AdminService ke under aayenge...aur User, Hotel, Room, Booking, Feedback as a data class banenge ye sab Service classes ke method ko use karenge for communication...ye saare service classes hotel management se related honge..toh bhai, ab ye batao ki final attributes and method kya hoge for each enity...
+
+
+Final decision for data classes, Service Classes and HotelManagementWeb ans Server....
+
+1. Data Classes (Entities)
+These are pure data holder classes that store information.
+
+User (Represents system users - Admin, Agent, Normal User)
+Attributes:
+userID (int) - Unique identifier for the user.
+name (string) - User's full name.
+email (string) - User's email (unique).
+password (string) - Encrypted password.
+role (enum) - User type: Admin / Agent / Normal.
+bookings (vector<int>) - List of booking IDs associated with this user.
+
+
+Hotel (Represents a hotel)
+Attributes:
+hotelID (int) - Unique identifier for the hotel.
+name (string) - Hotel name.
+location (string) - City or address.
+rooms (vector<int>) - List of room IDs available in the hotel.
+facilities (vector<string>) - List of facilities (WiFi, Pool, Gym, etc.).
+rating (float) - Average rating of the hotel.
+approvedByAdmin (bool) - Whether the admin has approved the hotel.
+
+
+Room (Represents an individual room in a hotel)
+Attributes:
+roomID (int) - Unique identifier for the room.
+hotelID (int) - Reference to the hotel.
+roomType (enum) - Single / Double / Suite.
+pricePerNight (double) - Price of the room per night.
+availability (bool) - True if available, false otherwise.
+
+
+Booking (Stores booking details)
+Attributes:
+bookingID (int) - Unique identifier.
+userID (int) - User who made the booking.
+hotelID (int) - Hotel where the room is booked.
+roomID (int) - Room booked.
+checkInDate (date) - Check-in date.
+checkOutDate (date) - Check-out date.
+status (enum) - Pending / Confirmed / Cancelled.
+
+Feedback (Stores user reviews & ratings)
+Attributes:
+feedbackID (int) - Unique identifier.
+userID (int) - User who gave the feedback.
+hotelID (int) - Hotel being reviewed.
+rating (int) - Rating (1-5 stars).
+comment (string) - User's feedback message.
+
+
+Payment (Minimal implementation)
+
+Attributes:
+paymentID, userID, bookingID, amount, status
+
+
+
+2. Service Classes
+Service classes provide functionality and act as business logic layers.
+
+UserService (Handles user-related operations)
+Methods:
+registerUser(name, email, password, role) -> User
+isAuthenticated(userID)
+isAdmin(int userID)
+isAgent(int userID)
+updateProfile(userID, newDetails) -> bool
+deleteUser(userID) -> bool (User and Agent can delete Own Profile and Admin can also delete any user and agent profile)
+Search the approve hotel details basing on the criteria. 
+
+
+HotelService (Manages hotels)
+Methods:
+addHotel(name, location, facilities) -> Hotel (Only can be done Admin and Agent)
+updateHotel(hotelID, updatedDetails) -> bool  (Only can be done Admin and Agent)
+getHotels(criteria) -> vector<Hotel> -> (if agent and admin show all hotels and for normal user show only approved hotels)
+getHotelDetails(hotelID) -> Hotel (if unapproved show agent and admin and for normal user show only approved hotels)
+
+
+RoomService (Manages room availability & pricing)
+Methods:
+addRoom(hotelID, roomType, price) -> Room (Only can be done Admin and Agent)
+updateRoom(roomID, updatedDetails) -> bool(Only can be done Admin and Agent)
+getAvailableRooms(hotelID) -> vector<Room (for all)
+updateAvailability(roomID, status) -> bool (Only can be done Admin and Agent)
+
+
+BookingService (Handles room booking & cancellations)
+Methods: (for all... Admin and Agent can book on the behalf of User)
+createBooking(userID, hotelID, roomID, checkIn, checkOut) -> Booking
+cancelBooking(bookingID) -> bool
+getUserBookings(userID) -> vector<Booking>
+getBookingDetails(bookingID) -> Booking
+
+
+FeedbackService (Manages feedback & ratings)
+Methods:(For all)
+addFeedback(userID, hotelID, rating, comment) -> bool
+getFeedback(hotelID) -> vector<Feedback>
+getUserFeedback(userID) -> vector<Feedback>
+
+
+AdminService (Handles admin-specific tasks)
+Methods:
+approveHotel(hotelID) -> bool
+deleteUser(userID) -> bool
+deleteHotel(hotelID) -> bool
+canRegisterAnyUser(userID) -> bool
+
+
+7. PaymentService (Minimal payment handling)
+processPayment(userID, bookingID, amount) -> Payment
+refundPayment(paymentID) -> bool (Only Admin can refund)
+getPaymentDetails(paymentID) -> Payment
+
+HotelManagementWeb Class (without register user can see hotels)
+    displayApprovedHotels() -> vector<Hotel>
+
+
+HotelManagementDB Class
+Responsibilities (As a Database Server)
+    vector<User> users; (सभी registered users)
+    vector<Hotel> hotels; (सभी hotels, approved/unapproved दोनों)
+    vector<Room> rooms; (सभी rooms)
+    vector<Booking> bookings; (सभी bookings)
+    vector<Feedback> feedbacks; (सभी feedback)
+    vector<Payment> payments; (सभी payments details)
+
+bhai, final data services classes ka attribute and method modify karake do
+aur Payment system ko bhi implementation karana hai
+
+
+
+bhai, ab requirement and design Analysis phase complete ho gaya hai.... ab implementation phase start karate hai.
+
+--follow Modular desing: separate file for user, hotel, room, booking, feedback, UserService, HotelService, RoomService, BookingService, FeedbackService, AdminService, HotelManagementWeb, HotelManagementDB (.h and .cpp) and main.cpp
+
+--apply solid principle: at least each class must have single responsibity principle
+
+--saare files ka code different section me dena directly in chat with little exaplanation...
+
+--give me complete code for all files... all methods must be implemented...
+
+
+
+
+
+
+final class HotelManagement {
+private:
+    static HotelManagement* instance;
+    vector<User> users;
+    vector<Hotel> hotels;
+    vector<Room> rooms;
+    vector<Booking> bookings;
+    vector<Feedback> feedbacks;
+
+    UserService userService;
+    HotelService hotelService;
+    RoomService roomService;
+    BookingService bookingService;
+    FeedbackService feedbackService;
+    AdminService adminService;
+
+    // Private constructor (Singleton)
+    HotelManagement() {}
+
+public:
+    static HotelManagement* getInstance() {
+        if (instance == nullptr) {
+            instance = new HotelManagement();
+        }
+        return instance;
+    }
+
+    UserService& getUserService() { return userService; }
+    HotelService& getHotelService() { return hotelService; }
+    RoomService& getRoomService() { return roomService; }
+    BookingService& getBookingService() { return bookingService; }
+    FeedbackService& getFeedbackService() { return feedbackService; }
+    AdminService& getAdminService() { return adminService; }
+};
+HotelManagement* HotelManagement::instance = nullptr;
+
+
+
+
+
+
+bhai, ab requirement and design Analysis phase complete ho gaya hai.... ab implementation phase start karate hai.
+
+--follow Modular desing: separate file for user, hotel, room, booking, feedback, UserService, HotelService, RoomService, BookingService, FeedbackService, AdminService, HotelManagement (.h and .cpp) and main.cpp
+
+--apply solid principle: at least each class must have single responsibity principle
+
+--saare files ka code different section me dena directly in chat with little exaplanation...
+
+--give me complete code for all files... all methods must be implemented...
+--authentication must be implemented... Bina Registration ke koi bhi user services ki specific functionality ka use na kar sake.
+Admin ka kaam koi agent ya user na kar paye...
+
+
+
+step3: bhai, kya ye possible hai ki 
+1. ham ek Hotelmanagement final class banaye...jisame sara database ho... aur vo saari services ko bind karata ho...
+2. Bina Registration ke koi bhi user services ki specific functionality ka use na kar sake.
+3. Admin ka kaam koi agent ya user na kar paye...
+
+
+3. How Entities & Services Interact?
+Example: Hotel Booking Flow
+User logs in via UserService.loginUser().
+User searches hotels via HotelService.getHotels(criteria).
+User selects a hotel and views available rooms via RoomService.getAvailableRooms(hotelID).
+User books a room using BookingService.createBooking(userID, hotelID, roomID, checkIn, checkOut).
+RoomService.updateAvailability(roomID, false) updates the room status.
+User can give feedback using FeedbackService.addFeedback(userID, hotelID, rating, comment).
+Final System Design Summary
+Entities: User, Hotel, Room, Booking, Feedback.
+Service Classes: UserService, HotelService, RoomService, BookingService, FeedbackService, AdminService.
+Service Classes Perform All Operations: Data classes are pure data holders.
+Interaction: Entities communicate via respective services, ensuring modularity.
+Admin Approves New Hotels: AdminService has control over hotel approval.
+🚀 Next Steps:
+Would you like:
+
+A database schema?
+API design?
+Code implementation for any service class?
+
+
+📂 HotelManagementSystem
+│── 📄 User.h / User.cpp
+│── 📄 Hotel.h / Hotel.cpp
+│── 📄 Room.h / Room.cpp
+│── 📄 Booking.h / Booking.cpp
+│── 📄 Feedback.h / Feedback.cpp
+│── 📄 UserService.h / UserService.cpp
+│── 📄 HotelService.h / HotelService.cpp
+│── 📄 RoomService.h / RoomService.cpp
+│── 📄 BookingService.h / BookingService.cpp
+│── 📄 FeedbackService.h / FeedbackService.cpp
+│── 📄 AdminService.h / AdminService.cpp
+│── 📄 HotelManagement.h / HotelManagement.cpp
+│── 📄 main.cpp 
+
+
+
+
+bhai, 
+1.inka ka implementation kaha 
+User newUser(newUserID, name, email, password, role);??
+newHotel(newHotelID, name, location, facilities);
+Room newRoom(newRoomID, hotelID, roomType, price, true);
+
+2. Hotel keval admin aur agent hee add/update kara sakata hai....
+add condtion to these classes
+Hotel HotelService::addHotel(std::string name, std::string location, std::vector<std::string> facilities) {
+    int newHotelID = HotelManagementDB::hotels.size() + 1;
+    Hotel newHotel(newHotelID, name, location, facilities);
+    HotelManagementDB::hotels.push_back(newHotel);
+    return newHotel;
+}
+
+bool HotelService::updateHotel(int hotelID, Hotel updatedDetails) {
+    for (Hotel &hotel : HotelManagementDB::hotels) {
+        if (hotel.getHotelID() == hotelID) {
+            hotel = updatedDetails;
+            return true;
+        }
+    }
+    return false;
+}
+
+3. Room ko keval admin aur agent hee add/update kara sakata hai....
+add condtion to these classes
+
+
+Room RoomService::addRoom(int hotelID, RoomType roomType, double price) {
+    int newRoomID = HotelManagementDB::rooms.size() + 1;
+    Room newRoom(newRoomID, hotelID, roomType, price, true);
+    HotelManagementDB::rooms.push_back(newRoom);
+    return newRoom;
+}
+
+bool RoomService::updateRoom(int roomID, Room updatedDetails) {
+    for (Room &room : HotelManagementDB::rooms) {
+        if (room.getRoomID() == roomID) {
+            room = updatedDetails;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool RoomService::updateAvailability(int roomID, bool status) {
+    for (Room &room : HotelManagementDB::rooms) {
+        if (room.getRoomID() == roomID) {
+            room.setAvailabil,ity(status);
+            return true;
+        }
+    }
+    return false;
+}
+
+bhai, ab UserService, HotelService, RoomService classes sahi ho gayi hai...
+baki ki classes implement kar do....
+
+--saare files ka code different section me dena directly in chat with little exaplanation...
+
+--give me complete code for all files... all methods must be implemented...
+
+
+bhai, ab kuch aur file implement karake... project ko finalize karate hai....
+
+HotelManagementWeb Class (without register user can see hotels) (.h and .cpp both)
+    displayApprovedHotels() -> vector<Hotel>
+
+
+main.cpp (esame jyada se jyada methods use karana for better understanding)

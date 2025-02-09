@@ -29,7 +29,7 @@ int main()
     rahulWhatsApp.sendMessage(msg2);
 
     // Displaying messages
-    std::vector<Message *> chat = amitWhatsApp.getMessages(1, 2);
+    std::vector<Message *> chat = amitWhatsApp.getMessages(2);
     for (auto msg : chat)
     {
         if (TextMessage *textMsg = dynamic_cast<TextMessage *>(msg))

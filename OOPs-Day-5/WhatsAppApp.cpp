@@ -55,11 +55,10 @@ void WhatsAppApp::deleteMessage(int messageID) {
     std::cout << "Message ID not found.\n";
 }
 
-std::vector<Message*> WhatsAppApp::getMessages(int senderID, int receiverID) {
+std::vector<Message*> WhatsAppApp::getMessages(int receiverID) {
     std::vector<Message*> userMessages;
     for (auto& msg : messages) {
-        if ((msg->senderID == senderID && msg->receiverID == receiverID) ||
-            (msg->senderID == receiverID && msg->receiverID == senderID)) {
+        if ((msg->receiverID == receiverID)) {
             userMessages.push_back(msg);
         }
     }

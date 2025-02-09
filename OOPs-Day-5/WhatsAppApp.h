@@ -25,7 +25,7 @@ public:
     void sendMessage(Message* msg);
     void editMessage(int messageID, const std::string& newContent);
     void deleteMessage(int messageID);
-    std::vector<Message*> getMessages(int senderID, int receiverID);
+    std::vector<Message*> getMessages(int receiverID);
 
     void postStatus(Status* status);
     std::vector<Status*> getStatus();

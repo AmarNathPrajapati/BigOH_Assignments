@@ -12,7 +12,7 @@ step1:
 4. How and what data flows between entities
 5. How we authenticate user.
 
-bhai, ye task hai... esame ye batana ki kya kya entities possible hai... un enities ke kya kya attributes and method possible hai...aur ye entities aapas me kaise communicate karenge (means relationship between them)... entites me bich kaun sa data transfer hoga aur kaise hoga... aur ham user ko kaise authenticate kar sakate hai... es task ka data flow diagram level 1 bhi samajhana
+bhai, ye task hai... esame ye batana ki kya kya entities possible hai... un enities ke kya kya attributes and method possible hai...aur ye entities aapas me kaise communicate karenge (means relationship between them)... entites me bich kaun sa data transfer hoga aur kaise hoga... aur ham user ko kaise authenticate kar sakate hai... 
 
 bhai, discussion ke baad... final decistion ye liya gaya... sare method related user, contact, message, status, authentication whatsApp class ke under aayenge...aur user, contact, message, status as a data class banenge aur whatsApp class ke method ko use karenge for communication...toh bhai, ab ye batao ki final attributes and method kya hoge for each enity...
 
