@@ -1,6 +1,7 @@
 #include <iostream>
-#include "WhatsAppApp.h"
-
+#include "./server/WhatsAppServer.h"
+#include "./app/WhatsAppApp.h"
+using namespace std;
 int main()
 {
     // WhatsApp Server Instance
@@ -29,12 +30,12 @@ int main()
     rahulWhatsApp.sendMessage(msg2);
 
     // Displaying messages
-    std::vector<Message *> chat = amitWhatsApp.getMessages(2);
+    vector<Message *> chat = amitWhatsApp.getMessages(2);
     for (auto msg : chat)
     {
         if (TextMessage *textMsg = dynamic_cast<TextMessage *>(msg))
         {
-            std::cout << "Message: " << textMsg->text << std::endl;
+            cout << "Message: " << textMsg->text << endl;
         }
     }
 

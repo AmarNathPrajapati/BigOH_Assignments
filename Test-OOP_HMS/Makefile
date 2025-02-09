@@ -7,7 +7,7 @@ SRC = main.cpp \
       services/AdminService.cpp \
       db/HotelManagementDB.cpp \
       data/User.cpp data/Hotel.cpp data/Room.cpp data/Booking.cpp data/Feedback.cpp data/Payment.cpp \
-      HotelManagementWeb.cpp
+      webApp/HotelManagementWeb.cpp
 
 TARGET = hotelSystem
 

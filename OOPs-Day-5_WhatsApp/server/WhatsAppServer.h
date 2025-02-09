@@ -2,12 +2,13 @@
 #define WHATSAPPSERVER_H
 
 #include <vector>
-#include "User.h"
+#include "../data/User.h"
+using namespace std;
 
 class WhatsAppServer {
 private:
     static WhatsAppServer* instance;
-    std::vector<User> users;
+    vector<User> users;
     WhatsAppServer() {}
 
 public:

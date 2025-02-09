@@ -2,14 +2,15 @@
 #define CONTACT_H
 
 #include <string>
+using namespace std;
 
 class Contact {
 public:
     int contactID;
-    std::string name;
-    std::string phone;
+    string name;
+    string phone;
 
-    Contact(int id, std::string n, std::string p);
+    Contact(int id, string n, string p);
 };
 
 #endif

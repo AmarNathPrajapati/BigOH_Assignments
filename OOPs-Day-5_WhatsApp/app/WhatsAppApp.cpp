@@ -5,42 +5,42 @@ WhatsAppApp::WhatsAppApp(User* user) {
     if (WhatsAppServer::getInstance()->getUserByID(user->userID)) {
         currentUser = user;
     } else {
-        std::cout << "User not registered on WhatsApp Server.\n";
+        cout << "User not registered on WhatsApp Server.\n";
         currentUser = nullptr;
     }
 }
 
 void WhatsAppApp::addContact(Contact contact) {
     contacts.push_back(contact);
-    std::cout << "Contact added: " << contact.name << std::endl;
+    cout << "Contact added: " << contact.name << endl;
 }
 
-std::vector<Contact> WhatsAppApp::getContacts() {
+vector<Contact> WhatsAppApp::getContacts() {
     return contacts;
 }
 
 void WhatsAppApp::sendMessage(Message* msg) {
     if (!currentUser) {
-        std::cout << "You are not a registered user.\n";
+        cout << "You are not a registered user.\n";
         return;
     }
     messages.push_back(msg);
-    std::cout << "Message sent from " << msg->senderID << " to " << msg->receiverID << std::endl;
+    cout << "Message sent from " << msg->senderID << " to " << msg->receiverID << endl;
 }
 
-void WhatsAppApp::editMessage(int messageID, const std::string& newContent) {
+void WhatsAppApp::editMessage(int messageID, const string& newContent) {
     for (auto& msg : messages) {
         if (msg->messageID == messageID) {
             if (TextMessage* textMsg = dynamic_cast<TextMessage*>(msg)) {
                 textMsg->text = newContent;
-                std::cout << "Message edited successfully.\n";
+                cout << "Message edited successfully.\n";
             } else {
-                std::cout << "Only text messages can be edited.\n";
+                cout << "Only text messages can be edited.\n";
             }
             return;
         }
     }
-    std::cout << "Message ID not found.\n";
+    cout << "Message ID not found.\n";
 }
 
 void WhatsAppApp::deleteMessage(int messageID) {
@@ -48,15 +48,15 @@ void WhatsAppApp::deleteMessage(int messageID) {
         if ((*it)->messageID == messageID) {
             delete *it;
             messages.erase(it);
-            std::cout << "Message deleted successfully.\n";
+            cout << "Message deleted successfully.\n";
             return;
         }
     }
-    std::cout << "Message ID not found.\n";
+    cout << "Message ID not found.\n";
 }
 
-std::vector<Message*> WhatsAppApp::getMessages(int receiverID) {
-    std::vector<Message*> userMessages;
+vector<Message*> WhatsAppApp::getMessages(int receiverID) {
+    vector<Message*> userMessages;
     for (auto& msg : messages) {
         if ((msg->receiverID == receiverID)) {
             userMessages.push_back(msg);
@@ -67,14 +67,14 @@ std::vector<Message*> WhatsAppApp::getMessages(int receiverID) {
 
 void WhatsAppApp::postStatus(Status* status) {
     if (!currentUser) {
-        std::cout << "You are not a registered user.\n";
+        cout << "You are not a registered user.\n";
         return;
     }
     statuses.push_back(status);
-    std::cout << "Status posted by user: " << status->userID << std::endl;
+    cout << "Status posted by user: " << status->userID << endl;
 }
 
-std::vector<Status*> WhatsAppApp::getStatus() {
+vector<Status*> WhatsAppApp::getStatus() {
     return statuses;
 }
 
@@ -83,9 +83,9 @@ void WhatsAppApp::deleteStatus(int statusID) {
         if ((*it)->statusID == statusID) {
             delete *it;
             statuses.erase(it);
-            std::cout << "Status deleted successfully.\n";
+            cout << "Status deleted successfully.\n";
             return;
         }
     }
-    std::cout << "Status ID not found.\n";
+    cout << "Status ID not found.\n";
 }
