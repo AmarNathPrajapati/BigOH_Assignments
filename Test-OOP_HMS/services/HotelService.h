@@ -3,12 +3,13 @@
 
 #include "../data/Hotel.h"
 #include "UserService.h"
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 #include <vector>
 
 using namespace std;
-class HotelService
+class HotelService : public BaseService
 {
+
 public:
     static Hotel addHotel(int userID, string name, string location, vector<string> facalities);
     static bool updateHotel(int userID, int hotelID, Hotel updateDetails);

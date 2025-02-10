@@ -4,11 +4,11 @@
 #include <iostream>
 #include <vector>
 #include "../data/Room.h"
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 #include "UserService.h"
 using namespace std;
 
-class RoomService
+class RoomService:public BaseService
 {
 public:
     static Room addRoom(int userID, int hotelID, RoomType roomType, double price);

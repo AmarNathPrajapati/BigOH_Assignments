@@ -2,11 +2,11 @@
 #define BOOKINGSERVICE_H
 
 #include "../data/Booking.h"
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 
 using namespace std;
 
-class BookingService
+class BookingService : public BaseService
 {
 public:
     static Booking createBooking(int userID, int hotelID, int roomID, string checkIn, string checkOut);

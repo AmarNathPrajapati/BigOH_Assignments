@@ -1,9 +1,9 @@
 #ifndef ADMINSERVICE_H
 #define ADMINSERVICE_H
 
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 
-class AdminService {
+class AdminService : public BaseService{
 public:
     static bool approveHotel(int hotelID);
     static bool deleteUser(int userID);
@@ -11,3 +11,4 @@ public:
 };
 
 #endif
+

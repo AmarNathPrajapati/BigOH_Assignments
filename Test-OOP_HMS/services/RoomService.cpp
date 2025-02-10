@@ -5,9 +5,9 @@ Room RoomService::addRoom(int userID, int hotelID, RoomType roomType, double pri
         cout<<"Only Admin and Agent can add a Room!";
         return Room();
     }
-    int newRoomID = HotelManagementDB::rooms.size() + 1;
+    int newRoomID = db->getRooms().size() + 1;
     Room newRoom(newRoomID,hotelID, roomType, price);
-    HotelManagementDB::rooms.push_back(newRoom);
+    db->addRoom(newRoom);
     return newRoom;
 }
 
@@ -16,7 +16,7 @@ bool RoomService::updateRoom(int userID, int roomID, Room updatedDetails){
         cout<<"Only Admin and Agent can update a Room!";
         return false;
     }
-    for(Room &room : HotelManagementDB::rooms){
+    for(Room &room : db->getRooms()){
         if(room.getRoomID()==roomID){
             room = updatedDetails;
             return true;
@@ -26,11 +26,11 @@ bool RoomService::updateRoom(int userID, int roomID, Room updatedDetails){
 }
 
 vector<Room> RoomService::getAllRooms(int userID){
-    return HotelManagementDB::rooms;
+    return db->getRooms();
 }
 
 bool RoomService::updateAvailability(int userID, int roomID, bool status){
-    for(Room &room : HotelManagementDB::rooms){
+    for(Room &room : db->getRooms()){
         if(room.getRoomID()==roomID){
             room.setAvailability(status);
             return true;

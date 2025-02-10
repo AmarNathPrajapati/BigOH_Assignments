@@ -2,16 +2,16 @@
 #include <iostream>
 
 Payment PaymentService::processPayment(int userID, int bookingID, double amount) {
-    int newPaymentID = HotelManagementDB::payments.size() + 1;
+    int newPaymentID = db->getPayments().size() + 1;
     Payment newPayment(newPaymentID, userID, bookingID, amount);
-    HotelManagementDB::payments.push_back(newPayment);
+    db->addPayment(newPayment);
     return newPayment;
 }
 
 bool PaymentService::refundPayment(int paymentID) {
-    for (auto it = HotelManagementDB::payments.begin(); it != HotelManagementDB::payments.end(); ++it) {
+    for (auto it = db->getPayments().begin(); it != db->getPayments().end(); ++it) {
         if (it->getPaymentID() == paymentID) {
-            HotelManagementDB::payments.erase(it);
+            db->getPayments().erase(it);
             return true;
         }
     }
@@ -19,7 +19,7 @@ bool PaymentService::refundPayment(int paymentID) {
 }
 
 Payment PaymentService::getPaymentDetails(int paymentID) {
-    for (const Payment& payment : HotelManagementDB::payments) {
+    for (const Payment& payment : db->getPayments()) {
         if (payment.getPaymentID() == paymentID) {
             return payment;
         }

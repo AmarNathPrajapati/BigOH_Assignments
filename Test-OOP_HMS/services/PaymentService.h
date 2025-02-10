@@ -2,9 +2,9 @@
 #define PAYMENTSERVICE_H
 
 #include "../data/Payment.h"
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 
-class PaymentService
+class PaymentService:public BaseService
 {
 public:
     static Payment processPayment(int userID, int bookingID, double amount);

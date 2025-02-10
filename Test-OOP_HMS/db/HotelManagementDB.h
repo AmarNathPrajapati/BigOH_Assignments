@@ -3,7 +3,8 @@
 
 #include <vector>
 using namespace std;
-//defined data classes
+
+// Data classes include
 #include "../data/User.h"
 #include "../data/Hotel.h"
 #include "../data/Room.h"
@@ -11,13 +12,44 @@ using namespace std;
 #include "../data/Feedback.h"
 #include "../data/Payment.h"
 
-class HotelManagementDB{
-    public:
-        static vector<User> users;
-        static vector<Hotel> hotels;
-        static vector<Room> rooms;
-        static vector<Booking> bookings;
-        static vector<Feedback> feedbacks;
-        static vector<Payment> payments;
+class HotelManagementDB {
+private:
+    // Private Constructor to prevent direct instantiation
+    HotelManagementDB();
+
+    // Delete Copy Constructor & Assignment Operator
+    HotelManagementDB(const HotelManagementDB&) = delete;
+    HotelManagementDB& operator=(const HotelManagementDB&) = delete;
+
+    // Static Singleton Instance
+    static HotelManagementDB* instance;
+
+    // Data storage
+    vector<User> users;
+    vector<Hotel> hotels;
+    vector<Room> rooms;
+    vector<Booking> bookings;
+    vector<Feedback> feedbacks;
+    vector<Payment> payments;
+
+public:
+    // Static Method to get Singleton Instance
+    static HotelManagementDB* getInstance();
+
+    // Getter & Adder for Data
+    vector<User>& getUsers();
+    vector<Hotel>& getHotels();
+    vector<Room>& getRooms();
+    vector<Booking>& getBookings();
+    vector<Feedback>& getFeedbacks();
+    vector<Payment>& getPayments();
+
+    void addUser(const User& user);
+    void addHotel(const Hotel& hotel);
+    void addRoom(const Room& room);
+    void addBooking(const Booking& booking);
+    void addFeedback(const Feedback& feedback);
+    void addPayment(const Payment& payment);
 };
-#endif
+
+#endif // HOTELMANAGEMENTDB_H

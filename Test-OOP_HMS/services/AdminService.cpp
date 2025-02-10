@@ -1,8 +1,7 @@
 #include "AdminService.h"
-#include <iostream>
 
 bool AdminService::approveHotel(int hotelID) {
-    for (Hotel& hotel : HotelManagementDB::hotels) {
+    for (Hotel& hotel : db->hotels) {  // Directly using db
         if (hotel.getHotelID() == hotelID) {
             hotel.approvedByAdmin = true;
             return true;
@@ -12,9 +11,9 @@ bool AdminService::approveHotel(int hotelID) {
 }
 
 bool AdminService::deleteUser(int userID) {
-    for (auto it = HotelManagementDB::users.begin(); it != HotelManagementDB::users.end(); ++it) {
+    for (auto it = db->users.begin(); it != db->users.end(); ++it) {
         if (it->getUserID() == userID) {
-            HotelManagementDB::users.erase(it);
+            db->users.erase(it);
             return true;
         }
     }
@@ -22,12 +21,11 @@ bool AdminService::deleteUser(int userID) {
 }
 
 bool AdminService::deleteHotel(int hotelID) {
-    for (auto it = HotelManagementDB::hotels.begin(); it != HotelManagementDB::hotels.end(); ++it) {
+    for (auto it = db->hotels.begin(); it != db->hotels.end(); ++it) {
         if (it->getHotelID() == hotelID) {
-            HotelManagementDB::hotels.erase(it);
+            db->hotels.erase(it);
             return true;
         }
     }
     return false;
 }
-

@@ -5,9 +5,9 @@ Hotel HotelService::addHotel(int userID, string name, string location, vector<st
         cout<<"Only Admin and Agent can add a hotel!";
         return Hotel();
     }
-    int newHotelID = HotelManagementDB::hotels.size()+1;
+    int newHotelID = db->getHotels().size()+1;
     Hotel newHotel(newHotelID, name, location, facilities);
-    HotelManagementDB::hotels.push_back(newHotel);
+    db->addHotel(newHotel);
     return newHotel;
 }
 
@@ -16,7 +16,7 @@ bool HotelService::updateHotel(int userID, int hotelID, Hotel updatedDetails){
         cout<<"Only Admin and Agent can add a hotel!";
         return false;
     }
-    for(Hotel &hotel:HotelManagementDB::hotels){
+    for(Hotel &hotel:db->getHotels()){
         if(hotel.getHotelID()==hotelID){
             hotel = updatedDetails;
             return true;
@@ -25,13 +25,12 @@ bool HotelService::updateHotel(int userID, int hotelID, Hotel updatedDetails){
     return false;
 }
 
-vector<Hotel> getHotels(){
-    return HotelManagementDB::hotels;
-    
+vector<Hotel>HotelService::getHotels(){
+    return db->getHotels();
 }
 
 Hotel HotelService::getHotelDetails(int hotelID){
-    for(Hotel &hotel : HotelManagementDB::hotels){
+    for(Hotel &hotel : db->getHotels()){
         if(hotel.getHotelID()==hotelID){
             return hotel;
         }

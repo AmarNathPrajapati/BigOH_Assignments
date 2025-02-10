@@ -201,4 +201,3 @@ HotelManagementSystem
 
 3. Main
 
-bhai, mai chahata hoon ki sari data classes data folder me ho... service classes services classes me ho... database class db folder me ho... aur main sabase bahar ho...usake liye kya changes karane honge....

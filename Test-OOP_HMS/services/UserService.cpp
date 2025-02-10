@@ -1,14 +1,14 @@
 #include "UserService.h"
 
 User UserService::registerUser(string name, string email, string password, Role role){
-    int newUserID = HotelManagementDB::users.size() + 1;
+    int newUserID = db->getUsers().size() + 1;
     User newUser(newUserID, name, email, password, role);
-    HotelManagementDB::users.push_back(newUser);
+    db->addUser(newUser);
     return newUser;
 }
 
 bool UserService::isAuthenticated(int userID){
-    for(User &user: HotelManagementDB::users){
+    for(User &user: db->getUsers()){
         if(user.getUserID()==userID){
             return true;
         }
@@ -17,7 +17,7 @@ bool UserService::isAuthenticated(int userID){
 }
 //??
 bool UserService::isAdmin(int userID){
-    for(User &user: HotelManagementDB::users){
+    for(User &user: db->getUsers()){
         if(user.getUserID()== userID && user.getRole()==Role::ADMIN){
             return true;
         }
@@ -26,7 +26,7 @@ bool UserService::isAdmin(int userID){
 }
 //??
 bool UserService::isAgent(int userID){
-    for(User &user: HotelManagementDB::users){
+    for(User &user: db->getUsers()){
         if(user.getUserID()== userID && user.getRole()==Role::AGENT){
             return true;
         }
@@ -35,7 +35,7 @@ bool UserService::isAgent(int userID){
 }
 
 bool UserService::updateProfile(int userID, User updatedDetails){
-    for(User &user: HotelManagementDB::users){
+    for(User &user: db->getUsers()){
         if(user.getUserID() == userID){
             user = updatedDetails;
             return true;
@@ -45,9 +45,9 @@ bool UserService::updateProfile(int userID, User updatedDetails){
 }
 
 bool UserService::deleteUser(int userID){
-    for(auto it = HotelManagementDB::users.begin(); it != HotelManagementDB::users.end(); ++it){
+    for(auto it = db->getUsers().begin(); it != db->getUsers().end(); ++it){
         if(it->getUserID()==userID){
-            HotelManagementDB::users.erase(it);
+            db->getUsers().erase(it);
             return true;
         }
     }
@@ -56,7 +56,7 @@ bool UserService::deleteUser(int userID){
 
 vector<Hotel> UserService::searchHotels(string criteria){
     vector<Hotel> result;
-    for(Hotel &hotel: HotelManagementDB::hotels){
+    for(Hotel &hotel: db->getHotels()){
         if(hotel.getApprovedStatus()){
             if (hotel.getName().find(criteria) != string::npos && hotel.getLocation().find(criteria) != string::npos){
                 result.push_back(hotel);

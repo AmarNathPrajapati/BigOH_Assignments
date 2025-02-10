@@ -1,13 +1,13 @@
 #ifndef USER_SERVICE_H
 #define USER_SERVICE_H
 
-#include "../db/HotelManagementDB.h"
+#include "BaseService.h"
 #include "../data/User.h"
 #include "../data/Hotel.h"
 #include <vector>
 
 using namespace std;
-class UserService
+class UserService: public BaseService
 {
 public:
     static User registerUser(string name, string email, string password, Role role);
