@@ -1,3 +1,5 @@
+User, Viewer, ContentCreator, Adminstrator, Video, Comment, Playlist, subscription, Like, SearchService, UserService, AuthenticationService, Db, WebApp, main
+
 bhai, ye task hai... esame ye batana ki kya kya entities possible hai... un enities ke kya kya attributes and method possible hai...aur ye entities aapas me kaise communicate karenge (means relationship between them)... entites me bich kaun sa data transfer hoga aur kaise hoga... aur ham user ko kaise authenticate kar sakate hai... 
 
 Test-OOPs

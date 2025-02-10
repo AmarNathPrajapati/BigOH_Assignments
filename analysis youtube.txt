@@ -1,0 +1,213 @@
+bhai, ye task hai... esame ye batana ki kya kya entities possible hai... un enities ke kya kya attributes and method possible hai...aur ye entities aapas me kaise communicate karenge (means relationship between them)... entites me bich kaun sa data transfer hoga aur kaise hoga... aur ham user ko kaise authenticate kar sakate hai...
+
+bhai, mai four type ki classes soch raha hoon... data classes, service classes, app class and server class
+
+Task:
+Video Streaming & Content Management System (Like YouTube)
+ 
+Problem Statement: You are designing a Video Streaming Platform where users can upload, watch, and interact with videos. The system has different roles with specific functionalities. 
+ 
+User Roles & Features: 
+1. Normal User (Viewer) Can register and log in to the platform. Watch and search for videos . Like, comment, and share videos. Subscribe to channels to get updates on new videos. Create playlists of favorite videos.
+ 2. Content Creator Has all features of a Normal User. Can upload, edit, or delete their own videos. Can monetize videos based on view count. Can view analytics (views, likes, watch time, engagement). 
+3. Administrator Can approve or remove videos
+
+
+Data Classes	
+    User, Viewer, ContentCreator, Administrator, Video, Comment, Playlist, Like, Subscription, Analytics, Monetization
+Service Classes	
+    UserService, VideoService, SearchService, AuthenticationService
+App Class	
+    App
+Server Class	
+    Server
+
+
+
+bhai, mai ye soch raha ki server class hata dete hai... usake jagah par ek db class banate hai.... jo sare data classes ko handle karega...
+
+
+
+bhai, mai soch raha ki DB class keval ek database ki tarah kaam kare.... means usame saare data ho.... aur us db class ko baki services class easily use kar sake....
+
+
+
+Entities, Attributes, and Methods
+Data classes
+    1. User (Base Class)
+    Attributes:
+
+    userID
+    name
+    email
+    password
+    role (Viewer, Creator, Admin)
+    joinDate
+    Methods:
+
+    register()
+    login()
+    logout()
+
+    2. Viewer (Inherits from User)
+    Attributes:
+
+    watchHistory
+    likedVideos
+    subscriptions
+    playlists
+    Methods:
+
+    watchVideo(videoID)
+    likeVideo(videoID)
+    commentOnVideo(videoID, commentText)
+    subscribeToChannel(creatorID)
+    createPlaylist(name)
+
+    3. ContentCreator (Inherits from Viewer)
+    Attributes:
+
+    uploadedVideos
+    channelName
+    revenue
+    Methods:
+
+    uploadVideo(videoDetails)
+    editVideo(videoID, newDetails)
+    deleteVideo(videoID)
+    viewAnalytics(videoID)
+    enableMonetization(videoID)
+
+    4. Administrator (Inherits from User)
+    Attributes:
+
+    adminID
+    Methods:
+
+    approveVideo(videoID)
+    removeVideo(videoID)
+
+    5. Video
+    Attributes:
+
+    videoID
+    title
+    description
+    uploadDate
+    views
+    likes
+    comments
+    ownerID
+    Methods:
+
+    increaseViewCount()
+    addLike(userID)
+    addComment(userID, commentText)
+
+    6. Comment
+    Attributes:
+
+    commentID
+    videoID
+    userID
+    text
+    timestamp
+    Methods:
+
+    editComment(newText)
+    deleteComment()
+
+    7. Playlist
+    Attributes:
+
+    playlistID
+    userID
+    name
+    videos
+    Methods:
+
+    addVideo(videoID)
+    removeVideo(videoID)
+    8. Subscription
+    Attributes:
+
+    subscriptionID
+    subscriberID
+    creatorID
+    Methods:
+
+    notifySubscriber()
+
+
+    9. Like
+    Attributes:
+
+    likeID
+    videoID
+    userID
+    Methods:
+
+    toggleLike()
+
+Services classes
+    1. SearchService
+    Methods:
+
+    searchVideo(query)
+    filterByCategory(category)
+
+    2. VideoService
+    Methods:
+
+    fetchVideoDetails(videoID)
+    fetchComments(videoID)
+
+    3. UserService
+    Methods:
+
+    getUserProfile(userID)
+    updateUserProfile(userID, newDetails)
+
+    4. AuthenticationService
+    Methods:
+
+    authenticateUser(email, password)
+    authorizeAccess(userID, role)
+
+
+3.Db class
+    Db  (Acts as a data storage)
+
+4.WebApp (Main Entry Point)
+Methods:
+
+run()
+
+5. main
+
+bhai, ab requirement and design Analysis phase complete ho gaya hai.... ab implementation phase start karate hai.
+
+--follow Modular desing: separate file for User, Viewer, ContentCreator, Adminstrator, Video, Comment, Playlist, subscription, Like, SearchService, UserService, AuthenticationService, Db, WebApp, (.h and .cpp) and main.cpp
+
+--apply solid principle: at least each class must have single responsibity principle
+
+--saare files ka code different section me dena directly in chat with little exaplanation...
+
+--give me complete code for all files... all methods must be implemented...
+
+
+bhai, mai soch raha ki pahale db class implement kar lete hai... jisame saare data hoga for all data classes...
+db  class as dataStore ki  tarah kaam karega....koi method nahi hoga
+
+baaki classe ese use karengi
+#includ "db.h"
+
+fir uas db class ko saare service class me pass kar dete hai...fir service classes implement karana...
+
+
+bhai, maine classes ke structure ko modify kar diya ek baar verify kar do... ki thik hai...ya kuch change karana hai...pahale design finalize karate hai
+
+
+bhai, ab main.cpp 
+main.cpp (esame jyada se jyada methods use karana for better understanding)
+bhai, db me directly data store mat karo..... sab kuch method ke thru karo

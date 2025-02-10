@@ -1,0 +1,144 @@
+Task:
+Video Streaming & Content Management System (Like YouTube)
+ 
+Problem Statement: You are designing a Video Streaming Platform where users can upload, watch, and interact with videos. The system has different roles with specific functionalities. 
+ 
+User Roles & Features: 
+1. Normal User (Viewer) Can register and log in to the platform. Watch and search for videos . Like, comment, and share videos. Subscribe to channels to get updates on new videos. Create playlists of favorite videos.
+2. Content Creator Has all features of a Normal User. Can upload, edit, or delete their own videos. Can monetize videos based on view count. Can view analytics (views, likes, watch time, engagement). 
+3. Administrator Can approve or remove videos
+
+
+
+
+Step1: Data classes (only data... No method)
+    1. User (Base Class)
+    Attributes:
+        userID
+        name
+        email
+        password
+        role (Viewer, Creator, Admin)
+        joinDate
+    
+
+    2. Viewer (Inherits from User)
+    Attributes:
+        watchHistory
+        likedVideos
+        subscriptions
+        playlists
+    
+    3. ContentCreator (Inherits from Viewer)
+    Attributes:
+        uploadedVideos
+        channelName
+        revenue
+
+    4. Administrator (Inherits from User)
+    Attributes:
+        adminID
+
+    5. Video
+    Attributes:
+        videoID
+        title
+        description
+        uploadDate
+        views
+        likes
+        comments
+        ownerID
+        approvedStatus
+
+    6. Comment
+    Attributes:
+        commentID
+        videoID
+        userID
+        text
+        timestamp
+
+    7. Playlist
+    Attributes:
+        playlistID
+        userID
+        name
+        videos
+    
+    8. Subscription
+    Attributes:
+        subscriptionID
+        subscriberID
+        creatorID
+
+    9. Like
+    Attributes:
+        likeID
+        videoID
+        userID
+
+Step2: DB class
+    Db  (Acts as a data storage... contains All data... No methods)
+    
+step3: Services classes
+
+    AuthenticationService
+        isValidUser(userID)
+        isAdmin(adminID)
+
+    User Services
+        register()
+        getUserProfile(userID)
+        updateUserProfile(userID, newDetails)
+
+    ViewerServices:
+        watchVideo(videoID)
+        likeVideo(userID, videoID)--> check isValidUser
+        commentOnVideo(userID, videoID, commentText)--> check isValidUser
+        subscribeToChannel(userID, creatorID)--> check isValidUser
+
+    ContentCreatorServices
+        uploadVideo(userID, videoDetails)--> check isValidUser
+        editVideo(userID, videoID, newDetails)--> check isValidUser
+        deleteVideo(userID, videoID)--> check isValidUser
+        viewAnalytics(userID, videoID)--> check isValidUser
+        enableMonetization(userID, videoID)--> check isValidUser
+
+    AdminServices
+        approveVideo(adminID, videoID)--> check isValidUser and isAdmin
+        removeVideo(adminID, videoID)--> check isValidUser and isAdmin
+
+    LikeServices
+        addLike(userID, videoID)--> check isValidUser
+        toggleLike(userID, videoID)--> check isValidUser
+
+    CommentService 
+        addComment(videoID, userID, commentText)--> check isValidUser
+        editComment(commentID, userID, newText)--> check isValidUser
+        deleteComment(commentID, userID)--> check isValidUser
+
+    PlaylistService
+        createPlaylist(userID, name) --> check isValidUser
+        addVideo(playlistID, videoID) --> check isValidUser
+        removeVideo(playlistID, videoID) --> check isValidUser
+        deletePlaylist(playlistID, userID) --> check isValidUser
+
+   
+    VideoService
+        fetchVideoDetails(videoID) 
+        fetchComments(videoID)
+        shareVideo(videoID, platform)
+
+    SubscriptionService
+        addSubscription(userID, subscriberID, creatorID)--> check isValidUser
+        unsubscribe(userID, subscriberID, creatorID)--> check isValidUser
+        notifySubscriber(userID, creatorID, videoID)--> check isValidUser
+
+4.WebApp (Main Entry Point) (without registration)
+        searchVideo(query)--->only approved Video
+        filterByCategory(category)
+
+5. main
+
+6.Makefile (to execute all file in single go)
