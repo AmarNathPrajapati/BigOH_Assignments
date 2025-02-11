@@ -1,0 +1,106 @@
+Topic to cover
+1.Basic Syntax, Variables, and Data Types
+2.Primitive vs. Referenced Data Types
+3.Undefined and Null
+4.Variable Declaration
+    Let, var and Const
+    When to use which
+5.Operators and Expressions
+    Arithmetic Operators
+    Assignment Operators
+    Comparison Operators
+    Logical Operators
+
+
+
+
+
+1. Basic Syntax of JavaScript
+    a. single line comment
+    b. multiline comment
+    c. Variables
+        JavaScript me variables ka use values ko store karne ke liye hota hai.
+        Variables declare karne ke liye var, let, aur const ka use hota hai.
+
+        Rules for Variable Names:
+
+        Sirf letters (a-z, A-Z), digits (0-9), underscore (_), aur dollar sign ($) allowed hai.
+        First character number nahi ho sakta.
+        Case-sensitive hote hain (name ≠ Name).
+        Reserved keywords ka use nahi kar sakte (e.g., let, class, function).
+
+2. Data Types in JavaScript
+    a. Primitive Data Types
+        String → Text
+        Symbol → Unique identifiers 
+            Har ek Symbol ki value unique hoti hai, even agar dono same string description se bane ho.
+            Symbols ka use object properties ko unique aur private banane ke liye hota hai.
+        Boolean → True/False 
+        BigInt → Large numbers
+        Number → Integers aur Floating point numbers 
+        Null → Intentionally empty value
+        Undefined → Jab kisi variable me value assign nahi hoti
+
+        Number vs BigInt
+        JavaScript me Number 2^53 - 1 (9007199254740991) tak hi accurate hota hai.
+        Usse bada number handle karne ke liye BigInt ka use hota hai.
+        float value (decimal numbers) BigInt me nahi aa sakti!
+
+    b. Reference Data Types (Mutable - store reference to memory)
+        Array → List of values 
+        Object → Key-value pairs 
+        
+        why javaScript Show both type as Object??
+            JavaScript me Array ek special type ka Object hai jo indexed properties maintain karta hai.
+            Normal objects {} key-value pairs store karte hain.
+            Arrays 0,1,2,3,... index-based properties store karte hain.
+            JavaScript me arrays bhi objects hi hain, isiliye typeof dono ke liye "object" return karta hai.
+
+3. Undefined and Null
+    Undefined:	Jab kisi variable ko declare kiya jaye but usko koi value assign na ki ho.
+    Null:	Jab kisi variable me intentionally empty value store ki jaye.
+
+    why JS show typeof NUll is Object
+        JavaScript me null ka typeof "object" return karna ek historical bug hai jo ECMAScript 1995 se chala aa raha hai! 
+        Objects ko binary format me "000" se represent kiya jata tha.
+        null ka binary representation bhi "000" hi tha, is wajah se JavaScript ne galti se typeof null ko "object" bata diya.
+        Ye ek bug tha, jo aaj tak fix nahi kiya gaya kyunki purane codes me compatibility ka issue aa jata!
+
+4. Variable Declaration: let, var, const
+        Keyword	    Scope	    Reassignment	Hoisting	                            Best Use Case
+        var	        Function	Allowed	        Hoisted (value undefined hoti hai)	    Avoid using it
+        let	        Block	    Allowed	        Hoisted but not initialized	            Recommended for variables that may change
+        const	    Block	    Not Allowed	    Hoisted but not initialized	            Best for constants
+
+5. Operators and Expressions
+    a. Arithmetic Operators
+        Operator	Description
+        +	        Addition
+        -	        Subtraction
+        *	        Multiplication
+        /	        Division
+        %	        Modulus (Remainder)
+        **	        Exponentiation
+    
+    b. Assignment Operators
+        Operator	Description
+        =	        Assign value
+        +=	        Add and assign
+        -=	        Subtract and assign
+        *=	        Multiply and assign
+        /=	        Divide and assign
+
+    c. Comparison Operators
+        Operator	Description
+        ==	        Equal to (type conversion hota hai)
+        ===	        Strict equal (no type conversion)
+        !=	        Not equal
+        !==	        Strict not equal
+        >	        Greater than
+        <	        Less than
+
+    d.Logical Operators
+        Operator	Description
+        &&	        AND
+        ||          OR 
+        !	        NOT (Reverse karta hai)
