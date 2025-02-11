@@ -2,10 +2,10 @@
 #define HOTELMANAGEMENTWEB_H
 
 #include "../data/Hotel.h"
-#include "../db/HotelManagementDB.h"
+#include "../services/BaseService.h"
 #include <vector>
 
-class HotelManagementWeb
+class HotelManagementWeb:public BaseService
 {
 public:
     static std::vector<Hotel> displayApprovedHotels();
