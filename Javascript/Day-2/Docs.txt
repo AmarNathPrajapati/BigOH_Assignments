@@ -340,7 +340,16 @@ Note:
             Agar use strict kisi statement ke baad likha, to ignore ho sakta hai.
 
 
-
-
-            example dry run usinmg GEC 2 phases
-            
+Note: Temporal Dead Zone
+        Script ke execute hone se lekar us variable ke declaration tak ka time hi TDZ hota hai.
+        Jab tak JavaScript execution us declaration line tak nahi pahuchti, tab tak wo variable use nahi ho sakta.
+        Jab tak execution uske declaration tak nahi pahuchti, tab tak wo TDZ me rehta hai.
+        Agar us zone me access karoge toh ReferenceError aayega.
+        var ko TDZ nahi hota (kyunki undefined assign hota hai).
+        let aur const TDZ me rehte hain jab tak unko initialize nahi kiya jata.
+        
+        Difference Between var, let and const w.r.t TDZ
+        Keyword	        Hoisting	    Initialized?	                        TDZ
+        var	            Hoisted	        undefined se initialize hota hai	    No TDZ
+        let	            Hoisted	        Not initialized	                        Yes TDZ
+        const	        Hoisted	        Not initialized	                        Yes TDZ
