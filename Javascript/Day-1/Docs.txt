@@ -11,6 +11,10 @@ Topic to cover
     Comparison Operators
     Logical Operators
 
+Important Points:
+    1. JavaScript Execution: Overview
+    2. JavaScript Type Conversion (Implicit & Explicit)
+    3. Bug in JavaScript
 
 
 
@@ -60,12 +64,6 @@ Topic to cover
     Undefined:	Jab kisi variable ko declare kiya jaye but usko koi value assign na ki ho.
     Null:	Jab kisi variable me intentionally empty value store ki jaye.
 
-    why JS show typeof NUll is Object
-        JavaScript me null ka typeof "object" return karna ek historical bug hai jo ECMAScript 1995 se chala aa raha hai! 
-        Objects ko binary format me "000" se represent kiya jata tha.
-        null ka binary representation bhi "000" hi tha, is wajah se JavaScript ne galti se typeof null ko "object" bata diya.
-        Ye ek bug tha, jo aaj tak fix nahi kiya gaya kyunki purane codes me compatibility ka issue aa jata!
-
 4. Variable Declaration: let, var, const
         Keyword	    Scope	    Reassignment	Hoisting	                            Best Use Case
         var	        Function	Allowed	        Hoisted (value undefined hoti hai)	    Avoid using it
@@ -104,3 +102,110 @@ Topic to cover
         &&	        AND
         ||          OR 
         !	        NOT (Reverse karta hai)
+
+
+
+Important Points:
+    1. JavaScript Execution: Overview
+
+        a. Jab bhi hum JavaScript code chalate hain, to JavaScript Engine (V8, SpiderMonkey, etc.) do main steps me execute karta hai:
+
+            Memory Creation Phase (Hoisting hoti hai!)
+                Variables aur functions ki memory allocate hoti hai.
+                var ko undefined se initialize kiya jata hai.
+                let aur const sirf allocate hote hain but initialize nahi hote (TDZ - Temporal Dead Zone me rehte hain).
+                Functions ka pura code memory me store hota hai.
+
+            Execution Phase
+                Code line-by-line execute hota hai.
+                let aur const ko value assign hoti hai.
+                Expressions evaluate hote hain.
+                Functions call hone par new execution context create hota hai.
+
+        b. Execution Context: Heart of JavaScript Execution
+            Jab bhi JavaScript ka code run hota hai, to JS engine ek special environment create karta hai jisme code execute hota hai. Isi environment ko Execution Context kehte hain.
+            Execution Context ek environment hota hai jisme JavaScript code execute hota hai. Isme Memory Allocation aur Code Execution dono phases hote hain. 
+            
+            For Example:
+            Maan le tu ek movie theatre me gaya:
+            Sabse pehle ticket counter pe jaake entry (global execution context create) hoti hai.
+            Phir seat pakadta hai (memory allocate hoti hai).
+            Phir movie start hoti hai (code execute hota hai).
+            Agar kisi scene me koi short clip (Ads) aaye (function call ho), to ek naya mini screen (new execution context) create hota hai.
+            Movie ke end me sab kuch clean ho jata hai (execution context destroy ho jata hai).
+
+            3 types ke execution context hote hain:
+
+            Global Execution Context (GEC) - Jab bhi JavaScript file run hoti hai, ek global execution context create hota hai.
+            Function Execution Context (FEC) - Jab koi function call hota hai, to uske liye ek naya execution context banta hai.
+            Eval Execution Context - Jab eval() function use hota hai, ek alag execution context banta hai.
+
+            Execution Context ke andar 2 phases hote hain:
+            Memory Creation Phase (Hoisting)
+            Execution Phase (Code Run hota hai)
+
+            Behind the Scenes (JS Execution Process)
+            Memory Phase (Creation Phase) – Sabhi variables aur functions memory me store hote hain.
+            Execution Phase – Code line-by-line execute hota hai.
+            Ye process Call Stack ke through manage hoti hai. Jab ek function call hota hai, to naya execution context stack me push hota hai, aur jab execute ho jata hai, to stack se pop ho jata hai.
+
+        c. Call Stack: Execution Context ka Manager
+            JavaScript Call Stack ka use karta hai execution context ko manage karne ke liye.
+            Call Stack ek LIFO (Last In, First Out) structure hai!
+
+            Call Stack Execution
+            Step	                                                        Call Stack
+            first() call hota hai	                                        first() push hota hai
+            console.log("First Function") execute hota hai	                "First Function" print hota hai
+            second() call hota hai	                                        second() push hota hai
+            console.log("Second Function") execute hota hai	                "Second Function" print hota hai
+            third() call hota hai	                                        third() push hota hai
+            console.log("Third Function") execute hota hai	                "Third Function" print hota hai
+            third() execution complete	                                    third() stack se pop hota hai
+            second() execution complete	                                    second() stack se pop hota hai
+            first() execution complete	                                    first() stack se pop hota hai
+
+    2. JavaScript Type Conversion (Implicit & Explicit)
+
+        a. Implicit Type Conversion (Type Coercion) → JavaScript khud convert karta hai.
+        
+            i. String Coercion (Number + String = String)
+            Exception: Subtraction (-), multiplication (*), division (/) me number hi rehta hai.
+
+            ii. String Coercion (Boolean + String = String)
+            iii. Number Coercion (Boolean → Number)
+            
+
+        b. Explicit Type Conversion (Type Casting) → Hum manually convert karte hain.        
+            i. String Conversion : Hum kisi bhi value ko string me convert kar sakte hain
+            ii. Number Conversion : Agar string ya boolean ko number me convert karna ho
+                parseInt() aur parseFloat() number me convert karne ke liye use hote hain
+            iii.  Boolean Coercion (Truthy / Falsy Values)
+                Koi bhi non-empty value → true aur empty/null/undefined/0 → false hota hai.
+
+        c. Special Cases
+            i. "5" + 3 aur "5" - 3 ka output alag kyu hai?
+                Reason: + concatenation karta hai, lekin - mathematical operation perform karta hai.
+            
+            ii.  null + 5 ka output kya hoga ------> 5
+            iii. undefined + 5 ka output kya hoga?-----> NaN
+
+    3. Bug in JavaScript
+
+        a. typeof NUll is Object
+            JavaScript me null ka typeof "object" return karna ek historical bug hai jo ECMAScript 1995 se chala aa raha hai! 
+            Objects ko binary format me "000" se represent kiya jata tha.
+            null ka binary representation bhi "000" hi tha, is wajah se JavaScript ne galti se typeof null ko "object" bata diya.
+            Ye ek bug tha, jo aaj tak fix nahi kiya gaya kyunki purane codes me compatibility ka issue aa jata!
+
+        b. typeof NaN is Number
+            NaN (Not-a-Number) ka type "Number" hi kyu hota hai? Yeh JavaScript ka ek logical bug hai jo ECMAScript standard me fix nahi kiya gaya.
+            NaN ka matlab "Not-a-Number" hai, lekin yeh Number type ka hi part hai. Yeh JavaScript ke Number system ka ek special value hai jo tab aati hai jab koi calculation valid nahi hoti.
+            NaN ka type "number" hi rahega, chahe calculation valid ho ya invalid.
+            Jab JavaScript banaya gaya tha, tab usne IEEE 754 floating-point standard ko follow kiya. Is standard me NaN ko ek special numerical value mana gaya hai.
+
+            IEEE 754 Standard ke hisaab se:
+                NaN ek invalid number hai, lekin phir bhi "Number" type ka hi hissa hai.
+                Yeh sirf batata hai ki calculation galat hai, lekin data type number hi rahega.
+            
+            Number.isNaN() sirf actual NaN ko hi detect karta hai, bina kisi type conversion ke

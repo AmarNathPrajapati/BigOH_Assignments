@@ -1,0 +1,346 @@
+Topic to cover (Remaining of Day-1)
+1. Conditional statements
+2. Logical operators and their use in conditionals.
+3. Loops in JavaScript: 
+    -for 
+    -for-of
+    -for-in
+4. Functions
+    - Parameters
+    - Return values
+    - Arrow function
+
+
+Topic To Cover (Day - 2)
+
+1. Basic Concept
+  a. Hoisting
+    i. Hoisting with Var
+    ii. Hoisting with let and const
+    iii. Hoisting in Functions
+    iv.  Hoisting with Arrow Function
+
+  b. Closures
+  c. Scope
+  d. Callback Functions
+  e. Pass by reference/ Pass by value
+  
+2. Arrays
+  a. Working with arrays: creation, accessing elements, and common methods: push, pop, shift, unshift, splice and more.
+  b. Understanding array iteration methods: for, forEach.
+  c. Array Properties: length, indexOf, includes and more.
+  d. What is filter, map and reduce 
+
+3. Object
+  a. Object Declaration.
+  b. Accessing Properties (bracket and dot notation)
+  c. Modifying Properties
+  d. Adding and Deleting Properties
+  e. Nested Objects
+  e. Object Methods (See MDN)
+
+
+
+*************************************** Detailed Explanation *************************************************************************
+1. Conditional Statements 
+
+    a. if-else
+        Jab ek se zyada conditions check karni ho to if-else ka use hota hai.
+        if → Pehli condition check karega
+        else if → Agar pehli condition false ho to agli check karega
+        else → Agar koi bhi condition match nahi hoti to yeh execute hoga
+
+    b. ternary Operator (? :)
+        Jab sirf ek simple condition check karni ho tab ternary operator use hota hai.
+        Jab ek line me condition check karni ho tab use hota hai.
+
+    c. switch-case Statement
+        switch statement ka use tab hota hai jab multiple cases check karne ho.
+        break har case ke baad likhna zaroori hai, warna sab cases execute honge.
+        default tab run hoga jab koi bhi case match nahi karega.
+
+    d. Nullish Operator 
+        Nullish Coalescing (??) ek logical operator hai jo null (null) aur undefined (undefined) ke liye check karta hai
+        aur agar value null ya undefined ho to default value return karta hai.
+
+        Difference Between ?? and || (OR Operator)
+            || (Logical OR) falsy values (0, "", false, NaN, null, undefined) ko check karta hai.
+            ?? (Nullish) sirf null aur undefined ko check karta hai.
+
+2.  Logical Operators & Their Use in Conditionals
+    Logical operators ka use multiple conditions ko check karne ke liye hota hai.
+        Operator	Description
+        &&	        AND (return true if both condtion are true)
+        ||          OR  (return false if both codition are false)
+        !	        NOT (Reverse karta hai)
+
+
+3. Loops in JavaScript: 
+    a. for Loop
+        Jab fixed number of iterations ho tab for loop use hota hai.
+        Use case → Jab count pata ho kitni baar loop chalega.
+    
+    b. for-of -- for Array (iterable data type)
+        Jab array ke elements iterate karne ho to for-of use hota hai.
+        Use case → Jab array ke har element ko access karna ho.
+
+    c. for-in -- for objects (for non-iterable data type)
+        Jab object ke properties ko iterate karna ho tab for-in use hota hai.
+        Use case → Jab object ke keys aur values ko access karna ho.
+
+    d. while loop
+        Jab pehle se iterations ka pata na ho, tab while loop useful hota hai.
+        Jab tak condition true hai, loop chalega.
+    
+    5. do while loop
+        do...while loop kam se kam ek baar chalta hi hai, chahe condition false hi kyu na ho.
+        Jab pehla iteration guaranteed ho, tab useful hai.
+
+
+    Note:
+        i. for...in ko array ke liye kyu avoid karna chahiye?
+            for...in array ke indexes return karta hai, values nahi.
+            Yeh array ke prototype properties bhi include kar sakta hai, jo unexpected behavior cause kar sakta hai.
+            that'why arrays ke liye for...of best hai.
+
+        ii. for...of ko object ke liye kyu use nahi kar sakte?
+            Objects iterable nahi hote, isliye for...of unpe kaam nahi karega.
+
+
+4. Functions
+    Functions ka use code reusability aur modularity ke liye hota hai.
+    a. Function with Parameters
+         Parameters → Function me jo values pass hoti hain.
+
+    b. Function with Return Value
+        Return → Function ek output return karta hai jo baad me use ho sakta hai.
+
+    c. Arrow Functions
+        Arrow functions concise syntax provide karte hain.
+
+
+
+
+Day-2
+1. Basic Concept
+
+    a. Hoisting
+        Hoisting ka matlab hai ki JavaScript execution ke dauraan variables aur functions ko pehle memory me allocate kiya jata hai, phir code execute hota hai.
+       
+        i. Hoisting with var
+            var hoist ho jata hai (memory me allocate ho gaya), lekin value undefined hoti hai, kyunki JavaScript sirf declaration ko hoist karta hai, initialization ko nahi.
+
+        ii. Hoisting with let and const
+            let aur const hoist to hote hain, but initialized nahi hote. 
+            Ye "Temporal Dead Zone" (TDZ) create karte hain, jisme bina initialize kiye variable ko access karna error dega.
+
+        iii. Hoisting in Functions
+             function declarations hoist ho jati hain, isliye hum unhe pehle call kar sakte hain.
+
+        iv.  Hoisting with Arrow Function
+             arrow functions hoist nahi hote
+             Arrow functions ko function expressions ke roop me treat kiya jata hai, aur function expressions hoist nahi hote.
+
+    b. Closures
+        Closure ek aisa function hota hai jo apne parent function ke scope ke variables ko yaad rakhta hai, chahe parent function execute ho chuka ho.
+        InnerFunction outerFunction ke variable ko yaad rakhta hai, chahe outerFunction() execute ho chuki ho.
+        use case:
+            Data hiding aur encapsulation ke liye
+            state management ke liye
+
+    c. Scope: Local, Global aur Block Scope
+        Scope ka matlab hai ki koi variable kaha accessible hoga.
+            Scope Type	                    Description
+            Global Scope	                Poore program me accessible
+            Local Scope	                    Sirf function ke andar accessible
+            Block Scope (let, const)	    Sirf {} ke andar accessible
+
+    d. Callback Functions
+        callback function wo function hota hai jo as an argument kisi doosre function me pass hota hai, aur baad me execute hota hai.
+        Ek function jo kisi doosre function ko as an argument leta hai, use higher-order function kehte hain.
+        Jo function pass kiya ja raha hai (jo execute hoga), wahi callback function hota hai.
+
+    e. Pass by reference/ Pass by value
+        i. Pass by Value	    
+            Primitive values ka copy banta hai
+            Yahaan copy pass hoti hai, original variable change nahi hota.
+
+            Note: JavaScript me Address Pass Kyu Nahi Kar Sakte?
+                    JavaScript me C/C++ ki tarah direct memory address pass nahi hota.
+                    JavaScript me pointers nahi hote, to direct memory address nahi pass hota.
+                    JavaScript memory management ko khud handle karta hai (garbage collector), isliye hum memory address ko manually access nahi kar sakte.
+                    Pass by reference tabhi hota hai jab hum objects ya arrays pass karte hain, na ki primitive types.
+                    Agar C++ jaisa behavior chahiye, to primitive value ko kisi object ya array me store karke pass karana hoga.
+                    JavaScript me objects aur arrays reference se pass hote hain, to indirectly memory ka reference pass ho jata hai.
+
+        ii. Pass by Reference	
+            Objects ka reference pass hota hai
+            Objects aur arrays reference se pass hote hain, isliye original object modify ho jata hai.
+
+2. Arrays
+    Array ek ordered collection hota hai multiple values ka, jisme har value index ke basis par store hoti hai.
+    JavaScript me arrays dynamic hote hain, yani hum unka size change kar sakte hain aur alag-alag data types bhi store kar sakte hain.
+
+    a. Creation of array 
+        i. Using square bracket(simple and efficient)
+        ii. Using new Array
+
+    b. Array Elements Ko Access Karna
+        JavaScript me array indexing 0 se start hoti hai.
+        Negative indexing JavaScript me direct support nahi karti, lekin hum at() method ka use kar sakte hain.
+    
+    c. Common Array Methods
+        i. push() - Last me element add karta hai
+        ii. pop() - Last element remove karta hai
+        iii.unshift() - First me element add karta hai
+        iv. shift() - First element remove karta hai
+        v. splice() - 
+            Specific index par elements add/remove karna
+            Original Array change karata hai
+            syntax: array.splice(startIndex, deleteCount, item1, item2, item3, ...);
+            --Parameter	                    Description
+            --startIndex	                Jis index se change start karna hai
+            --deleteCount	                Kitne elements delete karne hain (0 ka matlab kuch delete nahi hoga)
+            --item1, item2, ...	            Jo naye elements insert karne hain
+
+            use case:
+                --Multiple Elements Add Karna
+                --splice() Se Elements Replace Karna (Add + Remove)
+                --List Ke End Me Elements Add Karna
+                --List Ke Start Me Elements Add Karna
+
+        vi. slice() - Array ka ek part return karta hai (original array change nahi hota)
+            Syntax: array.slice(startIndex, endIndex);
+            --Parameter	        Description
+            --startIndex	    Jis index se slicing start karni hai (inclusive)
+            --endIndex	        Jis index tak slicing karni hai (exclusive)
+            Agar endIndex nahi dete → Slice last tak hoti hai.
+            Agar negative index dete → To last se count hota hai.
+            Agar koi argument nahi dete, to pure array ka copy milta hai.
+
+    d. Array Properties
+        i. length - Array ka size return karta hai
+        ii. indexOf() - Element ka index return karta hai
+        iii.  includes() - Element present hai ya nahi
+        iv. lastIndexOf() - Element ka last index return karta hai (right to left search karta hai).
+        v. isArray() - Check karta hai ki variable ek array hai ya nahi.
+        vi. concat() - Do ya zyada arrays ko combine karta hai.
+        vii. reverse - Array ko reverse karta hai (original array modify hota hai).
+        viii. sort()
+            --Alphabetical order me sort karta hai.
+            --Numbers me sort karne ke liye compare function dena padta hai.
+        ix. flat() - Nested arrays ko ek single level me convert karta hai.
+        x. join() - Array ke elements ko string me convert karta hai.
+        xi. find() - Condition match karne wala pehla element return karta hai.
+        xii. findIndex() - find() ki tarah hota hai, lekin index return karta hai.
+        xii. fill()
+            Pure array ko ek hi value se fill karta hai.
+            Agar start & end dete ho to uske beech me fill hota hai.
+            Syntax: array.fill(value, start, end)
+
+
+    e. Array Iteration Methods
+        i. for loop - Traditional loop
+        ii. forEach
+            forEach() kuch return nahi karta (Always undefined).
+            Agar naya array chahiye toh map() use kare.
+            break aur continue nahi chalega.
+
+            Syntax: array.forEach(callbackFunction(currentValue, index, array))
+            Parameter	            Description
+            callbackFunction	    Har element pe run hone wala function
+            currentValue	        Array ka current element
+            index (optional)	    Current element ka index (position)
+            array (optional)	    Pura array jisme loop chal raha hai
+
+    f. Advanced Array Methods: filter(), map(), reduce()
+        filter(), map(), aur reduce() higher-order array methods hain jo arrays ke saath kaam karne ke liye use hote hain. 
+        Ye methods functional programming ka part hain aur immutability ko follow karte hain (original array ko modify nahi karte).
+            
+            i. filter() 
+             filter() array ke andar se sirf wahi elements return karta hai jo ek specific condition satisfy karte hain.
+             Ye original array ko change nahi karta.
+             Naya filtered array return karta hai.
+             syntax: array.filter(callbackFunction(currentValue, index, array))
+                 Parameter	            Description
+                 --callbackFunction	    Har element pe execute hone wala function
+                 --currentValue	        Array ka current element
+                 --index (optional)	    Current element ka index (position)
+                 --array (optional)	    Pura array jisme loop chal raha hai
+
+
+            ii. map()
+             map() array ke har element ko transform karke ek naya array return karta hai.
+             Ye original array ko modify nahi karta.
+             Mostly data transformation ke liye use hota hai.
+             syntax: array.map(callbackFunction(currentValue, index, array))
+
+            iii. reduce()
+             reduce() array ke sabhi elements ko combine karke ek single value return karta hai.
+             Ye mostly sum, multiplication, average, maximum/minimum nikalne ya complex aggregation ke liye use hota hai.
+             syntax: array.reduce(callbackFunction(accumulator, currentValue, index, array), initialValue)
+             Parameter	            Description
+             --accumulator	        Ek variable jo result store karta hai
+             --currentValue	        Array ka current element
+             --index (optional)	    Current element ka index (position)
+             --array (optional)	    Pura array
+             --initialValue	        Starting value jo accumulator ko milti hai (default: first element)
+
+
+3. Object
+    Object ek key-value pair based data structure hai jo real-world entities ko represent karne ke kaam aata hai. 
+    JavaScript me almost sab kuch ek object hota hai (except primitive data types).
+    
+    a. Object Declaration
+        i. Using Object Literal : Yeh sabse common aur readable tareeka hai object banane ka.
+        ii.Using new Object() Constructor :  Is method ka use kam hota hai kyunki object literals jyada simple hote hain.
+
+    b. Accessing Properties
+        i. Using Dot notation :  Simple aur fast method hai.
+        ii.Bracket Notation : Yeh tab useful hota hai jab property name dynamic ho ya space contain karta ho
+
+    c.  Modifying Properties
+        Object me kisi bhi property ka value change kar sakte hain
+        object.key = newValue
+
+    d.  Adding & Deleting Properties
+        obj.newProperty = newPropertyValue; 
+        Delete obj.key keyword se property permanently remove ho jati hai.
+
+    e. Nested Objects
+        Object ke andar object store kar sakte hain (nested objects)
+        Nested objects se hum complex data structures ko easily manage kar sakte hain.
+    
+    f. Object Methods
+        i. Object.keys(obj)
+            Returns all keys in array format
+
+        ii. Object.values(obj)
+            Returns all values in array format
+
+        iii. Object.entries(obj)
+            Returns key-value pairs as arrays
+
+        iv. Object.assign(target, source)
+            Copy properties from one object to another
+
+        v. Object.freeze(obj)
+            Prevent modifications (read-only)
+            Object.freeze(obj) ka kaam object ko completely immutable (unchangeable) banana hota hai. 
+            Lekin error throw nahi hota (default mode me) agar tum strict mode enable nahi karte ho.
+
+        vi.  Object.seal(obj)
+            revent adding/deleting properties but allow modification
+
+Note: 
+        "use strict" Ko Hamesha Top Par Kyu Likha jata hai...
+            Agar object freeze ho jati hai. usake baad modification karane par error throw karega.
+            Agar upar nahi likha, to strict mode enable nahi hoga.
+            Agar use strict kisi function ke andar likha, to sirf usi function me apply hoga, puri script par nahi.
+            Agar use strict kisi statement ke baad likha, to ignore ho sakta hai.
+
+
+
+
+            example dry run usinmg GEC 2 phases
+            
