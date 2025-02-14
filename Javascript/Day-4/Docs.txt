@@ -1,0 +1,335 @@
+Topic to Cover:
+1. Object-Oriented JavaScript:
+    Class Declaration
+    Constructor
+    Instance Methods
+    Properties
+    Use of this
+    Inheritance
+    Getter and Setter Methods
+    Static Methods
+
+2. JavaScript Timers & Storage:
+    setTimeout
+    setInterval
+    Date Handling in JavaScript
+    Local Storage
+    Session Storage
+
+3. JavaScript Fetch API:
+    Fetching Data from APIs
+
+4. Document Object Model (DOM):
+    Document Manipulation
+    DOM Event Listeners
+    DOM Animations
+    DOM CSS & Classes
+
+******************************************* Detailed Explanation *****************************************
+1. Object-Oriented JavaScript:
+
+    a. Class Declaration
+        JavaScript ES6 se pehle classes nahi thi, hum function-based OOP use karte the (constructor functions).
+        Ab class keyword ka use hota hai, jo ek syntactic sugar hai, internally prototype-based inheritance hi use hota hai.
+        "Syntactic Sugar" ka matlab hota hai ek aisa feature jo coding ko easy aur readable banata hai, lekin internally wahi purana mechanism chalta hai.
+
+        Key Points:
+        class keyword se class define hoti hai.
+        constructor() method automatic call hota hai jab object create hota hai.
+        this ka use kar ke properties define kar sakte hain.
+        Methods ko directly class me likh sakte hain (instance methods).
+
+    b. Constructor
+        Constructor ek special function hota hai jo object create hone par automatic call hota hai.
+        Isme object ki initial properties set karte hain.
+        Agar class me constructor define nahi kiya toh ek default constructor hota hai jo empty object return karta hai.
+
+        Key Points:
+        Constructor ke andar default values de sakte hain.
+        Constructor automatic call hota hai jab bhi new keyword use karte hain.
+
+    c. Instance Methods
+        Instance methods objects ke liye specific hote hain aur class ke objects par hi kaam karte hain.
+        
+        Key Points:
+        Instance methods object ke saath use hote hain (emp1.getSalary()).
+        this ka use kar ke object ke properties access kar sakte hain.
+
+    d. Properties (Instance vs Static)
+        JavaScript me properties do tarike ki hoti hain:
+        Instance Properties → Object ke andar store hoti hain
+        Static Properties → Class ke andar hoti hain, direct object se access nahi hoti
+
+        Key Points:
+        Instance properties objects ke saath hoti hain (this.name).
+        Static properties sirf class ke saath hoti hain (ClassName.property).
+
+    e. Use of this
+        this ek special keyword hai jo current execution context (scope) ko refer karta hai.
+        Kiska reference milega? Ye function call hone ke tareeke par depend karta hai.
+        Normal function & Arrow function me this alag behave karta hai.
+
+        i. this in Global Scope
+            Agar this global scope me use ho raha hai toh:
+            Browser me this window object ko refer karega.
+            Node.js me this global object nahi hota.
+
+        ii. this in a Regular Function (Normal Function)
+            Global context me call hone par, browser me this window milega
+            Node.js ya strict mode ('use strict') me undefined milega.
+
+        iii.this in object
+            this caller object obj ko refer karega
+
+        iv. Call for Different context
+            call() method ka use karke, this ko manually set kar sakte hain.
+
+        v.this in Arrow Functions
+            Arrow functions me this lexical hota hai.
+            Ye function ke outer scope ka this inherit karta hai.
+            Arrow function ka this kabhi bhi change nahi hota.
+            Arrow function me this object ka nahi, balki global scope ka this use hota hai.
+
+        vi.this in Constructor Function
+            Constructor function ke andar this naya object ko refer karta hai.
+            new keyword se this naye object ko refer karega.
+
+        vii. this in setTimeout & setInterval
+            Normal function me this global object ko refer karta hai.
+            Arrow function ka this lexical hota hai.
+
+        Note:
+            Normal function me this function call ke basis par decide hota hai.
+            Arrow function me this lexical hota hai (outer function se inherit karta hai).
+            Object ke andar normal function ka this object ko refer karega.
+            Event listeners me this target element hota hai.
+            Arrow function ka this kabhi change nahi hota.
+
+    f. Inheritance
+        Inheritance ek concept hai jisme ek class ya object dusre class ya object ke properties aur methods ko access kar sakta hai.
+        JavaScript me prototype-based inheritance hota hai (Classical inheritance nahi).
+        ES6 ke baad "class" keyword aaya, lekin internally wahi prototype-based system chal raha hai.
+        
+        i.  Prototype-Based Inheritance (Default JavaScript System)
+            Object [[Prototype]] ke through dusre object se inherit karta hai.
+            Object.create(prototypeObject) ka use karke inheritance implement hota hai.
+
+        ii. Class-Based Inheritance (ES6 Classes)
+            JavaScript ES6 ke baad "class" keyword aaya, jo inheritance ko easy aur readable banata hai.
+            super(name) likhne se parent class ka constructor call ho gaya.
+
+        iii.Multiple Inheritance (Mixins se implement hota hai)
+            JavaScript me direct multiple inheritance possible nahi hoti, lekin hum mixins ka use karke kar sakte hain.
+            JavaScript multiple inheritance allow nahi karta, lekin Object.assign() ka use karke mixins implement kiya jata hai.
+
+        iv. Hierarchical Inheritance
+            Jab ek parent class ke multiple child classes hoti hain, to use hierarchical inheritance kahte hain.
+        
+        v.  Hybrid Inheritance (Combination of Multiple Types)
+            Hybrid inheritance Multiple aur Hierarchical inheritance ka combination hota hai.
+
+    g. Getter, Setter and Static methods
+        JavaScript me traditionally public aur private data ka direct support nahi tha.
+        lekin ES6 ke baad Classes ke andar private properties aur methods ko define karne ka ek official tariqa aaya.
+            
+            Public Properties: Yeh har jagah se accessible hote hain.
+            Private Properties (#): Yeh sirf class ke andar accessible hote hain.
+            Getter & Setter: Yeh controlled access provide karte hain.
+            Static Methods: Yeh instance pe nahi, balki class ke upar call hote hain.
+
+        i.  Public and Private Properties in JavaScript
+            Private properties # ke saath likhe jaate hain aur sirf class ke andar accessible hote hain.
+            Public properties bina kisi prefix ke likhi jaati hain aur easily access hoti hain.
+
+        ii. Getter & Setter Methods
+            Getter aur Setter ka use private properties ko safe access aur modification dene ke liye hota hai.
+            Getter ek property ko read karne ke liye hota hai.
+            Setter property ki value set karne ke liye hota hai.
+            Private properties ko directly access nahi kar sakte, but getter & setter ka use kar sakte hain.
+
+        iii. Static Methods in JavaScript
+            Static methods class ke instances ke liye nahi, balki class khud ke liye hote hain.
+            Ye class ke kisi bhi instance pe call nahi hote, balki direct class name se call hote hain.
+            Static methods ka instance se koi lena dena nahi hota, sirf class ke upar hota hai.
+           
+    Note: Prototype-Based Inheritance vs Classical Inheritance
+
+        Prototype-Based Inheritance (Default JavaScript System)
+            JavaScript ka default inheritance system Prototype-Based hai.
+            Objects dusre objects se directly inherit karte hain, kisi "class" ki zaroorat nahi hoti.
+            Every object ek hidden [[Prototype]] link maintain karta hai jo uske parent object ko refer karta hai.
+            Functions ka ek prototype property hota hai jisse naye objects inherit kar sakte hain.
+
+        Classical Inheritance (OOP Approach in Java, C++, etc.)
+            Classical Inheritance me "class" ka concept hota hai, jisme ek class dusre class se extend karti hai.
+            Objects classes ke instance hote hain, na ki directly ek dusre ke.
+            Parent class se child class methods aur properties inherit karti hai.
+
+2. JavaScript Timers & Storage
+    a. setTimout and clearTimeout
+        setTimeout() ek JavaScript function hai jo ek specific time delay ke baad ek function ko execute karta hai.
+        clearTimeout() ka use karke setTimeout ko cancel kiya ja sakta hai.
+        syntax: setTimeout(function, delay, param1, param2, ...);
+            function: Wo function jo delay ke baad execute hoga.
+            delay: Milliseconds me time (1000ms = 1 second).
+            param1, param2, ... (Optional): Function me extra parameters pass karne ke liye
+
+    b. setInterval and clearInterval
+        setInterval() ek function ko bar-bar execute karta hai specified interval ke baad.
+        clearInterval() se interval ko stop kiya jata hai.
+        syntax: setInterval(function, interval, param1, param2, ...);
+            function: Jo repeatedly execute hoga.
+            interval: Milliseconds me time.
+            param1, param2, ... (Optional): Extra parameters.
+
+    c. Date Object in JavaScript
+        JavaScript me Date object ka use time aur date ko handle karne ke liye hota hai.
+
+        i.Month Indexing in JavaScript Date Object
+            JavaScript me month indexing 0-based hoti hai. Matlab:
+            January = 0, February = 1, ..., April = 3, May = 4, ..., December = 11
+
+        ii.Day Shift Issue (Time Zone Effect)
+            JavaScript ka Date object UTC (Coordinated Universal Time) ko use karta hai jab tum Date ko console me print karte ho.
+            Agar tum exact wahi date chahte ho jo tumne enter ki hai, toh toLocaleString() ka use karo
+            JavaScript Date object internally UTC use karta hai, isliye console.log(date) time zone shift karke dikhata hai.
+
+        Note: UTC vs. ISO Format
+        UTC (Coordinated Universal Time)
+            Global standard time zone without daylight saving.
+            Example: 2024-05-09T18:30:00.000Z
+            Z means Zulu time (same as UTC).
+            Independent of local time zones.
+
+        ISO 8601 (International Standard Format)
+            Standard format for date & time representation.
+            Example: YYYY-MM-DDTHH:mm:ss.sssZ
+            T separates date & time.
+            Z indicates UTC time.
+            Supports time zone offsets (e.g., +05:30 for IST).
+
+        Key Difference:
+            UTC is a time standard (global reference).
+            ISO is a string format to represent time (can use UTC).
+            All ISO timestamps with Z are in UTC, but ISO can also store local times.
+
+        All ISO dates are UTC, but ISO format can include local time zones.
+        Use date.toISOString() for ISO format in JavaScript.           
+
+    d. Local Storage
+        Local Storage ek browser-based storage hai jo permanent data store karta hai.
+        Local Storage me data tab tak store rehta hai jab tak manually delete na ho ya browser cache clear na ho.
+        Node.js me localStorage aur sessionStorage kaam nahi karte kyunki ye browser-specific Web APIs hain, jo window object ka part hain.
+        localStorage aur sessionStorage sirf browser environment me available hote hain.
+        Node.js ek server-side runtime hai, jisme window object nahi hota.
+
+    e. Session Storage
+        Session Storage bhi browser-based storage hai, par yeh sirf current session tak data store karta hai.
+        Session Storage ka data tab tak rehta hai jab tak tab close na ho.
+        sessionStorage ka data tab close karne ke baad bhi store raha iska reason ho sakta hai session restore feature ya kuch browser-specific behavior.
+        Incognito mode me ye nahi hota!
+
+
+3. JavaScript Fetch API
+    Fetch API JavaScript ka modern way hai HTTP requests send aur data fetch karne ke liye.
+    Yeh Promises-based API hai, jo asynchronous tarike se kaam karti hai.
+        fetch(url, options): Yeh server se request bhejta hai aur Promise return karta hai.
+        response.json(): Yeh response ko JavaScript object me convert karta hai.
+        .catch(error): Agar network issue ya error aaya toh handle karega.
+
+    i.  GET Request Using Async/Await
+    ii. POST Request Using Async/Await
+        Agar hume server pe data bhejna ho, toh POST request ka use karte hain.
+    
+    iii.PUT (Update Data) Using Async/Await
+        PUT request server pe existing data update karne ke liye hoti hai.
+
+        Note: Difference between POST and PUT:
+            POST naya resource create karta hai.
+            PUT existing resource ko update karta hai.
+
+    iv. DELETE (Delete Data) Using Async/Await
+        Agar hume kisi record ko delete karna ho, toh DELETE request ka use hota hai.
+
+
+4. Document Object Model (DOM)
+    DOM ka full form Document Object Model hota hai. 
+    Yeh HTML aur XML documents ka ek structured representation hota hai, jo JavaScript ke through manipulate kiya ja sakta hai.
+    Jab browser kisi HTML page ko load karta hai, to woh ek DOM Tree generate karta hai, jisme sabhi elements ek hierarchy me hote hain. 
+    JavaScript ke through hum is DOM Tree ko modify kar sakte hain, naye elements add/remove kar sakte hain, CSS properties change kar sakte hain, aur user interactions handle kar sakte hain.
+
+    a. Document Manipulation
+        DOM Manipulation ka matlab hai HTML ke elements ko dynamically change karna, jaise:
+        Naya element add karna
+        Element ke text ya HTML content ko update karna
+        Element ko delete karna
+        CSS properties modify karna
+
+        i. DOM me elements ko access karne ke tarike
+            JavaScript ke through HTML elements ko select karne ke liye kuch built-in methods hote hain:
+
+            Method	                                            Description
+            document.getElementById("id")	                    Kisi bhi element ko ID se select karta hai.
+            document.getElementsByClassName("class")	        Class name ke basis pe elements ka collection return karta hai.
+            document.getElementsByTagName("tag")	            Tag name se elements ka collection return karta hai.
+            document.querySelector("css-selector")	            Pehla matching element return karta hai.
+            document.querySelectorAll("css-selector")	        Sabhi matching elements ka NodeList return karta hai.
+
+        ii. DOM Manipulation Methods
+            Method	                                            Description
+            element.innerHTML	                                Element ke andar ka HTML content change karta hai.
+            element.textContent	                                Sirf text content ko update karta hai.
+            element.setAttribute(name, value)	                Kisi attribute ki value set karta hai.
+            element.getAttribute(name)	                        Kisi attribute ki value return karta hai.
+            element.removeAttribute(name)	                    Kisi attribute ko remove karta hai.
+            document.createElement("tag")	                    Naya HTML element create karta hai.
+            parent.appendChild(child)	                        Kisi element ko parent ke andar last me add karta hai.
+            parent.insertBefore(newElement, referenceElement)	Kisi element ko specific position pe insert karta hai.
+            parent.removeChild(child)	                        Kisi child element ko remove karta hai.
+
+    b. DOM Event Listeners
+        DOM me event handling ka matlab hota hai ki hum kisi bhi user action (click, hover, keypress, etc.) par response de sakte hain.
+        JavaScript me events ko handle karne ke liye Event Listeners use kiye jate hain.
+            Event Listener Add Karne ke Tarike
+                i. HTML ke andar directly event likhna (Not Recommended)
+                ii. JavaScript me .onclick use karna
+                iii. Best Practice: .addEventListener() use karna
+                iv. Commonly Used Events
+                    Event	                Description
+                    click	                Jab koi element click hota hai.
+                    mouseover	            Jab cursor kisi element par jata hai.
+                    mouseout	            Jab cursor kisi element se bahar jata hai.
+                    keydown	                Jab koi key press hoti hai.
+                    keyup	                Jab key release hoti hai.
+                    change	                Jab input field ka value change hota hai.
+                    submit	                Jab form submit hota hai.
+
+
+
+    c. DOM Animations
+        Animations ke liye hum CSS properties dynamically change kar sakte hain ya CSS classes toggle kar sakte hain.
+        JavaScript Animation Methods
+            Method	                            Description
+            setTimeout(callback, delay)	        Ek baar animation chalayega.
+            setInterval(callback, interval)	    Har kuch time ke baad repeat karega.
+            requestAnimationFrame(callback)	    Smooth animations ke liye best method.
+
+    d. DOM CSS & Classes
+        JavaScript se hum CSS properties modify kar sakte hain aur classes add/remove/toggle kar sakte hain.
+            i.CSS Property Change Karna
+                let div = document.getElementById("box");
+                div.style.backgroundColor = "blue";  // Background color change
+                div.style.width = "200px";  // Width badhaya
+
+            ii.Class Add, Remove aur Toggle Karna
+                Method	                                            Description
+                element.classList.add("className")	                Class add karega.
+                element.classList.remove("className")	            Class remove karega.
+                element.classList.toggle("className")	            Class ko toggle karega (agar hai to remove, agar nahi hai to add).
+            
+
+
+
+//call, bind and apply
+//cache, cookies
+

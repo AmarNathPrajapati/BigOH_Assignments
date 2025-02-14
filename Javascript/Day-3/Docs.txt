@@ -230,9 +230,20 @@ Note:
 
 
 
-// destructured and spread of Undefined as array and object 
-let a = undefined
-let obj = {
-    ...a
-}
-console.log(obj)
+
+
+3. destructured and spread of Undefined as array and object 
+    Agar property undefined hai toh default value lagti hai.
+    Agar null hai toh default value nahi lagti.
+    Agar property exist hi nahi karti toh undefined assign hota hai aur default apply ho jata hai.
+
+Note:
+    case 1: x = undefined ; console.log([...x])//error
+        Reason: Spread operator (...) sirf iterables pe kaam karta hai jaise array ([]), string (""), set (new Set()), map (new Map()) etc.
+        Problem: undefined iterable nahi hota, isliye error aata hai.
+        Solution: Agar hume ensure karna ho ki agar undefined aaye toh bhi error na ho, toh || [] ka use karein:
+
+    case 2: x = undefined; console.log({...x})//not error
+        Reason: Object Spread ({...obj}) iterable hone ki requirement nahi rakhta, balki ek valid object ya null ya undefined accept karta hai.
+        JavaScript engine internally Object.assign({}, x) ka use karta hai.
+        Agar x = undefined ho toh JavaScript ignore karke {} return kar deta hai (error nahi deta).

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: steelblue;
+            margin: 20px auto;
+            transition: background-color 0.5s ease;
+        }
+
+        .zoom-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .fade-text {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>DOM Manipulation Example</h2>
+
+    <div class="box" id="colorBox"></div>
+    <button class="zoom-btn" id="zoomButton">Hover to Zoom</button>
+    <p class="fade-text" id="fadeText">This text will fade in/out</p>
+    <button id="toggleText">Toggle Fade</button>
+
+    <script>
+        // Color Change on Click
+        let colorBox = document.getElementById("colorBox");
+        colorBox.addEventListener("click", function () {
+            let newColor = colorBox.style.backgroundColor === "steelblue" ? "tomato" : "steelblue";
+            colorBox.style.backgroundColor = newColor;
+        });
+
+        // Zoom Button on Hover
+        let zoomButton = document.getElementById("zoomButton");
+        zoomButton.addEventListener("mouseenter", function () {
+            zoomButton.style.transform = "scale(1.2)";
+        });
+        zoomButton.addEventListener("mouseleave", function () {
+            zoomButton.style.transform = "scale(1)";
+        });
+
+        // Fade-in / Fade-out Effect
+        let fadeText = document.getElementById("fadeText");
+        let toggleText = document.getElementById("toggleText");
+
+        toggleText.addEventListener("click", function () {
+            fadeText.classList.toggle("show");
+        });
+    </script>
+
+</body>
+</html>
