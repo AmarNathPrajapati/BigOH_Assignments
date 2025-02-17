@@ -25,3 +25,4 @@ let date = new Date();
 console.log(date.toLocaleDateString());  // Local Date Format
 console.log(date.toLocaleTimeString());  // Local Time Format
 console.log(date.toISOString());  // ISO Format
+                                                       

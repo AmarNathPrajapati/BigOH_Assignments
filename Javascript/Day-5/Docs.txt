@@ -1,0 +1,289 @@
+Topic To Cover:
+1. Advanced JavaScript Concepts:
+    call, apply, and bind, and the use of this
+2. JavaScript Data Structures:
+    Set
+    Map
+3. Performance Optimization Techniques:
+    Debouncing and Throttling in JavaScript
+4. JavaScript Internal Mechanisms:
+    Event Loop
+    Prototype
+
+****************************************************Detailed Explanation*********************************
+
+1. Call, Apply and bind
+    Ye teeno methods JavaScript me functions ka execution context control karne ke liye use hote hain.
+    Basically, inka kaam this keyword ko manually set karna hota hai.
+
+    a. Call Method
+        call() method kisi function ko immediately invoke karta hai aur this value ko explicitly set karta hai.
+        Isme comma-separated arguments pass kiye jate hain.
+
+    b.  Apply Method
+        apply() bhi immediately invoke karta hai, lekin arguments ko array ke form me leta hai.
+        Bas call aur apply ka difference itna hai ki apply me arguments array ke form me pass hote hain.
+
+    c.  Bind Method
+        bind() method function ka copy return karta hai jisme this value fix hoti hai.
+        call aur apply function ko turant execute kar dete hain, lekin bind() sirf ek new function return karta hai jo baad me execute hota hai.
+        bind() se ek new function create hota hai jo later execute kiya ja sakta hai.
+
+
+        Note: Summary Table of this Behavior
+                    Context	                        this refers to
+                    Global Scope	                window (browser) / {} (Node.js)
+                    Object Method	                Object itself
+                    Function (Strict Mode)	        undefined
+                    Function (Non-Strict Mode)	    Global Object
+                    Arrow Function	                Parent Scope ka this
+                    setTimeout/setInterval	        window (unless arrow function is used)
+                    Constructor Function	        Newly created object
+                    Class Method	                Instance of the class
+                    Event Listener	                The DOM element triggering the event
+        
+                    Normal function me this dynamic hota hai, aur execution ke time decide hota hai.
+                    Arrow function me this fix hota hai aur parent scope ka this le leta hai.
+                    Object method me this object ko refer karta hai.
+                    setTimeout aur event listeners me this ka behavior different hota hai.
+                    Constructor function aur classes me this naya object ko refer karta hai.
+        
+                    Best Practices to Avoid this Related Errors
+                        Agar this ka reference maintain karna ho to arrow function use karo.
+                        Agar kisi function me this lost ho raha ho to .bind(this) ka use karo.
+                        Event listener me this ko maintain karne ke liye event.target use karo.
+
+2. Set & Map in JavaScript
+    JavaScript me Set aur Map do important built-in data structures hain jo arrays aur objects ka better alternative provide karte hain.
+    Dono ka apna specific use-case hota hai
+
+    a. Set
+        i. Set ek unique collection hoti hai jo duplicate values allow nahi karti.
+        Isme values insertion order me store hoti hain.
+        Set ek iterable hota hai, toh ispar for...of loop ya spread operator (...) use kar sakte hain.
+
+        ii. Set Methods and Operations
+        Method	                            Description
+        add(value)	                        Set me naya element add karta hai.
+        delete(value)	                    Set se element delete karta hai.
+        has(value)	                        Check karta hai ki element exist karta hai ya nahi.
+        clear()	                            Poora Set empty kar deta hai.
+        size	                            Set me total elements ka count return karta hai.
+
+        iii. Iterating Over a Set
+            Using forEach Loop
+            Using for...of Loop
+            Using Spread Operator
+
+        iv. Use Case of Set
+            Duplicate Removal from array
+            Effcient lookup (Better than Array include method)
+
+
+    b. Map
+        Map ek collection hai jo key-value pairs store karta hai.
+        Keys kisi bhi data type ki ho sakti hain (string, number, object, function).
+        Map ka insertion order maintain hota hai.
+
+        i. creation of Map
+            Using Array of Arrays (Most Common Way)
+                Yeh tarika sabse zyada use hota hai.
+                Har inner array ek [key, value] pair represent karta hai.
+                Keys kisi bhi data type ki ho sakti hain!
+                Yeh tarika easy aur clean hai!
+
+            Using set() Method
+                Khud se ek empty Map banao aur manually set() method se values add karo.
+                Har set(key, value) ek naya pair insert karega.
+                Jab dynamically values add karni ho, tab yeh approach better hoti hai!
+
+            Using Another Map (Clone or Copy)
+                Ek existing Map se naya Map bana sakte hain!
+                Directly ek Map object doosre Map me pass kar do.
+                Yeh approach tab useful hai jab ek existing Map ka clone banana ho.
+
+            Using Object.entries() (Convert Object to Map)
+                Yeh bahut useful hota hai jab backend se JSON object aaye aur Map me convert karna ho!
+                Agar tumhare paas ek normal object hai, to usko Map me convert kar sakte ho!
+                Object.entries(obj) ek array of arrays return karta hai, jo Map ka format hai.
+
+        ii. Map Methods and Operations
+            Method	                    Description
+            set(key, value)	            Map me key-value pair insert karta hai.
+            get(key)	                Given key ka corresponding value return karta hai.
+            delete(key)	                Given key ko Map se remove karta hai.
+            has(key)	                Check karta hai ki key exist karti hai ya nahi.
+            clear()	                    Poora Map empty kar deta hai.
+            size	                    Map me total elements ka count return karta hai.
+
+        iii. Iterating Over a Map
+            Using forEach Loop
+            Using for...of Loop
+
+        iv. Use Cases of Map
+            Storing Key-Value Pairs Dynamically
+            Using Objects as Keys
+            Counting Word Frequency
+
+3. Performance Optimization Techniques
+
+    a. Debouncing
+        Debouncing ek technique hai jisme function execution delay kiya jata hai jab tak ek certain time ke andar koi naya event trigger na ho jaye.
+        Simple shabdon me: Agar continuous events fire ho rahe hain, toh debounce function sirf last event ke baad kuch delay ke baad execute hoga.
+
+        i. Use Cases of Debouncing
+            Search box suggestion (Jab user type kar raha ho, unnecessary API calls ko avoid karne ke liye)
+            Window resize events (Bar-bar layout calculation avoid karne ke liye)
+            Button click spam prevention (Ek button ko bar-bar click hone se prevent karna)
+            Form validation while typing (Har keypress pe validation na ho, balki user ke rukne ke baad ho)
+
+
+        ii. How Does Debouncing Work?
+            Jab continuous event trigger hota hai, toh debounce function ek timer set kar leta hai.
+            Agar naya event trigger hota hai toh pehle wala timer reset ho jata hai.
+            Jab tak user events trigger karta rahega, function execute nahi hoga.
+            Jaise hi user rukta hai aur ek defined time pass hota hai, function execute hota hai.
+
+        iii. Line-by-Line Explanation of Debounce Function
+
+            Step 1: Debounce Function Definition
+                debounce(func, delay) ek function hai jo 2 arguments leta hai:       
+                func → Jo actual function execute hoga (yahan fetchData())
+                delay → Kitna time wait karna hai execution ke liye (yahan 500ms)
+                timer variable ek reference store karega setTimeout ka, jise hum reset karenge jab naya event trigger hoga.
+        
+            Step 2: Returning a Function
+                Debounce function ek naye function ko return kar raha hai jo anonymous function hai.
+                (...args) ka matlab hai jitne bhi arguments debounce function ko milenge, woh sab pass ho jayenge inner function ko.
+                Matlab jab bhi hum debounced function call karenge, actual function execute nahi hoga, balki delay ke baad hoga.
+
+            Step 3: Reset Previous Timer
+                Har baar jab bhi function call hoga, pehle wale timer ko clear kar diya jayega.
+                Agar naya event fire hota hai, toh purana timer cancel ho jata hai, aur ek naya timer set hota hai.
+                Yeh prevent karta hai unnecessary execution ko jab tak user typing karta rahe.
+
+            Step 4: Setting a New Timer
+                setTimeout() ek naye timer ko start karta hai jo delay milliseconds ke baad execute hoga.
+                Jab tak user fast typing karta rahega, yeh timer reset hota rahega.
+                Jaise hi user rukta hai, delay time complete hote hi function execute ho jata hai.
+                .apply(this, args) ka use hota hai function ke proper context aur arguments pass karne ke liye.
+
+            Step 5: Final Execution
+                debouncedSearch("Hello") trigger hota hai, but 500ms complete hone se pehle debouncedSearch("Hello W") call hota hai → Pehle wala clear ho jata hai.
+                Same process debouncedSearch("Hello World") ke saath hoti hai.
+                Jab user typing stop kar deta hai, toh 500ms ke baad last wala call execute hota hai.
+
+                .apply(this, args)           vs.             .call(this, ...args)
+                    Method	                                    Use Case
+                .apply(this, args)	                        Jab arguments ek array format me hote hain, jaise func.apply(this, [arg1, arg2]).
+                .call(this, ...args)	                    Jab arguments normal form me hote hain, jaise func.call(this, arg1, arg2).
+
+
+                Direct func(args) nahi use kar sakte, kyunki woh turant execute ho jayega.
+                .apply(this, args) ka use isliye kiya jata hai taaki function proper this aur arguments ke saath execute ho, bina turant call hone ke.
+                Agar single argument ho toh .call(this, arg) bhi use ho sakta hai.
+
+    b. Throttling
+        Throttling ek technique hai jo kisi function ke execution ko ek fixed interval me limit karti hai.
+        Jab bhi user koi event bar-bar trigger kare (jaise scroll, resize, keypress), throttling ensure karta hai ki function sirf ek specific interval ke baad hi chale.
+
+        i. Example Use Cases:
+            Window Resize Event: Agar window resize ho rahi ho toh har millisecond pe event fire hone se performance slow ho sakti hai.
+            Scroll Event: Jab user scroll kare, toh har pixel movement pe event trigger hona inefficient hoga.
+            Button Click Event: Agar user fast click kare toh multiple requests na bheje.
+
+        ii. working
+            Throttling ek function ke execution ko ek fixed time gap ke baad allow karta hai, chahe kitni baar bhi event fire ho raha ho.
+
+        iii. Throttling vs Debouncing
+                Feature	                Throttling	                            Debouncing
+                Execution Time          Regular intervals pe hota hai	        Jab event trigger hona band hota hai, tab delay ke baad hota hai
+                Use Case	            Scroll, Resize, Mouse Move	            Search Bar, Auto-Save, Form Validation
+                Example	                Scroll par har 1 sec me ek API request	Typing complete hone ke 500ms baad API request
+
+4. JavaScript Internal Mechanisms
+    a. Event Loop
+        JavaScript ek single-threaded language hai, iska matlab hai ki ek samay pe ek hi kaam execute hota hai.
+        Event Loop ek mechanism hai jo asynchronous code (setTimeout, Promises, fetch) ko JavaScript execution ke sath sync karta hai.
+
+        Event Loop Ka Kaam
+        Call Stack: JavaScript ka execution stack jisme synchronous code execute hota hai.
+        Web APIs: Browser ke asynchronous tasks yahan jaate hain (e.g., setTimeout, fetch).
+        Callback Queue: Jab Web APIs execute ho jati hain to callbacks queue me aate hain.
+        Microtask Queue: Promises aur MutationObserver yahan store hote hain.
+        Event Loop: Ye check karta hai ki Call Stack empty hai ya nahi. Agar hai, to Callback Queue se task uthakar execute karta hai.
+
+        Microtask vs Callback Queue
+        Microtask Queue (Priority High): Promises, MutationObserver
+        Callback Queue (Priority Low): setTimeout, setInterval, fetch
+        Microtask hamesha pehle execute hota hai agar Call Stack empty ho.
+
+        /**
+        Event Loop Execution Order
+        console.log("1 Synchronous: Start"); (Call Stack me execute hota hai)
+        setTimeout ka function Web API me chala gaya aur 2 sec ka delay start ho gaya.
+        Promise.resolve().then(...) Microtask Queue me chala gaya.
+        console.log("2️ Synchronous: End"); Call Stack me execute hota hai.
+        Event Loop dekhta hai ki Call Stack empty hai, to Microtask Queue ka kaam (Promise) execute hota hai.
+        2 second baad, setTimeout wala callback Callback Queue me aata hai aur execute hota hai.
+        **/
+
+        /**
+        Kya Ho Raha Hai?
+        "Start" & "End" Call Stack me synchronous execution kar rahe hain.
+        Promises (Microtask Queue) me ja rahe hain (Promise 1, Promise 2).
+        Timeouts (Callback Queue) me hain (Timeout 1, Timeout inside Promise, Timeout 2).
+        Event Loop pehle Microtasks execute karega (Promise 1, Promise 2).
+        Phir Callbacks execute honge (Timeout 1, Timeout inside Promise, Timeout 2).
+        **/
+
+        Key Takeaways
+        Event Loop ka kaam hai Call Stack aur Callback Queue ko sync karna.
+        Microtask Queue (Promises) ko Callback Queue (setTimeout) se pehle execute kiya jata hai.
+        Web APIs, Call Stack, Microtask Queue aur Callback Queue milkar JavaScript ka asynchronous flow manage karte hain.
+
+        Event Loop Ka Real-World Use Case
+            UI Freezing Problem Ko Solve Karna
+            API Calls Ko Efficiently Handle Karna
+            Smooth Animations & UI Updates
+            Background Tasks Without Blocking UI
+
+
+    b. Prototype
+        JavaScript me har function aur object ke paas ek hidden property hoti hai jise "prototype" kaha jata hai.
+        Agar kisi object me koi property ya method nahi milti, to JavaScript uske prototype me search karta hai.
+
+        i. Function Prototype
+            Jab hum ek function create karte hain, JavaScript uske saath ek prototype object attach kar deta hai.
+            Function ke prototype me naye methods aur properties add kiye ja sakte hain.
+
+        ii. Prototype-Based Inheritance
+            Agar hume kisi object ke sare instances ke liye ek common method banana ho, to hum prototype use kar sakte hain.
+
+        iii. Prototype Chain (Parent-Child Inheritance)
+            Agar ek object ke andar koi property/method nahi milta to wo prototype chain ke through uske parent object me check karta hai.
+
+        iv.  Prototype vs __proto__
+            Prototype (prototype) => Function ke saath associated hota hai.
+            __proto__ => Kisi bhi object ke parent prototype ko point karta hai.
+
+        v. Overriding Prototype Methods
+            Agar hum prototype method ko overwrite karna chahein to hum direct object me define kar sakte hain.
+
+
+        Prototype ek object hota hai jo inheritance enable karta hai.
+        Prototype ke through methods efficiently share kiye ja sakte hain.
+        Prototype chain ka use karke JavaScript objects properties inherit karte hain.
+        prototype function ke saath associated hota hai, aur __proto__ kisi object ke parent ko point
+
+
+
+
+
+
+
+
+
+
+
+

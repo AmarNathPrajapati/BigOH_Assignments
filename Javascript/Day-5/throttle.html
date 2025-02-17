@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttling Example</title>
+    <style>
+        body {
+            height: 200vh;
+            /* Extra height for scrolling */
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .box {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background: crimson;
+            color: white;
+            font-size: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">Scroll to see throttling in action</div>
+
+    <script>
+        // Throttling Function
+        function throttle(func, limit) {
+            let lastFunc;
+            let lastRan;
+
+            return function (...args) {
+                const context = this;
+
+                if (!lastRan) {
+                    func.apply(context, args);
+                    lastRan = Date.now();
+                } else {
+                    clearTimeout(lastFunc);
+                    lastFunc = setTimeout(() => {
+                        if ((Date.now() - lastRan) >= limit) {
+                            func.apply(context, args);
+                            lastRan = Date.now();
+                        }
+                    }, limit - (Date.now() - lastRan));
+                }
+            };
+        }
+
+        // Function to show scroll position
+        function updateScrollPosition() {
+            document.querySelector('.box').innerText = `Scrolled at ${new Date().toLocaleTimeString()}`;
+        }
+
+        // Applying throttling with 1 second delay
+        const throttledScroll = throttle(updateScrollPosition, 1000);
+
+        // Adding event listener
+        window.addEventListener('scroll', throttledScroll);
+    </script>
+
+</body>
+</html>

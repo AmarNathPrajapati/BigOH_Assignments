@@ -72,20 +72,22 @@ Topic to Cover:
         i. this in Global Scope
             Agar this global scope me use ho raha hai toh:
             Browser me this window object ko refer karega.
-            Node.js me this global object nahi hota.
+            Node.js me this empty object {} ko refer karega.
 
         ii. this in a Regular Function (Normal Function)
             Global context me call hone par, browser me this window milega
             Node.js ya strict mode ('use strict') me undefined milega.
+            Non-strict mode me this global object ko refer karega.
 
         iii.this in object
             this caller object obj ko refer karega
+            Jab this kisi object ke method me hota hai, toh ye usi object ko refer karta hai.
 
         iv. Call for Different context
             call() method ka use karke, this ko manually set kar sakte hain.
 
         v.this in Arrow Functions
-            Arrow functions me this lexical hota hai.
+            Arrow functions me this lexical hota hai. yani apne parent scope ka this le leta hai.
             Ye function ke outer scope ka this inherit karta hai.
             Arrow function ka this kabhi bhi change nahi hota.
             Arrow function me this object ka nahi, balki global scope ka this use hota hai.
@@ -97,7 +99,11 @@ Topic to Cover:
         vii. this in setTimeout & setInterval
             Normal function me this global object ko refer karta hai.
             Arrow function ka this lexical hota hai.
+            Browser me setTimeout aur setInterval ke andar normal function ka this window object hota hai.
 
+        viii. this in event listener
+            Event listeners me this wo element refer karta hai jo event trigger kar raha hai.
+             Arrow function use karne par this window ko refer karega.
         Note:
             Normal function me this function call ke basis par decide hota hai.
             Arrow function me this lexical hota hai (outer function se inherit karta hai).

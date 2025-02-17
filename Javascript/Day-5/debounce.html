@@ -1,0 +1,20 @@
+<input type="text" id="searchBox" placeholder="Type something...">
+<script>
+    function debounce(func, delay) {
+        let timer;
+        return function (...args) {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    function searchAPI(query) {
+        console.log("Searching for:", query);
+    }
+
+    const debouncedSearch = debounce(searchAPI, 500);
+
+    document.getElementById("searchBox").addEventListener("input", function (event) {
+        debouncedSearch(event.target.value);
+    });
+</script>
