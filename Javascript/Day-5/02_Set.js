@@ -3,7 +3,11 @@ const mySet = new Set(); // Empty Set
 console.log("adfdasdfasdfas",mySet);
 
 // directly initializing the value
-const numbers = new Set([1, 2, 3, 4, 4, 2, 5]);
+let obj = {
+    "name":"abc"
+};
+let newArr2 = new Array();
+const numbers = new Set([1,obj,obj,newArr2,newArr2, [] ,3, 4, 4, 2, 5]);
 console.log("asdfsdfasdf__",numbers); // Output: Set(5) {1, 2, 3, 4, 5} (duplicates removed)
 
 //performaing various set operations

@@ -2,16 +2,12 @@
 const myMap = new Map();
 console.log(myMap);
 
-//initializing a Map
+//initializing a Map (unique keys)
 const newMap = new Map([
     ["name","Amar"],
-    [true,"programmer"],
-    [{
-        Age:25,
-        city:"Jaunpur"
-    },true]
 ])
-console.log(newMap);
+newMap.set("name","Amit")
+console.log("asdfsaddsf_____adsfafsd",newMap);
 
 //cloning a Map
 const originalMap = new Map([

@@ -183,7 +183,18 @@ Topic To Cover:
                 .apply(this, args) ka use isliye kiya jata hai taaki function proper this aur arguments ke saath execute ho, bina turant call hone ke.
                 Agar single argument ho toh .call(this, arg) bhi use ho sakta hai.
 
+        iv. Necessity of This, apply and ...args in debouncing
+            agar humein ek powerful aur generic debouncing function banana hai jo har type ke function ke saath sahi se kaam kare, 
+            tab this, apply, aur ...args ka use zaroori ho jata hai.
+
+            Agar function multiple arguments leta hai
+                Basic version sirf ek argument ke saath kaam karega, lekin ...args use karne se hum kitne bhi arguments pass kar sakte hain.
+            
+            Agar function ek object ka method hai (this required)
+                Normal function call mein this kho sakta hai, lekin apply use karne se hum this ki value preserve kar sakte hain.
+                
     b. Throttling
+        throttling ka ye basic concept hai ki "Ek function ko repeatedly call hone se rokna, aur usko fixed interval ke baad chalne dena."
         Throttling ek technique hai jo kisi function ke execution ko ek fixed interval me limit karti hai.
         Jab bhi user koi event bar-bar trigger kare (jaise scroll, resize, keypress), throttling ensure karta hai ki function sirf ek specific interval ke baad hi chale.
 
@@ -196,10 +207,11 @@ Topic To Cover:
             Throttling ek function ke execution ko ek fixed time gap ke baad allow karta hai, chahe kitni baar bhi event fire ho raha ho.
 
         iii. Throttling vs Debouncing
-                Feature	                Throttling	                            Debouncing
-                Execution Time          Regular intervals pe hota hai	        Jab event trigger hona band hota hai, tab delay ke baad hota hai
-                Use Case	            Scroll, Resize, Mouse Move	            Search Bar, Auto-Save, Form Validation
-                Example	                Scroll par har 1 sec me ek API request	Typing complete hone ke 500ms baad API request
+            Feature	                Debouncing	                            Throttling
+            When to execute	        Function after delay of last action.	Function after fixed interval (e.g., 1 sec).
+            Frequency	            Executes only once after actions stop.	Executes at regular intervals.
+            Use case	            Input validation, search bars.	        Scrolling, resizing, mouse movements.
+            Example	Search bar      (after typing stops).	                Scroll events (every 1 second).
 
 4. JavaScript Internal Mechanisms
     a. Event Loop
@@ -277,12 +289,17 @@ Topic To Cover:
         prototype function ke saath associated hota hai, aur __proto__ kisi object ke parent ko point
 
 
+5. __proto__
+    __proto__ ek internal property hai jo ki prototype-based inheritance ko handle karti hai.
+    __proto__ ek property hai jo kisi bhi JavaScript object ke paas hoti hai.
+    Ye object ka prototype reference karti hai.
+    Jab hum kisi object ke properties ko access karte hain aur vo property us object me nahi milti, toh JavaScript us object ke prototype me search karta hai.
+    Aur ye prototype bhi __proto__ ke through linked hota hai.
 
-
-
-
-
-
+    How it works (prototype chain):
+        Har JavaScript object ka ek prototype hota hai.
+        Agar ek object me koi property nahi milti, toh vo prototype me search karta hai.
+        Aur yeh ek prototype chain banata hai, jo parent se child objects tak jaati hai.
 
 
 

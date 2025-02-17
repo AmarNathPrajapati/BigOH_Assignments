@@ -13,6 +13,9 @@ function Person1(name) {
     this.name = name;
 }
 
+
+
+
 console.log(Person1.prototype);  // {} (By default empty object)
 //prototype based inheritance
 function Person(name) {
@@ -29,6 +32,10 @@ let user2 = new Person("Ankit");
 
 user1.sayHello();  // "Hello, my name is Rahul"
 user2.sayHello();  // "Hello, my name is Ankit"
+
+
+
+
 
 //Prototype Chain (Parent-Child Inheritance)
 function Animal(name) {
@@ -54,6 +61,9 @@ Dog.prototype.bark = function () {
 let myDog = new Dog("Bruno", "Labrador");
 myDog.makeSound();  // "Animal sound..." (Inherited)
 myDog.bark();       // "Woof! Woof!"
+
+
+
 
 //Overriding Prototype Methods
 function Car(name) {

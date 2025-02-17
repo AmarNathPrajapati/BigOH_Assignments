@@ -118,9 +118,6 @@ Topic To Cover (Day - 2)
     c. Arrow Functions
         Arrow functions concise syntax provide karte hain.
 
-
-
-
 Day-2
 1. Basic Concept
 

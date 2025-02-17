@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttling Example</title>
+</head>
+<body>
+
+    <h2>Click the button (Throttling Applied)</h2>
+    <button id="myButton">Click Me</button>
+
+    <script>
+        function throttle(func, limit) {
+            let lastCall = 0;
+            return function (args) {
+                let now = Date.now();
+                if (now - lastCall >= limit) {//Agar last function call se limit milliseconds ka gap ho gaya hai, tabhi function chalega.
+                    func(args);//execute function call
+                    lastCall = now;
+                }
+            };
+        }
+
+        function handleClick() {
+            console.log("Button clicked at", new Date().toLocaleTimeString());
+        }
+
+        document.getElementById("myButton").addEventListener("click", throttle(handleClick, 3000));
+    </script>
+
+</body>
+</html>
