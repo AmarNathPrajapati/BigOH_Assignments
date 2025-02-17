@@ -1,0 +1,55 @@
+1. eval()
+    eval() JavaScript ka built-in function hai jo ek string ko JavaScript code ki tarah execute karta hai.
+    Agar input mathematical expression hai, toh uska result return karega.
+    Agar JavaScript code hai, toh usko execute karega.
+    JavaScript eval() automatically BODMAS rule follow karta hai.
+    eval() existing scope ke variables ko bhi access kar sakta hai.
+
+    warning:
+    eval() dangerous ho sakta hai, agar user input directly execute ho jaye.
+
+    Solution:
+    Avoid eval() Using new Function()
+    eval() ka secure alternative new Function() hai, jo sirf mathematical expressions evaluate karega.
+
+    Feature	                    eval()	                        Alternative
+    Mathematical Expressions	  Safe (Agar trusted input ho)	  new Function()
+    Executing User Input	      DANGEROUS! (Security Risk)	    Avoid karo
+    Accessing Variables	        Possible but risky	            Avoid karo
+    Performance	                Slow	                          new Function() is better
+
+2. importance of rest operator
+    ...args ko rest parameter kehte hain.
+    Yeh JavaScript mein ek special feature hai jo tumhe function ke arguments ko dynamically handle karne ka mauka deta hai, bina unka fixed number define kiye.
+    Iska use tum kisi bhi function mein variable number of arguments lene ke liye kar sakte ho.
+
+3. URLSearchParams 
+    URLSearchParams ek JavaScript ka built-in object hai jo query strings ko generate aur manipulate karne ke liye use hota hai.
+    Yeh ?key=value&key2=value2 jaise query parameters ko easily handle karta hai.
+
+    i. URLSearchParams Create Karna
+      Agar ek object ya string se query parameters banana ho, toh URLSearchParams ka use kar sakte hain.
+    
+    ii. URLSearchParams ko String Se Initialize Karna
+      Agar ek existing URL ya query string ho, toh URLSearchParams use karke usko manipulate kar sakte hain.
+      get("key") method use karke specific parameter ki value nikal sakte hain.
+    
+    iii. Query Parameters Add, Delete aur Modify Karna
+      URLSearchParams query parameters ko dynamically modify karne ke liye kaam aata hai.
+      append() - New Key-Value Pair Add Karna
+      set() - Existing Parameter Update Karna
+      delete() - Query Parameter Remove Karna
+
+    iv. Query Parameters Iterate Karna
+      Agar query parameters ki list print karni ho, toh loop ka use kar sakte hain.
+
+    v.  URLSearchParams Ka Use fetch() Ke Saath
+      Agar API request me query parameters pass karne ho, toh URLSearchParams use kar sakte hain.
+    
+    vi.decodeURIComponent() Se + Ko %20 Me Convert Karna
+      Agar URLSearchParams spaces ko + me convert kar raha hai, aur tumhe %20 chahiye, toh decodeURIComponent() use karo.
+
+
+
+
+
