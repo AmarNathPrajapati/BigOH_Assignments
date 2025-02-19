@@ -24,7 +24,7 @@ function evaluateExpression2(expression) {//More safer than eval()
     return new Function('return ' + expression)();//execute only mathematical expression
 }
 
-console.log(evaluateExpression("1+(2+3)*4-10/2+3-4")); 
+console.log(evaluateExpression("1+(2+(-3))*4-10/2+3-4")); 
 console.log(evaluateExpression2("1+(2+3)*4-10/2+3-4")); 
 
 //redo

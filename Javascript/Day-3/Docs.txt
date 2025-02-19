@@ -182,6 +182,28 @@ Topic To Cover
 
     ii.Stringifying JSON (Convert JavaScript Object → JSON String)
         Jab hume JavaScript object ko JSON string me convert karna hota hai, toh JSON.stringify() ka use karte hain.
+        JSON.stringify(value, replacer, space) Syntax
+
+        Syntax: JSON.stringify(value, replacer, space)
+            value → Jo bhi object ya array ko stringify karna hai
+            replacer → (Optional) Kisi specific key ko remove ya modify karne ke liye
+            space → (Optional) Pretty print karne ke liye indentation set karta hai
+
+        1. null kya karta hai?
+            Yeh replacer parameter hota hai.
+            Agar null dete hain, toh poora object as it is stringify ho jata hai.
+            Agar kisi specific key ko exclude ya modify karna ho toh yaha ek function de sakte hain.
+        
+        2. 2 kya karta hai? (Indentation for Readability)
+            Yeh spaces define karta hai JSON format ko readable banane ke liye.
+            Agar 2 dete hain toh 2 spaces ka indentation hota hai.
+            Agar 4 dete hain toh 4 spaces ka indentation hota hai.
+        
+        Why Use JSON.stringify(result, null, 2)?
+            Better Readability – JSON structured format me clear dikhega.
+            Debugging Easy – Indentation ke wajah se errors easily spot ho sakti hain.
+            Avoiding Compact JSON – Default compact JSON ek line me hota hai, jo read karna mushkil hota hai.
+
 
     iii.JSON Manipulation (Accessing and Modifying JSON Data)
         JSON ko JavaScript object me convert karne ke baad, hum dot notation (obj.key) ya bracket notation (obj["key"]) se uska data access & modify kar sakte hain.

@@ -296,6 +296,18 @@ Topic to Cover:
     b. DOM Event Listeners
         DOM me event handling ka matlab hota hai ki hum kisi bhi user action (click, hover, keypress, etc.) par response de sakte hain.
         JavaScript me events ko handle karne ke liye Event Listeners use kiye jate hain.
+        
+            1. Event Kya Hota Hai?
+            Event ek trigger point hota hai jo ek specific action ko perform karta hai jab koi particular situation hoti hai.
+            Jaise hi ek event emit (trigger) hota hai, uss event ke listeners (functions) execute ho jate hain.
+
+            Real-life Example:
+            Maan lo ek bell (ghanti) hai jo jab bhi bajti hai, tab log react karte hain.
+
+            Bell bajana → Event emit karna
+            Sunne wale log → Event ke listeners
+            Har listener kuch action leta hai (jaise koi darwaza kholega, koi message bhejega)
+            
             Event Listener Add Karne ke Tarike
                 i. HTML ke andar directly event likhna (Not Recommended)
                 ii. JavaScript me .onclick use karna
