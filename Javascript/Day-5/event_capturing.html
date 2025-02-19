@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+        parent
+        <div id="child">
+            child
+        </div>
+    </div>
+    <script>
+        document.getElementById('parent').addEventListener("click", (e) => {
+            console.log("Parent clicked");
+        }, true)//event capturing (parent->child propogation)
+        document.getElementById('child').addEventListener("click", (e) => {
+            console.log("child clicked");
+        }, true)
+
+    </script>
+</body>
+</html>

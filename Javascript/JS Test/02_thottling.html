@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Throttling</title>
+</head>
+<body>
+    <button id="btn">
+        click Me
+    </button>
+    <script>
+        function throttle(func, limit) {
+            let lastCall = 0;
+            return function (args) {
+                let now = Date.now();
+                if (now - lastCall >= limit) {
+                    func(args);
+                    lastCall = now;
+                }
+            }
+        }
+        function handleClick() {
+            console.log("Button Clicked");
+        }
+        document.getElementById('btn').addEventListener('click', throttle(handleClick, 3000))
+    </script>
+</body>
+</html>

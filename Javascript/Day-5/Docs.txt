@@ -301,6 +301,45 @@ Topic To Cover:
         Agar ek object me koi property nahi milti, toh vo prototype me search karta hai.
         Aur yeh ek prototype chain banata hai, jo parent se child objects tak jaati hai.
 
+6. Event Bubbling
+    Jab kisi child element pe event trigger hota hai, toh woh event automatically uske parent aur ancestors tak bubble hota hai. Matlab:
+        Sabse pehle inner element ka event chalega
+        Phir parent ka chalega
+        Phir grandparent ka chalega
+        Aur aise hi document tak propagate hota rahta hai
+        Yeh default behavior hota hai DOM events ka.
+
+7. Event Delegation
+    Agar tumhare pass multiple child elements hain aur tum har ek child pe alag-alag event listener na lagakar sirf parent pe ek event listener laga do, toh usko Event Delegation kehte hain.
+
+    Ye technique efficient hoti hai, kyunki:
+
+    Har ek child pe event listener lagane ki zaroorat nahi hoti.
+    Dynamically added elements ke liye bhi ye automatically work karta hai.
+
+    Event Delegation Kab Use Kare?
+    Jab multiple elements ek parent ke andar ho
+    Example: List items, table rows, buttons inside a div.
+    
+    Jab dynamically elements add ho rahe ho
+    Example: AJAX se naye elements load ho rahe ho.
+    
+    Jab performance optimize karni ho
+    Example: 1000+ elements ke liye har ek pe event listener lagane se acha hai parent pe lagana.
+
+
+8. Event Capturing (Trickling)
+    Event capturing (trickling) ek aisi process hai jisme event sabse pehle root element se travel karta hai aur phir target element tak pahuchta hai.
+    By default, JavaScript event bubbling hota hai, lekin agar third parameter true pass karein, toh capturing mode enable ho jata hai.
+
+    Event Capturing vs Bubbling
+    Mode	            Execution               Order
+    Bubbling            (Default)	            Child → Parent → Grandparent
+    Capturing           (Trickling)	            Grandparent → Parent → Child
+Agar tum true pass nahi karte ho, toh default bubbling mode hi hota hai.
+Event capturing root se start hota hai aur inner element tak pahuchta hai.
+
+
 
 
 

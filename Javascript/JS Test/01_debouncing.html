@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing </title>
+</head>
+<body>
+    <input type="text" id="searchBox">
+    <script>
+        function debounce(func, delay) {
+            let timer;
+            return function (args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func(args)
+                }, delay)
+            }
+        }
+        function searchAPI(query) {
+            console.log("Searching...", query);
+        }
+        const debounceSearch = debounce(searchAPI, 1000);
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            debounceSearch(e.target.value);
+        })
+    </script>
+</body>
+</html>
