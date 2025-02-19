@@ -81,5 +81,4 @@ const projectsData = {
 
 // Run the function
 const generatedResult = generateEmployeeReport(employeesData, projectsData)
-console.log(JSON.stringify(generatedResult, null, 2));
-//bhai, es code ko line by line explain karana..... ye batana ki map kyu use hua... aur ye bhi dekho ki final output me "average_project_rating" kyu nahi aa raha hai...
+console.log(JSON.stringify(generatedResult, null, 4));

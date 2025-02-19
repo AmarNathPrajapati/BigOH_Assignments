@@ -1,6 +1,9 @@
 function manageCompany(jsonObject, operation, departmentName, employee = null) {//employee detail optional
+
     const departments = jsonObject.company.departments;//extracting all department
-    console.log("adffasaddf__ad",departments);
+
+    // console.log("adffasaddf__ad",departments);
+
     const department = departments.find(dept => dept.name === departmentName);//findiing actual department whero to perform change
 
     if (!department) {
@@ -9,6 +12,7 @@ function manageCompany(jsonObject, operation, departmentName, employee = null) {
     }
 
     switch (operation) {
+
         case "add":
             //checking required filed to insert an employee
             if (!employee || !employee.id || !employee.name || !employee.role) {
@@ -77,7 +81,7 @@ const jsonObject = {
 };
 
 //  Add Employee
-manageCompany(jsonObject, "add", "Engineering", { "id": 4, "name": "Dave", "role": "Intern" });
+manageCompany(jsonObject, "add", "Engineering", { "id": 4, "name": "Amar", "role": "TGT" });
 
 //  Remove Employee
 manageCompany(jsonObject, "remove", "HR", { "id": 3 });

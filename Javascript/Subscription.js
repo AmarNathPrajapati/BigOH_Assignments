@@ -9,6 +9,7 @@ function transformRoutes(routes, subscriptions) {
         }
     });
 
+    console.log("adfasfasfd___asdfadsf",subMap);
     let firstSubscribed = null;//store the first subscribed module so that we can add property "redirectTo"
     
     function processRoute(route) {
@@ -33,7 +34,6 @@ function transformRoutes(routes, subscriptions) {
     }
 
     const updatedRoutes = routes.map(processRoute);
-    //bhai, zara ye process route ko detail me samajhana uski ek ek line aur ye bhi batana ki map(function) kaise pass kar saltat haaaai.
 
     // Add redirect-to in the beginning
     if (firstSubscribed) {
@@ -182,6 +182,3 @@ const routes = [
   ];
 const updatedRoutes = transformRoutes(routes, subscription);
 console.log(JSON.stringify(updatedRoutes, null, 2));
-/**
-bhai, es code ki ek ek line samajha do... problem ko bhi achchhe se samajha do bhai....
- */

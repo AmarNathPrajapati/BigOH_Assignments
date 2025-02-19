@@ -66,10 +66,13 @@ function createCompanyStructure(initialData) {
         Object.assign(empToUpdate, employee);
         console.log(`Employee with ID ${employee.id} updated in ${departmentName}.`);
         break;
+
       case "find":
         return department.employees;
+
       case "findOne":
         return department.employees.find(emp => emp.id === employee.id || emp.name === employee.name);
+        
       default:
         console.log("Invalid operation");
     }
@@ -84,7 +87,7 @@ const jsonObject = createCompanyStructure(initialData);
 // Example Usage:
 
 // 1. Add a new employee to the Engineering department
-jsonObject.manageCompany("add", "Engineering", { "id": 4, "name": "Dave", "role": "Intern" });
+jsonObject.manageCompany("add", "Engineering", { "id": 4, "name": "Amar", "role": "TGT" });
 
 // 2. Remove an employee from the HR department
 jsonObject.manageCompany("remove", "HR", { "id": 3 });
