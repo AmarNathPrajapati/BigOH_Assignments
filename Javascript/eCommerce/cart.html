@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div>
+            <a class="logo" href="./index.html">
+                ShopLogo
+            </a>
+        </div>
+        <div class="search-filter">
+            <input type="text" placeholder="Search products..." id="searchBox">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="smartphones">Smartphones</option>
+                <option value="laptops">Laptops</option>
+                <option value="fragrances">Fragrances</option>
+            </select>
+        </div>
+        <div class="nav-links">
+            <a href="wishlist.html">❤️ Wishlist</a>
+            <a href="cart.html">🛒 Cart</a>
+        </div>
+    </nav>
+    <h1>My Cart</h1>
+    <!-- Adding Product Dynamically -->
+    <div id="cartContainer"></div>
+
+    <script src="scripts/api.js"></script>
+    <script src="scripts/cart.js"></script>
+</body>
+</html>

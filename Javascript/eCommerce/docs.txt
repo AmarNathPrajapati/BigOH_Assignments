@@ -1,0 +1,160 @@
+1. grid-template-columns
+    grid-template-columns ek CSS property hai jo Grid container ke andar columns ka size aur structure define karti hai.
+    Yeh CSS Grid Layout ka ek important part hai jo elements ko rows aur columns me organize karne me madad karta hai.
+    Syntax:
+    grid-template-columns: value1 value2 value3 ...;
+    Yahaan har value ek column ke width ko represent karti hai.
+
+    Different Values aur Examples:
+    a. Fixed Width Columns (px, em, rem, etc.)
+        Agar ham chahe  ki har column ek fixed size ka ho, toh aise define kar sakte ho:
+        .container {
+        display: grid;
+        grid-template-columns: 200px 300px 400px;
+        }
+        Explanation:
+
+        Pehla column 200px wide hoga
+        Dusra column 300px wide hoga
+        Teesra column 400px wide hoga
+
+    b. Percentage Based Columns (%)
+        Agar ham chahe  ki columns responsive ho aur parent container ke size ke according adjust ho, toh % ka use kar sakte ho:
+        .container {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        }
+        Explanation:
+        Dono columns equal width (50% each) lenge, yani screen ke aadha-aadha part cover karenge.
+
+    c. Auto Columns (auto)
+        Agar ham chahe  ki columns ka size apne content ke according adjust ho, toh auto ka use karo:
+        .container {
+          display: grid;
+          grid-template-columns: 200px auto;
+        }
+        Explanation:
+
+        Pehla column 200px fixed hoga.
+        Dusra column content ke size ke hisaab se adjust hoga.
+
+    d. Fractional Unit (fr) – Best for Responsive Grids
+        fr (fraction) unit ka use karke columns ko available space ke hisaab se distribute kiya jata hai:
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr;
+        }
+        Explanation:
+
+        Pehla column total space ka 1 part lega.
+        Dusra column 2 parts lega (double space milega pehle wale column se).
+        Teesra column bhi 1 part lega.
+
+    e. Repeat() Function – Shorter Syntax
+        Agar tumhe ek jaise multiple columns chahiye, toh repeat() function use kar sakte ho:
+        .container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+        Explanation:
+        Yahaan 3 columns banenge, aur har column equal width lega (1fr each).
+        Agar 4 columns chahiye, jisme pehle do 100px ke ho aur baaki auto ho, toh:
+        .container {
+          display: grid;
+          grid-template-columns: repeat(2, 100px) auto auto;
+        }
+
+    f. Minmax() – Responsive Columns with Min & Max Size
+        Agar ham chahe  ki kisi column ka ek minimum aur maximum width ho, toh minmax() use kar sakte ho:
+
+        .container {
+          display: grid;
+          grid-template-columns: minmax(150px, 1fr) 2fr;
+        }
+        Explanation:
+
+        Pehla column kam se kam 150px ka hoga, aur maximum available space le sakta hai (1fr).
+        Dusra column total space ka 2 parts lega.
+
+    g. Auto-fit & Auto-fill – Dynamic Columns
+        Jab ham chahe  ki columns automatically adjust ho screen size ke hisaab se, toh auto-fit aur auto-fill ka use kar sakte ho:
+        .container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+        Ya
+
+        .container {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+        Difference between auto-fit and auto-fill:
+
+        auto-fit: Jo columns fit ho sakte hain, sirf unko adjust karega aur extra space hata dega.
+        auto-fill: Columns ko jagah reserve karne dega, chahe extra space bache ya na bache.
+        
+    h. Conclusion
+        Agar tum ek flexible aur responsive grid banana chahte ho, toh fr, minmax(), aur repeat() ka use karo.
+
+        Agar fixed layout banana chahte ho, toh px ya % use karo.
+
+        Yeh property responsive design ke liye bahut powerful hai aur CSS Flexbox se zyada control deti hai.
+
+
+
+
+
+2. DOMContentLoaded event ensure karta hai ki HTML elements ready ho chuke ho.
+    ab poora HTML page load ho jaye tabhi yeh function chalega
+
+
+3. window.location.search ➝ URL me jo query parameters hain, unko fetch karta hai.
+
+4. new URLSearchParams(...) ➝ Query parameters ko object ki tarah treat karne deta hai.
+
+5. .get("id") ➝ "id" parameter ko extract karta hai.
+
+6. Query parameter
+    Query parameters URL me extra information pass karne ka tarika hain.
+    Ye ? ke baad likhe jate hain aur & se separate hote hain.
+    JavaScript me URLSearchParams se read kar sakte hain.
+    Ye search, pagination, filtering aur dynamic page generation me use hote hain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

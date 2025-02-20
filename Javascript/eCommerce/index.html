@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCommerce - Home</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+</head>
+<body>  
+
+    <nav class="navbar">
+        <div>
+            <a class="logo" href="./index.html">
+                ShopLogo
+            </a>
+        </div>
+        <div class="search-filter">
+            <input type="text" placeholder="Search products..." id="searchBox">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="smartphones">Smartphones</option>
+                <option value="laptops">Laptops</option>
+                <option value="fragrances">Fragrances</option>
+            </select>
+        </div>
+        <div class="nav-links">
+            <a href="wishlist.html">❤️ Wishlist</a>
+            <a href="cart.html">🛒 Cart</a>
+        </div>
+    </nav>
+    <!-- Product Container -->
+    <div class="product-container" id="productContainer"></div>
+    <!-- Pagination -->
+    <div class="pagination" id="paginationContainer">
+
+    </div>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/pagination.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/product.js"></script>
+
+</body>
+</html>

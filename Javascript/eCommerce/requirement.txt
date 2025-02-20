@@ -1,0 +1,299 @@
+bhai, ek chat start karo jisame ham step by step ek simple eCommerce website develop karenge
+poore project ko simple html, CSS and JavaScript me banani hai...
+modular code hoga... means sabhi ke liye seprate files
+
+Requirements:
+eCommerce website me pages hoge
+first page -> list of products
+second page -> product details page
+cart page -> products in cart
+wishlist page-> product in wishlist
+
+Home page
+    Navbar:
+        left me logo hoga... middle me filter hoga aur search bar hoga....right me cart aur wishlist ka button hoga
+        filter:
+            filter category aur price ke basis par filter karega...
+        Search:
+            search name aur category ke basis par result dega...
+        cart:
+            jaise hee product ko add to cart kiya jayega vo cart me show ho jayega
+            aur agar user browser close karake dobara open kare toh cart me product hone chahiye
+        wishlist:
+            jaise hee product ko add to wishlist kiya jayega vo wishlist me show ho jayega
+            aur agar user browser close karake dobara open kare toh wishlist khali ho haye
+
+    Container:
+        Container me infinite scrolling hongi
+        conntainer me product ko show karenge with its details
+        har product me two button honge add to cart and add to wishlist
+
+        add to cart:
+            jaise user add to cart button par click karega product cart me chala jayega
+            data es tarah store karana hai ki agar user browser close karake dobara open kare toh cart me product hone chahiye
+
+        add to wishlist:
+            jaise user add to wishlist button par click karega product wishlist me chala jayega
+            data es tarah store karana hai ki agar user browser close karake dobara open kare toh wishlist khali ho haye
+
+    bottom:
+        yaha par bhai pagination implement hoga
+        pagination two part me hoga 
+        first part: set number of prouduct par page
+        second part : actual pagination
+
+        pagination:
+            prev aur next button hoga.
+            initially ese show hoga (1,2,3..................98,99,100(suppose))
+            by default 1st wala page show ho.
+            maan lo user 50th page par aa gaya toh ab page ese show hoga (1,2,3...........49,50,51..............98,99,100)
+            logic me ho sake binary search implement karana
+
+Product page:
+    jab bhi user poduct par click kareng toh project ki page open ho hayegi with its all details and picture.
+
+
+Note: 
+    script:
+    API Class:
+        ek class API hogi usi ke andar API se related sabhi method honge
+        API class ke instance se API related operation perform honge
+        
+    Pagination Class:
+        handle pagination related method
+
+    infinie scorlling ke liye intersection observer ka use karana hai
+    css likhane ka sahi sequence follow karana hai, width->hight->.....->margin padding
+
+
+
+bhai, abhi code mat do bas ye batao ki tum kya kya samajhe aur kya planning hai..
+step by step complete karenga
+
+
+
+
+
+
+
+bhai, dhyan rakahana mujhe code direct chat me chahiye with little explanation, editor me code mat dena
+
+
+
+
+
+
+
+
+bhai, ham log products ke liye ye saare APIs ka use karenge... ek baar achchhe se dekh lo aur samajah lo...
+
+DummyJSON
+The products endpoint provides a comprehensive dataset of sample product information, including details like names, prices, descriptions, images, and categories, ideal for testing and prototyping e-commerce applications.
+
+Get all products
+By default you will get 30 items, use Limit and skip to paginate through all items.
+
+fetch('https://dummyjson.com/products')
+.then(res => res.json())
+.then(console.log);
+Get a single product
+fetch('https://dummyjson.com/products/1')
+.then(res => res.json())
+.then(console.log);
+Search products
+fetch('https://dummyjson.com/products/search?q=phone')
+.then(res => res.json())
+.then(console.log);
+Limit and skip products
+You can pass limit and skip params to limit and skip the results for pagination, and use limit=0 to get all items.
+
+You can pass select as query params with comma-separated values to select specific data
+
+fetch('https://dummyjson.com/products?limit=10&skip=10&select=title,price')
+.then(res => res.json())
+.then(console.log);
+Sort products
+You can pass sortBy and order params to sort the results, sortBy should be field name and order should be "asc" or "desc"
+
+fetch('https://dummyjson.com/products?sortBy=title&order=asc')
+.then(res => res.json())
+.then(console.log);
+Get all products categories
+fetch('https://dummyjson.com/products/categories')
+.then(res => res.json())
+.then(console.log);
+Get products category list
+fetch('https://dummyjson.com/products/category-list')
+.then(res => res.json())
+.then(console.log);
+Get products by a category
+fetch('https://dummyjson.com/products/category/smartphones')
+.then(res => res.json())
+.then(console.log);
+Add a new product
+Adding a new product will not add it into the server.
+It will simulate a POST request and will return the new created product with a new id
+
+fetch('https://dummyjson.com/products/add', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    title: 'BMW Pencil',
+    /* other product data */
+  })
+})
+.then(res => res.json())
+.then(console.log);
+Update a product
+Updating a product will not update it into the server.
+It will simulate a PUT/PATCH request and will return updated product with modified data
+
+/* updating title of product with id 1 */
+fetch('https://dummyjson.com/products/1', {
+  method: 'PUT', /* or PATCH */
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    title: 'iPhone Galaxy +1'
+  })
+})
+.then(res => res.json())
+.then(console.log);
+Delete a product
+Deleting a product will not delete it into the server.
+It will simulate a DELETE request and will return deleted product with isDeleted & deletedOn keys
+
+fetch('https://dummyjson.com/products/1', {
+  method: 'DELETE',
+})
+.then(res => res.json())
+.then(console.log);
+
+
+
+bhai, phase 1 start karate hai...
+bhai, dhyan rakahana mujhe code direct chat me chahiye with little explanation, editor me code mat dena
+
+Bhai, maine pura project scope samajh liya hai. Ye ek simple **modular eCommerce website** hogi jo **HTML, CSS, aur JavaScript** me develop hogi.  
+
+### 🔍 **Meri Planning:**
+Is project ko **step-by-step** develop karenge taaki har ek feature samajhne me easy ho. Pehle basic structure banayenge, phir **functionality** add karenge, aur **optimization** karenge.  
+
+---
+
+## **🛠️ Development Steps (Phase-wise Approach)**
+### **Phase 1: Basic Structure & Setup**
+- 🏗️ **Project Structure Define Karna (Folder & Files)**
+  - `index.html` → Home Page (Product Listing)
+  - `product.html` → Product Details Page
+  - `cart.html` → Cart Page
+  - `wishlist.html` → Wishlist Page
+  - `styles/` → CSS Files (modular approach)
+  - `scripts/` → JavaScript Files (modular approach)
+  - `data/` → Dummy JSON Data  
+- 🎨 **Basic UI Design using HTML & CSS** (Navbar, Container, Buttons)
+- 🔗 **Page Navigation Setup** (Routing via simple anchor tags)
+
+---
+
+### **Phase 2: Functional Implementation**
+- 🛒 **Cart System Implement Karna**
+  - **LocalStorage** use karenge taaki data browser close hone ke baad bhi save rahe.  
+  - **"Add to Cart" Button Functionality**  
+  - **Cart Page me Products Display Karna**  
+  - **Remove from Cart Feature**  
+
+- ❤️ **Wishlist System Implement Karna**
+  - Wishlist bhi **LocalStorage** me store hogi  
+  - "Add to Wishlist" button functionality  
+  - Wishlist Page me products show karna  
+  - Wishlist clear hone ka logic likhna (browser restart hone par)  
+
+---
+
+### **Phase 3: Product Display & Filtering**
+- 🔍 **Filter System Implement Karna**
+  - **Category-wise Filtering**  
+  - **Price Range Filtering**  
+
+- 🏷️ **Search System Implement Karna**
+  - **Product Name & Category ke basis par Search**  
+
+- 🔄 **Infinite Scrolling (Intersection Observer)**
+  - API se dynamically aur products load karna  
+
+- 🔢 **Pagination Implementation**
+  - **Pagination Class** banayenge jo har page pe products control karega  
+  - **Binary Search Logic** se pagination ko optimize karenge  
+
+---
+
+### **Phase 4: Final Enhancements**
+- 📄 **Product Details Page**
+  - Jab user kisi product par click kare, toh uska detail page open ho  
+  - Product ki **Image, Description, Price, etc.** dikhane honge  
+
+- 🎭 **UI Enhancements (CSS Improvements)**
+  - Responsive Design  
+  - Proper CSS Flow (width → height → margin → padding)  
+
+- 🚀 **Code Optimization & Testing**
+  - Code cleanup  
+  - Performance improvements  
+
+---
+
+## **⏳ Next Step:**
+Sabse pehle **Phase 1 start karenge** → **Project structure banayenge aur basic UI setup karenge** 🚀  
+Batado, **koi aur feature add karna hai ya isko start karein?**
+
+
+/ecommerce-project
+│── index.html         (Home Page - Product Listing)
+│── product.html       (Product Details Page)
+│── cart.html          (Cart Page)
+│── wishlist.html      (Wishlist Page)
+│── styles/
+│   ├── style.css      (Global Styles)
+│   ├── navbar.css     (Navbar Specific Styles)
+│── scripts/
+│   ├── app.js         (Main JavaScript File)
+│── data/
+│   ├── products.json  (Dummy Product Data - Optional)
+
+
+Ha bhai, dhyan rakhan ki
+API Class:
+        ek class API hogi usi ke andar API se related sabhi method honge
+        API class ke instance se API related operation perform honge
+
+product.html
+Cart.html
+wishlist.html 
+
+bhi implement kar dena
+
+
+bhai, meri baat bahut dhyan se samajho
+jaha bhi API call karo API class ke instance se hee karo
+
+Filter System Implement Karna
+    Only category-wise Filtering
+
+Search:
+    search name or category ke basis par result dega...
+    search result usi page se aana chahiye... global search nahi hona chahiye
+
+aur bhai, mujhe zara pagination ka at least structure de do so that use ham show kar sake
+Paging ka structure
+            prev aur next button hoga.
+            initially ese show hoga (1,2,3..................98,99,100(suppose))
+            by default 1st wala page show ho.
+            maan lo user 50th page par aa gaya toh ab page ese show hoga (1,2,3...........49,50,51..............98,99,100)
+            logic me ho sake binary search implement karana
+
+Pagination Implementation**
+  Pagination Class banayenge jo har page pe products control karega  
+  Binary Search Logicse pagination ko optimize karenge
+
+
+bhai, dhyan rakahana mujhe code direct chat me chahiye with little explanation, editor me code mat dena
