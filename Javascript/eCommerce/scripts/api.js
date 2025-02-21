@@ -1,4 +1,4 @@
-class API {
+export default class API {
     constructor(baseURL) {
         this.baseURL = baseURL;
     }
@@ -23,6 +23,3 @@ class API {
         return response.json();
     }
 }
-
-// API Instance
-const api = new API('https://dummyjson.com');
