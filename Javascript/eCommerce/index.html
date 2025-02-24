@@ -38,19 +38,26 @@
     <!-- Product Container -->
     <div class="product-container" id="productContainer">
 
-        <div id="scrollEnd"></div>
+        <div id="scrollEnd">
+            Loading More...
+        </div>
     </div>
     <!-- Pagination -->
-    <label for="pageSize">Products per Page:</label>
-    <select id="pageSize">
-        <option value="10">10</option>
-        <option value="20" selected>20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-    </select>
-    <div class="pagination" id="paginationContainer">
-        <!-- Scroll End Detector -->
-    </div>
+     <div class="pagination-container">
+        <div>
+            <label for="pageSize">Products per Page:</label>
+            <select id="pageSize">
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+         <div class="pagination" id="paginationContainer">
+             <!-- Scroll End Detector -->
+         </div>
+     </div>
     <script type="module" src="scripts/api.js"></script>
     <script type="module" src="scripts/pagination.js"></script>
     <script type="module" src="scripts/app.js"></script>

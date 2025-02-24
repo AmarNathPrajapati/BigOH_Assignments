@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log("asdfsdf____asdfasdf", response);
         categoryFilter.innerHTML = `
         <option value="">All Categories</option>
-        ${response.map(cat => `<option value="${cat?.slug}">${cat?.name}</option>`).join('')}
+        ${response?.map(cat => `<option value="${cat?.slug}">${cat?.name}</option>`).join('')}
     `;
     }
     getAllCategories();
@@ -114,19 +114,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     function renderProducts(products, isSearch = false) {
         console.log("Rendering products...");
         if (products.length > 0) {
-            productContainer.innerHTML = products.map(product => `
-                <div class="product-card">
-                <img src="${product.thumbnail}" alt="${product.title}">
-                <h3>${product.title}</h3>
-                <p>₹${product.price}</p>
-                <button onclick="toggleCart(${product.id})">
-                    ${cart.includes(product.id) ? "Remove from Cart" : "Add to Cart"}
-                </button>
-                <button onclick="toggleWishlist(${product.id})">
-                    ${wishlist.includes(product.id) ? "Remove from Wishlist" : "Add to Wishlist"}
-                </button>
-            </div>
-            `).join('');
+            console.log("asfasdfasdfasdf____asdfsadf", products[0]);
+            productContainer.innerHTML = products?.map(product =>
+                `
+        <div class="product-card">
+        <img src="${product?.thumbnail}" alt="${product.title}">
+        <h3>${product?.title}</h3>
+        <p>₹${product?.price}</p>
+        <button onclick="toggleCart(${product?.id})">
+            ${cart.includes(product?.id) ? "Remove from Cart" : "Add to Cart"}
+        </button>
+        <button onclick="toggleWishlist(${product?.id})">
+            ${wishlist.includes(product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
+        </button>
+        <a href="product.html?id=${product?.id}" class="view-details">View Details</a>
+    </div>
+`
+            ).join('');
         } else {
             productContainer.innerHTML = `
                     <b> No Product Found! </b>
@@ -143,14 +147,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!scrollEnd) {
             scrollEnd = document.createElement("div");
             scrollEnd.id = "scrollEnd";
-            scrollEnd.style.height = "10px"; // Ensure it has height
+            scrollEnd.style.height = "20px"; // Ensure it has height
+            scrollEnd.textContent = "Loading More..."
             productContainer.appendChild(scrollEnd);
         } else {
             productContainer.appendChild(scrollEnd); // Reposition `scrollEnd`
         }
         observer.observe(scrollEnd);//observer triggered if it view scrollEnd in viewport
     }
-
+ 
     //updating counter of cart and wishlist.
     function updateCounters() {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -248,12 +253,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     function renderPagination() {
         let pages = pagination.getPages(); // 
         paginationContainer.innerHTML = `
-            <button onclick="prevPage()" ${currentPage === 1 ? "disabled" : ""}>⬅</button>
-            ${pages.map(page =>
+            <button onclick="prevPage()" ${currentPage === 1 ? "disabled" : ""}>⬅Prev</button>
+            ${pages?.map(page =>
             page === "..." ? `<span>...</span>` :
                 `<button onclick="gotoPage(${page})" ${page === currentPage ? "class='active'" : ""}>${page}</button>`
         ).join('')}
-            <button onclick="nextPage()" ${currentPage === pagination.totalPages ? "disabled" : ""}>➡</button>
+            <button onclick="nextPage()" ${currentPage === pagination.totalPages ? "disabled" : ""}>Next➡</button>
         `;
     }
 
@@ -278,6 +283,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             lastScrollTop = currentScrollTop;
             loadProducts(currentPage, categoryFilter.value);
             renderPagination();
+            //Scroll Down Smoothly when New Products Load
+            setTimeout(() => {
+                let scrollAmount = document.querySelector(".product-card")?.clientHeight || 300;
+                productContainer.scrollBy({ top: scrollAmount, behavior: "smooth" });
+            }, 1000);
         }
     }, { root: document.getElementById("productContainer"), rootMargin: "50px", threshold: 0.5 });
 

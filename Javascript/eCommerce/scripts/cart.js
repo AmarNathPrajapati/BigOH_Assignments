@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    const cartItems = await Promise.all(cart.map(id => api.fetchProductById(id)));
-    cartContainer.innerHTML = cartItems.map(product => `
+    const cartItems = await Promise.all(cart?.map(id => api.fetchProductById(id)));
+    cartContainer.innerHTML = cartItems?.map(product => `
         <div class="cart-item">
-            <img src="${product.thumbnail}" alt="${product.title}">
-            <h3>${product.title}</h3>
-            <p>₹${product.price}</p>
-            <button onclick="removeFromCart(${product.id})">Remove</button>
+            <img src="${product?.thumbnail}" alt="${product?.title}">
+            <h3>${product?.title}</h3>
+            <p>₹${product?.price}</p>
+            <button onclick="removeFromCart(${product?.id})">Remove</button>
         </div>
     `).join('');
 

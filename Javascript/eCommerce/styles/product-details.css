@@ -1,0 +1,150 @@
+/* styles/product-details.css */
+
+.product-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+}
+
+.product-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.product-info h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.brand, .category, .price, .availability, .stock, .rating, .shipping, .warranty, .return-policy {
+    font-size: 16px;
+    color: #555;
+    margin: 8px 0;
+}
+
+.description {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e60023;
+}
+
+.discount {
+    font-size: 16px;
+    color: #4caf50;
+}
+
+.low-stock {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.product-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.product-buttons button {
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+
+.add-to-cart {
+    border: 1px solid var(--btn1);
+    background: white;
+    color: var(--btn1)
+}
+.add-to-cart:hover {
+    background: var(--btn1);
+    color: white; 
+}
+
+.add-to-wishlist {
+    border: 1px solid  var(--btn2);
+    background: white;
+    color: var(--btn2);
+}
+
+.add-to-wishlist:hover {
+    background: var(--btn2);
+    color: white
+}
+
+.buy-now {
+    border: 1px solid  var(--btn3);
+    background: white;
+    color: var(--btn3);
+}
+.buy-now:hover {
+    background: var(--btn3);
+    color: white
+}
+
+
+
+.product-buttons button:hover {
+    opacity: 0.8;
+}
+
+/* Reviews Section */
+.reviews-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.review p {
+    margin: 5px 0;
+}
+
+.review-comment {
+    font-style: italic;
+    color: #555;
+}

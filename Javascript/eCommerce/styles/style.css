@@ -1,26 +1,141 @@
-body {
+:root {
+    --btn1: #218838;
+    --btn2: #f0471d;
+    --btn3: #007bff;
+}
+*{
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
 }
-.product-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    border: 2px solid black;
-    margin:10px;
-    height: 66vh;
-    overflow:auto;
-    overflow-x: hidden;
-    
-}
+
 button.active {
-    background-color: blue;
+    background-color: var(--btn3);
     color: white;
     font-weight: bold;
 }
+/* Design for the container*/
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin: 15px;
+    height: 74vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #f9f9f9;
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+/* Hover Effect */
+.product-container:hover {
+    box-shadow: inset 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+/* styling for product card */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0px 10px 4px -2px rgba(21, 40, 241, 0.121);
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit:contain;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+.product-card h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+    background: white;
+}
+
+.product-card p {
+    font-size: 16px;
+    color: var(--btn3);
+    font-weight: bold;
+}
+
+.product-card button {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+.product-card a {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Add to Cart Button */
+.product-card button:nth-child(4) {
+    border: 1px solid var(--btn1);
+    background: white;
+    color: var(--btn1)
+}
+
+.product-card button:nth-child(4):hover {
+    background: var(--btn1);
+    color: white;
+}
+
+/* Wishlist Button */
+.product-card button:nth-child(5) {
+    border: 1px solid  var(--btn2);
+    background: white;
+    color: var(--btn2);
+}
+
+.product-card button:nth-child(5):hover {
+    background: var(--btn2);
+    color: white
+}
+
+/* View Details Button */
+.product-card .view-details {
+    border: 1px solid  var(--btn3);
+    background: white;
+    color: var(--btn3);
+    text-decoration: none;
+}
+
+.product-card .view-details:hover {
+    background: var(--btn3);
+    color: white
+}
+
 
 /*styling for wishlist and cart icon*/
 .icon-container {
@@ -50,7 +165,7 @@ button.active {
     position: absolute;
     top: -5px;
     right: -5px;
-    background: red;
+    background: var(--btn2);
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -63,8 +178,8 @@ button.active {
 }
 
 .icon-container:hover .badge {
-    background: yellow;
-    color: black;
+    background: var(--btn3);
+    color: white;
 }
 
 /* Show badge when count > 0 */
@@ -101,7 +216,7 @@ button.active {
 }
 
 .search-filter input:focus, .search-filter select:focus {
-    border-color: #007bff;
+    border-color: var(--btn3);
     box-shadow:inset 0 0 5px rgba(0, 123, 255, 0.3);
     outline: none;
 }
@@ -124,4 +239,110 @@ button.active {
     transform: scale(1.1);
     filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
     filter: invert(1);
+}
+/* styling for the loader*/
+#scrollEnd {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--btn1);
+    padding: 10px;
+    margin: 20px 0;
+    position: relative;
+}
+
+/* Loader Animation */
+#scrollEnd::after {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border: 3px solid var(--btn1);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/**styling for pagination**/
+.pagination-container {
+    display: flex;
+    justify-content: space-between;  /* Products left, Pagination right */
+    align-items: center;
+    padding: 15px 20px;
+    border-top: 2px solid #ddd;
+    margin-top: 10px;
+}
+
+/* Page Size Dropdown Styling */
+#pageSize {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--btn3);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Pagination Styling */
+.pagination {
+    display: flex;
+    gap: 8px;
+}
+
+/* Number Buttons */
+.pagination button {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #ddd;
+}
+
+.pagination button:hover {
+    background-color: var(--btn3);
+    color: white;
+}
+
+/* Active Page */
+.pagination button.active {
+    background-color: var(--btn3);
+    color: white;
+    font-weight: bold;
+    border: 1px solid var(--btn3);
+}
+
+/* Disabled Buttons */
+.pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Previous & Next Buttons */
+.pagination .prev-btn,
+.pagination .next-btn {
+    background-color: var(--btn3);
+    color: white;
+    border: none;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.pagination .prev-btn:hover,
+.pagination .next-btn:hover {
+    background-color: var(--btn3);
 }
