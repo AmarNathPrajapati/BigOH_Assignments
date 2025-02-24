@@ -4,38 +4,78 @@ import API from './api.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
     const api = new API('https://dummyjson.com');
+    //listing of products:1
     const productContainer = document.getElementById("productContainer");
+    //search functionality:1
     const searchBox = document.getElementById("searchBox");
+    //listing of categories:1
     const categoryFilter = document.getElementById("categoryFilter");
     const paginationContainer = document.getElementById("paginationContainer");
+    const pageSizeSelect = document.getElementById("pageSize");
+    //fetching all categories : listing of categories:2
+    async function getAllCategories() {
+        let response = await api.getAllCategory();
+        console.log("asdfsdf____asdfasdf", response);
+        categoryFilter.innerHTML = `
+        <option value="">All Categories</option>
+        ${response.map(cat => `<option value="${cat?.slug}">${cat?.name}</option>`).join('')}
+    `;
+    }
+    getAllCategories();
 
     let currentPage = 1;
     let pageSize = 20;
     let totalProducts = 100;
+    //infiniteScrolling:1
     let isFetching = false;
+    //searching:0
     let allLoadedProducts = []; //Store all fetched data
-    let loadedProductIds = new Set(); // Already added product IDs track karne ke liye
-
+    // let loadedProductIds = new Set(); // Already added product IDs track karne ke liye
+    let cache = {};  // Cache object to store API responses
+    //add to cart and wishlit:0
     let cart = JSON.parse(localStorage.getItem("cart")) || []; //
     let wishlist = JSON.parse(sessionStorage.getItem("wishlist")) || []; // 
 
 
     let pagination = new Pagination(Math.ceil(totalProducts / pageSize));
 
+    pageSizeSelect.addEventListener("change", () => {
+        pageSize = parseInt(pageSizeSelect.value);  // Get new page size
+        cache = {}; // Clear cache when page size changes
+        let totalPages = Math.ceil(totalProducts / pageSize); // Recalculate total pages
+        pagination = new Pagination(totalPages);  // Reset pagination object
+        currentPage = 1;  // Reset to first page
+        loadProducts(currentPage, categoryFilter.value);  // Reload products
+        renderPagination();  // Update pagination UI
+    });
+
     async function loadProducts(page = 1, category = "") {
+        let cacheKey = `${page}_${category}_${pageSize}`;
+        if (cache[cacheKey]) {
+            console.log("Using cached data for:", cacheKey);
+            renderProducts(cache[cacheKey]);
+            renderPagination();
+            return;
+        }
         if (isFetching) return;
         isFetching = true;
 
         let skip = (page - 1) * pageSize;
+        if (category) {
+            searchBox.value = "";
+        }
+        //listing of product:2
         let response = category ?
             await api.fetchProductsByCategory(category, pageSize, skip) :
             await api.fetchAllProducts(pageSize, skip);
 
         totalProducts = response.total || 100;
+        console.log("asdfsdfsdfdsf__asdfsd", pageSize);
         pagination = new Pagination(Math.ceil(totalProducts / pageSize));
         pagination.setPage(page);  //  Ensure pagination state update ho
 
         if (page === 1) {
+            //searching:01
             allLoadedProducts = response.products; //  First load: Replace all data
             productContainer.innerHTML = "";
         } else {
@@ -57,13 +97,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         // } else {
         //     allLoadedProducts.push(...newProducts); //Append unique products only
         // }
-
+        cache[cacheKey] = response.products; // Store response in cache
+        //listing of Product:4
         renderProducts(allLoadedProducts);
         renderPagination();
         isFetching = false;
     }
 
-
+    //listing of product:4
     function renderProducts(products, isSearch = false) {
         console.log("Rendering products...");
         if (products.length > 0) {
@@ -85,7 +126,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <b> No Product Found! </b>
                 `
         }
-
         // Observer ko temporarily disconnect karo jab search active ho
         if (isSearch) {
             observer.disconnect();
@@ -102,11 +142,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             productContainer.appendChild(scrollEnd); // Reposition `scrollEnd`
         }
-
-        //**Observer ko sirf tab re-attach karo jab search OFF ho**
-        observer.observe(scrollEnd);
-        console.log("Observer RE-ENABLED");
+        observer.observe(scrollEnd);//observer triggered if it view scrollEnd in viewport
     }
+
+    //updating counter of cart and wishlist.
+    function updateCounters() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let wishlist = JSON.parse(sessionStorage.getItem("wishlist")) || [];
+
+        let cartBadge = document.getElementById("cartCount");
+        let wishlistBadge = document.getElementById("wishlistCount");
+
+        cartBadge.textContent = cart.length;
+        wishlistBadge.textContent = wishlist.length;
+
+        // Badge hide/show logic
+        cartBadge.style.display = cart.length > 0 ? "block" : "none";
+        wishlistBadge.style.display = wishlist.length > 0 ? "block" : "none";
+    }
+    updateCounters();
+    //add to cart
     window.toggleCart = (productId) => {
         if (cart.includes(productId)) {
             cart = cart.filter(id => id !== productId);
@@ -115,8 +170,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         localStorage.setItem("cart", JSON.stringify(cart));
         renderProducts(allLoadedProducts);
+        updateCounters();
     };
-
+    //add to wish list
     window.toggleWishlist = (productId) => {
         if (wishlist.includes(productId)) {
             wishlist = wishlist.filter(id => id !== productId);
@@ -125,8 +181,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         sessionStorage.setItem("wishlist", JSON.stringify(wishlist)); //  Resets on browser close
         renderProducts(allLoadedProducts);
+        updateCounters();
     };
-
+    //seaching functionlity
     function debounce(func, delay) {
         let timer;
         return function (...args) {
@@ -134,32 +191,31 @@ document.addEventListener("DOMContentLoaded", async () => {
             timer = setTimeout(() => func(...args), delay);
         };
     }
-
+    //searching functionlity:2
     function applySearch(query) {
         let filteredProducts = allLoadedProducts.filter(product =>
             product.title.toLowerCase().includes(query.toLowerCase())
         );
-
         renderProducts(filteredProducts, query.length > 0);
     }
 
-
+    //searching functionlity:3
     const debounceSearch = debounce((query) => {
         applySearch(query);
     }, 500);
-
+    //searching functionlity:4
     searchBox.addEventListener("input", () => {
         debounceSearch(searchBox.value);
     });
-
+    //category functionaly
     categoryFilter.addEventListener("change", () => {
+        cache = {}; // Reset cache when category changes
         loadProducts(1, categoryFilter.value);
     });
 
 
     function gotoPage(page) {
         if (page !== "..." && currentPage !== page) {  //  Prevent duplicate loading
-            console.log("Goto Page Clicked:", page);
             pagination.setPage(page);  //  Pagination object update karega
             currentPage = page;  //  Global `currentPage` update
             loadProducts(currentPage, categoryFilter.value);
@@ -169,12 +225,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     function prevPage() {
-        console.log("Previous Button Clicked");
         gotoPage(pagination.prevPage());
     }
 
     function nextPage() {
-        console.log("Next Button Clicked");
         gotoPage(pagination.nextPage());
     }
 
@@ -186,9 +240,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function renderPagination() {
         let pages = pagination.getPages(); // 
-
-        console.log("Rendering Pagination... Pages:", pages);
-
         paginationContainer.innerHTML = `
             <button onclick="prevPage()" ${currentPage === 1 ? "disabled" : ""}>⬅</button>
             ${pages.map(page =>
@@ -199,29 +250,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
     }
 
+
     let lastScrollTop = 0;
     const observer = new IntersectionObserver(entries => {
+        console.log("dfdsadfds____asdfdsf", entries);
         let currentScrollTop = productContainer.scrollTop;
-        console.log(`Current Scroll Top: ${currentScrollTop}, Last Scroll Top: ${lastScrollTop}`);
-        if (entries[0].isIntersecting && !isFetching && currentPage < pagination.totalPages) {
-            console.log("🔄 Infinite Scroll Triggered!");
-
+        if (entries[0].isIntersecting && !isFetching && currentPage < pagination.totalPages) {//checking div is visible or not, cheking that any api request already running or not and also checking unnecessary API calls
             if (searchBox.value.length > 0) {
-                console.log("🚫 Search Active: Infinite Scroll Blocked!");
                 return;
             }
             if (currentScrollTop > lastScrollTop) {
-                console.log("⬇ Scrolling Down");
                 if (currentPage < pagination.totalPages) {
                     currentPage++;
                 }
             } else {
-                console.log("⬆ Scrolling Up");
                 if (currentPage > 1) {
                     currentPage--;
                 }
             }
-            console.log(`🔥 Updated Current Page: ${currentPage}`);
             lastScrollTop = currentScrollTop;
             loadProducts(currentPage, categoryFilter.value);
             renderPagination();
@@ -230,7 +276,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     observer.observe(document.getElementById("scrollEnd"));
     loadProducts();
-
 
 
 });

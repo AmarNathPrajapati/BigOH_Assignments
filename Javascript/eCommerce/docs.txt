@@ -42,6 +42,13 @@ Concept of Intersection Observer
     isFetching flag ensure karta hai ki ek baar me sirf ek request jaye.
     Pagination control intact hai, lekin scroll ke basis par auto-load ho raha hai
 
+    Threshold Value in Intersection Observer
+      Threshold ek aisi value hoti hai jo define karti hai ki ek element kab "intersect" (visible) maana jayega. Yeh value 0 se 1 tak hoti hai:
+
+      0 (zero) → Jaise hi element ka ek chhota sa hissa viewport me aata hai, callback function trigger ho jata hai.
+      1 (one) → Jab tak pura element viewport me nahi aa jata, tab tak callback trigger nahi hoga.
+      0.5 (50%) → Jab element ka aadha part (50%) viewport me dikhne lage, tab callback trigger hoga.
+
 
   Uses:
     Lazy Loading: Jab image ya content screen par aaye tabhi load ho.
@@ -178,23 +185,116 @@ Concept of Intersection Observer
 
 
 
+/*************************************** Applied Concepts *******************************************/
+1. Listing of products
+step1 : ek product Container taiya kiya
+step2 : us productContainer ka access liya by its ID
+step3 : asynce await se api call ki aur saare products get kar liya
+step4 : Product Container me sare products ko render kar diya using innerHTML, Map, template literal and Join;
+
+2. Listing of category
+step1: ek select category tag banaya
+step2: usaka access dom me liya by Its ID
+step3: async await ki help se api call ki aur saare categories get kar li.
+step4: uas Category select me sare categories ko render kar diya using innerHTML, Map, template literal and join.
+
+3. Fetching product on the basis of category
+step1: check kiya if category ki value hai
+step2: dynamic API call kiya 
+
+4. Add to Cart
+step1: Saare products me `Add to Cart` ka button laga diya
+step2: ek function `toggleCart` ke sath id pass kar di, jab bhi button par click hoga.
+step3: localStorage se cartArray ko nikala aur usame uas product ki ID push kar di.
+step4: uas cartArray ko localStorage me store kar diya.
+
+5.Change the button [Add to Cart] -> [Remove from Cart]
+step1: localstorage se cartArray nikala aur check kiya ki yadi cartArray me pahale se id hai toh change it.
+
+6.Showing product in Cart Page
+step1: cart.html me ek cartContainer taiyar kiya
+step2: uas container to cart.js me access liya by its ID
+step3: localStorage se cartArray nikal liya jisame saare products ki ID thi.
+step4: product id se related sare products nikal liya using promise All, map and api call
+step5: uan sare products ko render kara diye.
+
+7.Remove To Cart
+step1: cart to filter kar diya aur cartArray update kay diya, vo productID nikal di.
+step2: cart Array ko local Storage update karake reload kar diya.
+
+8. Wishlist functioinality
+Step1: Add to wishlist ka button banaya aur ek function `toggleWishlist` ko call kar diya with product ID.
+Step2: uas ID ko wishList Array me dal diya aur session storage me store kar diya.
+Step3: Show karane ke liye sessionStorage se saari ID nikali aur api hit karake saara product nikal diya.
+step4: Remove array ko uas particular ID se filter kar diya aur sessionStorage me array update kar diya.
+
+9. Dynamic Change number of products in carts and wishlist
+step0: span tag banakar usame css lagakar usaki position set kar di.
+step1: id se dono ke span tag ka dom access le liya
+step2: localstorage se cartArray nikalkar length check kar liya
+step3: sessionStorage se wishlistArray nikalakar lenght check kar liya
+step4: agar products hai kisi me ton uso display kar diya
 
 
+10. Searching the products in present prouducts
+step1: search box ko usake id se script me access kiya.
+step2: allProducts array me saare fetch products ko store karata gaya
+step3: allProducts array me se un saare products ko filter kar liya jinaki title search query ke content ko include kiya ho.
+step4: debouncing lagake filterproducts ko render kay diya.
+
+Note: Handling Category with Search box
+  jaise hee koi naye category select hui, search Box ko khali kar diya.
+
+11. Infinite Scrolling using Intersection Observer and handling conflict with Search
+step1. productContainer me ek `scrollEnd` id ke naam ka ek div bana diya.
+step2. Uas Div to script me access kiya aur usi par observer laga diya.
+step3. Jaise hee scrollEnd div view port me aayega observer trigger ho jayege.
+step4. Observer me check hoga jaise hee scrollEnd ka 50% hissa visible hua(intersect hua) ki nahi, koi pahale se data toh nahi fetch ho raha hai.
+step5. Observer naye page ko upload kar diya.
+
+Note: Handling conflict with search
+step1. Jab koi search karege toh observer ko temporarely disconnect kar diya jayega 
+step2. kyoki search ke samay hame data fetch nahi karana hai usi data me se filter karake dena hai
+step3. search ki input me kuchh ho to observer bina kuchh kiye return ho jayega.
+
+12. Implement pagination 
+Step1. Ek pagination class banayi, jisame nextpage(), prevpage(), setPage() aur getPages() ka method banaya.
+  constructor: totalPages set karata hai aur current page ko 1 se initialize karata hai.
+  nextPage(): agar currentPage totalPages se kam hai toh, currentPage ko increment kar deta hai.
+  prevPage(): agar currentPage 1 se bada hai toh, currentPage ko decrement kar deta hai.
+  setPage(): ye pageNumber se karata hai, currentPage ko usi page par set karta hai.
+  getPage(): ye pagination ka dynamic structure return karata hai using binary search.
+
+step2. srcipt me by default currentPage ko 1 se, pageSize ko 20 se aur totalProducts ko 100 se initialize kar diya aur pagination ka ek instance ban liya jisame totalPages pass kar diya.
+
+step3. Jaise hee products load hota hai, totalProducts aur pagination ke instance ko update kar deta hoon.
+
+step4.  if first Page hai toh allLoadedProducts Array ko response ke sath initialize kar diya. else usi allLoadedProducts me saare products push karata gaya.
+
+step5. Pagination ko render kar diya:
+    i.sare pages ko get kiya 
+    ii. prev and next arrow add kiya
+    iii. agar currentPage 1 hai, toh previous ko disable kar diya aur onclick par prevPage() function call kar diya.
+    iv. agar currentPage last me hai, toh next ko disable kar diya aur onClick par nextPage() function call kar diya.
+    v. pageButton: agar currentPage pagenumber ke equal hai toh usame active class add kar diya aur direct uas page par pahuchane ke liye gotoPage() attach kar diya.
+
+Note: jaha jaha currentPage chage ho raha hai, vaha loadProduct() aur rendPagination() call kara de raha hoon.
+    Intersection Observer function me.
+    gotoPage() me.
 
 
+13. Adding Offset for pagination
+Step1. select page size ka ek tag banaya.
+Step2. Uso script me access kar liya.
+Step3. uas par `change` addEventListener laga diya
+Step4. pageSize ko get kar liya aur pagination instance ko fir se initialize kar diya.
+Step5. currentPage ko 1 set karake loadProduct() aur renderPagniation() ko invoke kar diya.
 
-
-
-
-
-
-
-
-
-
-
-
-
+14. Concept of Caching
+Step1. Cache object bana diya
+Step2. cache key banayi jo page, category aur pagesize par based hogi.
+Step3. jab first time data fetch karate hai toh uas key me data store kar dete hai.
+Step4. fetching ke samay check karate hai ki agar key pahale se hai toh vahi data render kar do otherwise naya data fetch kar lo.
 
 
 

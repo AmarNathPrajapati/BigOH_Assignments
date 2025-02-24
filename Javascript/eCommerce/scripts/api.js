@@ -22,4 +22,9 @@ export default class API {
         const response = await fetch(`${this.baseURL}/products/search?q=${query}`);
         return response.json();
     }
+    //fetch all category
+    async getAllCategory(){
+        const response = await fetch(`${this.baseURL}/products/categories`);
+        return response.json();
+    }
 }
