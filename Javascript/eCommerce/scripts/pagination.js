@@ -28,7 +28,7 @@ export default class Pagination {
     
 
     getPages() {
-        console.log("Current Page:", this.currentPage, "Total Pages:", this.totalPages);
+        // console.log("Current Page:", this.currentPage, "Total Pages:", this.totalPages);
         let pages = [1]; //  First page hamesha dikhana hai
 
         if (this.totalPages <= 7) {
@@ -39,11 +39,11 @@ export default class Pagination {
             let left = Math.max(2, this.currentPage - 2);
             let right = Math.min(this.totalPages - 1, this.currentPage + 2);
 
-            console.log("Left Bound:", left, "Right Bound:", right);
+            // console.log("Left Bound:", left, "Right Bound:", right);
 
             if (left > 2) {
                 pages.push("...");
-                console.log("Adding '...' at Left");
+                // console.log("Adding '...' at Left");
             }
 
             for (let i = left; i <= right; i++) {
@@ -52,13 +52,13 @@ export default class Pagination {
 
             if (right < this.totalPages - 1) {
                 pages.push("...");
-                console.log("Adding '...' at Right");
+                // console.log("Adding '...' at Right");
             }
 
             pages.push(this.totalPages);
         }
 
-        console.log("Pages Generated:", pages);
+        // console.log("Pages Generated:", pages);
         return pages;
     }
 }

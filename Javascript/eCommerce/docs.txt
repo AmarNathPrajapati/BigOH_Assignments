@@ -182,8 +182,16 @@ Concept of Intersection Observer
     JavaScript me URLSearchParams se read kar sakte hain.
     Ye search, pagination, filtering aur dynamic page generation me use hote hain.
 
+7. Caching Kya Hota Hai?
+    Caching ek technique hai jisme frequently accessed data ko temporarily store kiya jata hai takki future requests fast ho sakein. Ye performance optimization ke liye use hota hai, taki har baar same data ko recalculate ya fetch na karna pade.
 
-
+    Types of Caching
+    Browser Cache – Browser static assets (CSS, JS, Images) ko cache karta hai taki fast loading ho.
+    Memory Cache – Data RAM me store hota hai (e.g., Redis, Memcached).
+    Local Storage & Session Storage – Browser me data save karne ke liye.
+    API Response Caching – API responses ko cache karke unnecessary network requests avoid karna.
+    Function Caching (Memoization) – Computationally expensive functions ke results store karna taki same input ke liye repeat calculation na ho.
+ 
 
 /*************************************** Applied Concepts *******************************************/
 1. Listing of products

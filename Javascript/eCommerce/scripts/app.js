@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     pageSizeSelect.addEventListener("change", () => {
         pageSize = parseInt(pageSizeSelect.value);  // Get new page size
+        //caching:0
         cache = {}; // Clear cache when page size changes
         let totalPages = Math.ceil(totalProducts / pageSize); // Recalculate total pages
         pagination = new Pagination(totalPages);  // Reset pagination object
@@ -50,11 +51,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     async function loadProducts(page = 1, category = "") {
+        //caching:1
         let cacheKey = `${page}_${category}_${pageSize}`;
+        console.log("asfsfdsfsdf__adfd", cacheKey);
         if (cache[cacheKey]) {
+            console.log("asdfsddfdsadfdf___asdfd", cache[cacheKey]);
             console.log("Using cached data for:", cacheKey);
             renderProducts(cache[cacheKey]);
             renderPagination();
+            observer.disconnect();
             return;
         }
         if (isFetching) return;
@@ -97,6 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // } else {
         //     allLoadedProducts.push(...newProducts); //Append unique products only
         // }
+        //caching:3
         cache[cacheKey] = response.products; // Store response in cache
         //listing of Product:4
         renderProducts(allLoadedProducts);
@@ -209,6 +215,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
     //category functionaly
     categoryFilter.addEventListener("change", () => {
+        //caching: 4
         cache = {}; // Reset cache when category changes
         loadProducts(1, categoryFilter.value);
     });
