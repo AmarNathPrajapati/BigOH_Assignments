@@ -49,22 +49,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         loadProducts(currentPage, categoryFilter.value);  // Reload products
         renderPagination();  // Update pagination UI
     });
+    //Scrolling Effects
+    function smoothScroll(scrollAmount) {
+        let currentScroll = 0;
+        let step = 5; // Jitna chhota step hoga, utna smooth lagega
 
+        let interval = setInterval(() => {
+            productContainer.scrollBy({ top: step, behavior: "instant" });
+            currentScroll += step;
+            if (currentScroll >= scrollAmount) {
+                clearInterval(interval);
+            }
+        }, 10); // Ye 10ms delay scroll ko dheere karega
+    }
     async function loadProducts(page = 1, category = "") {
         //caching:1
         let cacheKey = `${page}_${category}_${pageSize}`;
         console.log("asfsfdsfsdf__adfd", cacheKey);
         if (cache[cacheKey]) {
-            console.log("asdfsddfdsadfdf___asdfd", cache[cacheKey]);
-            console.log("Using cached data for:", cacheKey);
             renderProducts(cache[cacheKey]);
+            setTimeout(smoothScroll(50), 1000);
             renderPagination();
             observer.disconnect();
+            document.getElementById("scrollEnd").style.display = 'none';
+            // Scroll function disable kar do
+            productContainer.scrollTop = 0;
+            window.disableScroll = true;
             return;
+        }else{
+            window.disableScroll = false;
         }
         if (isFetching) return;
         isFetching = true;
-
+        document.getElementById("scrollEnd").style.display = 'block'; 
         let skip = (page - 1) * pageSize;
         if (category) {
             searchBox.value = "";
@@ -73,7 +90,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let response = category ?
             await api.fetchProductsByCategory(category, pageSize, skip) :
             await api.fetchAllProducts(pageSize, skip);
-
+        
         totalProducts = response.total || 100;
         console.log("asdfsdfsdfdsf__asdfsd", pageSize);
         pagination = new Pagination(Math.ceil(totalProducts / pageSize));
@@ -86,30 +103,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         } else {
             allLoadedProducts.push(...response.products); //  Append new products
         }
-
-        //remove duplicacy
-        // let newProducts = response.products.filter(product => {
-        //     if (loadedProductIds.has(product.id)) {
-        //         return false;
-        //     }
-        //     loadedProductIds.add(product.id); //Add new product ID to Set
-        //     return true;
-        // });
-
-        // if (page === 1) {
-        //     allLoadedProducts = newProducts;  //First load: Replace all products
-        //     productContainer.innerHTML = "";
-        // } else {
-        //     allLoadedProducts.push(...newProducts); //Append unique products only
-        // }
         //caching:3
         cache[cacheKey] = response.products; // Store response in cache
         //listing of Product:4
         renderProducts(allLoadedProducts);
         renderPagination();
         isFetching = false;
+        if (page >= pagination.totalPages) {
+            document.getElementById("scrollEnd").style.display = 'none';
+            observer.disconnect();
+        }
     }
-
+ 
     //listing of product:4
     function renderProducts(products, isSearch = false) {
         console.log("Rendering products...");
@@ -155,7 +160,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         observer.observe(scrollEnd);//observer triggered if it view scrollEnd in viewport
     }
- 
+
     //updating counter of cart and wishlist.
     function updateCounters() {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -225,6 +230,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         loadProducts(1, categoryFilter.value);
     });
 
+    
+
+    function smoothScrollOnClick(pageSize) {
+        if (window.disableScroll) return;
+        let productContainer = document.querySelector(".product-container"); // Ensure correct container selector
+        let productCards = document.querySelectorAll(".product-card"); // Select all product cards
+
+        if (!productContainer || productCards.length === 0) return; // If elements not found, exit
+
+        let productCardHeight = productCards[0].offsetHeight; // Height of one product card
+        let containerWidth = productContainer.clientWidth; // Width of product container
+        let productCardWidth = productCards[0].offsetWidth; // Width of one product card
+
+        // Calculate number of product cards in one row
+        let cardsPerRow = Math.floor(containerWidth / productCardWidth);
+        if (cardsPerRow === 0) cardsPerRow = 1; // Safety check to avoid division by zero
+
+        // Calculate number of rows per page
+        let rowsPerPage = Math.ceil(pageSize / cardsPerRow);
+
+        // Final scroll amount
+        let scrollAmount = rowsPerPage * productCardHeight;
+
+        let currentScroll = 0;
+        let step = Math.ceil(scrollAmount / 50); // Smaller steps for smooth scrolling
+
+        let interval = setInterval(() => {
+            productContainer.scrollBy({ top: step, behavior: "instant" });
+            currentScroll += step;
+            if (currentScroll >= scrollAmount) {
+                clearInterval(interval);
+            }
+        }, 10);
+    }
+
+
+
 
     function gotoPage(page) {
         if (page !== "..." && currentPage !== page) {  //  Prevent duplicate loading
@@ -233,6 +275,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             loadProducts(currentPage, categoryFilter.value);
             renderPagination(); //  Update pagination UI
         }
+        // Scroll logic add karein
+        setTimeout(smoothScrollOnClick(pageSize), 1000); // Scroll animation
     }
 
 
@@ -263,6 +307,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
+
     let lastScrollTop = 0;
     const observer = new IntersectionObserver(entries => {
         console.log("dfdsadfds____asdfdsf", entries);
@@ -284,10 +329,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             loadProducts(currentPage, categoryFilter.value);
             renderPagination();
             //Scroll Down Smoothly when New Products Load
-            setTimeout(() => {
-                let scrollAmount = document.querySelector(".product-card")?.clientHeight || 300;
-                productContainer.scrollBy({ top: scrollAmount, behavior: "smooth" });
-            }, 1000);
+            setTimeout(smoothScroll(200), 1000);
         }
     }, { root: document.getElementById("productContainer"), rootMargin: "50px", threshold: 0.5 });
 

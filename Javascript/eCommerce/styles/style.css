@@ -53,6 +53,9 @@ button.active {
     align-items: center;
     justify-content: space-between;
 }
+.product-card:hover {
+    transform: scale(1.05);
+} 
 
 .product-card img {
     width: 100%;
@@ -68,6 +71,15 @@ button.active {
     margin: 10px 0;
     color: #333;
     background: white;
+}
+.product-card h4 {
+    font-size: 15px;
+    margin: 10px 0;
+    font-weight: lighter;
+    color: #797272;
+    background: white;
+    text-align: justify;
+    line-height: 18px;
 }
 
 .product-card p {

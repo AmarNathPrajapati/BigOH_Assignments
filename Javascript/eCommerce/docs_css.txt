@@ -1,0 +1,35 @@
+/************************************** Real life Requirement CSS Use *******************************/
+1. Color ka variable banakar use karana
+    Step 1. pahale 3-4 color ko decide kiya, jo thruought project use honge.
+    Step 2. :root{} ke andar -- ki help se varible banake use color se initialize kar diya.
+    Step 3. jaha bhi color lagane ki jarurat padi vaha var(--vname) se variable laga diya.
+
+
+2. sabhi element ka intial size, margin aur padding issue resolve karana
+    Step 1. *{} ke andar margin aur padding 0 se initialize kar diya.
+    Step 2. aur box sizing ko border-box kar diya.
+
+3. Dynamic active class lagao button par
+    Step 1. Active class laga diya button par.
+    Step 2. button.active se uas par css laga diya.
+    Step 3. template literal ki madad se jab condition satisfy hua usame active class Add kar diya.
+
+4. Kisi Container me scroll Bar laga do
+    1. Usame overflow property ki value auto set kar diya.
+    2. x direction me scroll nahi karana chahate toh overflow-x hidden kar diya
+
+5. Container par shadow laga do
+    1. box-shadow property use kar liya.
+    2. inset/(out by default), x-offset, y-offset, blur, spread aur color.
+
+6. Hover karane par smooth animation add kar do.
+    1. element:hover karake property add kar diya, jo bhi changes perform karana chahate ho hover karane par.
+    2. element{} ke andar transition property set kar diya.
+    3. transition: all(sabhi property par), time, way of transition.
+
+7. Product Card banao
+    1. card par border-radius, box-shadow laga diya.
+    2. card ke andar ke element par procut-cart element ki help se property add kar di.
+    3. Dynamic css laga diya, button:nth child(number) par css laga diya
+    
+Note: jaruri nahi border-radius lagane ke liye border property ho.
