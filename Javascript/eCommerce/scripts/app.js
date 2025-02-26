@@ -62,6 +62,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         }, 10); // Ye 10ms delay scroll ko dheere karega
     }
+
+    function addPageIndicator(page) {
+        let indicator = document.createElement("div");
+        indicator.id = page;
+        indicator.style.height = "50px"
+        indicator.classList.add("page-indicator");
+        productContainer.appendChild(indicator);
+        console.log("adsfasdfdfddsf___asfadsfad",indicator);
+    }
+
+
     async function loadProducts(page = 1, category = "") {
         //caching:1
         let cacheKey = `${page}_${category}_${pageSize}`;
@@ -76,23 +87,27 @@ document.addEventListener("DOMContentLoaded", async () => {
             productContainer.scrollTop = 0;
             window.disableScroll = true;
             return;
-        }else{
+        } else {
             window.disableScroll = false;
         }
         if (isFetching) return;
         isFetching = true;
-        if(document.getElementById("scrollEnd")){
-            document.getElementById("scrollEnd").style.display = 'block'; 
+        let scollElement = document.getElementById("scrollEnd");
+        if (scollElement) {
+            document.getElementById("scrollEnd").style.display = 'block';
         }
         let skip = (page - 1) * pageSize;
         if (category) {
             searchBox.value = "";
+            if (scollElement) {
+                document.getElementById("scrollEnd").style.display = 'none';
+            }
         }
         //listing of product:2
         let response = category ?
             await api.fetchProductsByCategory(category, pageSize, skip) :
             await api.fetchAllProducts(pageSize, skip);
-        
+
         totalProducts = response.total || 100;
         console.log("asdfsdfsdfdsf__asdfsd", pageSize);
         pagination = new Pagination(Math.ceil(totalProducts / pageSize));
@@ -116,28 +131,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             observer.disconnect();
         }
     }
- 
+
     //listing of product:4
     function renderProducts(products, isSearch = false) {
         console.log("Rendering products...");
         if (products.length > 0) {
             console.log("asfasdfasdfasdf____asdfsadf", products[0]);
-            productContainer.innerHTML = products?.map(product =>
-                `
-        <div class="product-card">
-        <img src="${product?.thumbnail}" alt="${product.title}">
-        <h3>${product?.title}</h3>
-        <p>₹${product?.price}</p>
-        <button onclick="toggleCart(${product?.id})">
-            ${cart.includes(product?.id) ? "Remove from Cart" : "Add to Cart"}
-        </button>
-        <button onclick="toggleWishlist(${product?.id})">
-            ${wishlist.includes(product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
-        </button>
-        <a href="product.html?id=${product?.id}" class="view-details">View Details</a>
-    </div>
-`
+            productContainer.innerHTML = products?.map(product =>`
+                <div class="product-card">
+                <img src="${product?.thumbnail}" alt="${product.title}">
+                <h3>${product?.title}</h3>
+                <p>₹${product?.price}</p>
+                <button onclick="toggleCart(${product?.id})">
+                    ${cart.includes(product?.id) ? "Remove from Cart" : "Add to Cart"}
+                </button>
+                <button onclick="toggleWishlist(${product?.id})">
+                    ${wishlist.includes(product?.id) ? "Remove from Wishlist" : "Add to Wishlist"}
+                </button>
+                <a href="product.html?id=${product?.id}" class="view-details">View Details</a>
+                </div>
+            `
             ).join('');
+
+            console.log("adfafasdfadf___adfadfadfsadsf",productContainer.innerHTML);
         } else {
             productContainer.innerHTML = `
                     <b> No Product Found! </b>
@@ -232,7 +248,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         loadProducts(1, categoryFilter.value);
     });
 
-    
+
 
     function smoothScrollOnClick(pageSize) {
         if (window.disableScroll) return;
@@ -295,7 +311,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.prevPage = prevPage;
     window.nextPage = nextPage;
 
-
     function renderPagination() {
         let pages = pagination.getPages(); // 
         paginationContainer.innerHTML = `
@@ -331,6 +346,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             loadProducts(currentPage, categoryFilter.value);
             renderPagination();
             //Scroll Down Smoothly when New Products Load
+            // addPageIndicator(currentPage);
             setTimeout(smoothScroll(200), 1000);
         }
     }, { root: document.getElementById("productContainer"), rootMargin: "50px", threshold: 0.5 });
