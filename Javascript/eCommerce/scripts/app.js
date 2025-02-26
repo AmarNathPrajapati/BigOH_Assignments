@@ -81,7 +81,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
         if (isFetching) return;
         isFetching = true;
-        document.getElementById("scrollEnd").style.display = 'block'; 
+        if(document.getElementById("scrollEnd")){
+            document.getElementById("scrollEnd").style.display = 'block'; 
+        }
         let skip = (page - 1) * pageSize;
         if (category) {
             searchBox.value = "";
