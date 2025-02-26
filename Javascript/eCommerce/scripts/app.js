@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             `
             ).join('');
 
-            console.log("adfafasdfadf___adfadfadfsadsf",productContainer.innerHTML);
+            // console.log("adfafasdfadf___adfadfadfsadsf",productContainer.innerHTML);
         } else {
             productContainer.innerHTML = `
                     <b> No Product Found! </b>
