@@ -15,6 +15,7 @@ Topic to Cover:
     Date Handling in JavaScript
     Local Storage
     Session Storage
+    cookies
 
 3. JavaScript Fetch API:
     Fetching Data from APIs
@@ -235,6 +236,53 @@ Topic to Cover:
         sessionStorage ka data tab close karne ke baad bhi store raha iska reason ho sakta hai session restore feature ya kuch browser-specific behavior.
         Incognito mode me ye nahi hota!
 
+    f. Cookies:
+        Cookies Kya Hain?
+            Cookies ek small piece of data hoti hain jo browser me store hoti hain aur server aur client ke beech communication me kaam aati hain.
+            Ye ek key-value pair format me store hoti hain.
+
+            Use Cases:
+            User Authentication (Login sessions ya Remember Me feature)
+            User Preferences (Theme selection, language settings)
+            Tracking & Analytics (Google Analytics, Ad targeting)
+
+        Cookies Ki Properties
+            Key-Value Pair → "username=JohnDoe"
+            Storage in Browser → Client side par store hoti hai.
+            Automatic Sending → Same domain ke har request ke sath browser automatically cookies bhejta hai.
+            Expiration Date → Set kiya ja sakta hai ki kab expire hogi.
+            Secure & HTTP Only Options → Sirf HTTPS connections me bhejne ya JavaScript access disable karne ka option hota hai.
+
+        Types of Cookies
+            Session Cookies:
+                Jab tak browser open hai tab tak kaam karti hain.
+                Example: Login session
+
+            Persistent Cookies:
+                Expire hone tak ya manually delete hone tak store rehti hain.
+                Example: "Remember Me" feature
+
+            Secure Cookies:
+                Sirf HTTPS connections me bheji ja sakti hain.
+
+            HttpOnly Cookies:
+                JavaScript se access nahi kiya ja sakta.
+                Security ke liye kaam aati hain.
+                
+            Third-Party Cookies:
+                Dusre domain ki cookies jo advertising aur tracking ke liye use hoti hain
+
+        Cookies vs LocalStorage vs SessionStorage
+            Feature	                  Cookies	                    LocalStorage	                    SessionStorage
+            Size Limit	              4KB	                        5-10MB	                          5-10MB
+            Expiration	              Set kiya ja sakta hai	      Manually delete karna hota hai	  Tab close hone par delete hoti hain
+            Accessible by Server?	    Haan	                      Nahi	                            Nahi
+            Security	                Less Secure	                More Secure	                      More Secure
+
+    Cookies ek small data hoti hain jo browser me store hoti hain aur server ke sath automatically exchange hoti hain.
+    Authentication, tracking, preferences ke liye use hoti hain.
+    Expiration, Secure flag, HTTP-only flag ka use karke security badha sakte hain.
+    Alternatives: LocalStorage ya SessionStorage use kar sakte hain agar sirf client-side storage chahiye.
 
 3. JavaScript Fetch API
     Fetch API JavaScript ka modern way hai HTTP requests send aur data fetch karne ke liye.

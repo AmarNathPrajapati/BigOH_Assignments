@@ -18,7 +18,7 @@ int lcm(int a, int b) { // We know that a*b = lcm*hcf
 
 // Function to calculate smallest number divisible by all numbers from 1 to n
 int smallestNumberDivisible(int n) {
-    int result = 1;
+    int result = 1;                                                  
     for (int i = 1; i <= n; i++) {
         result = lcm(result, i);
     }
