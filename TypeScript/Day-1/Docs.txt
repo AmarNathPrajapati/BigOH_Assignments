@@ -1,0 +1,137 @@
+TypeScript Tasks for Today:
+1. Basic Understanding of TypeScript
+    What is TypeScript and why is it used?
+
+2. Setting Up TypeScript
+    Installation and configuration.
+    Using the TypeScript Playground for hands-on practice.
+    
+3. Basic TypeScript Syntax
+    Understanding variables and their declaration.
+    Exploring data types (Primitive and Reference types).
+    Writing functions in TypeScript.
+
+4. Functions in TypeScript
+    Function Declarations.
+    Function Types.
+    Optional and Default Parameters.
+    Rest Parameters.
+
+
+
+/*********************************** Detailed Exaplanaiton  ************************************/
+
+1. Basic Understanding of TypeScript
+    What is TypeScript?
+        TypeScript ek superset hai JavaScript ka, jo strongly typed features add karta hai.
+        Iska matlab hai ki TypeScript ka code JavaScript se extra hota hai, lekin jab compile hota hai, to pure JavaScript me convert ho jata hai.
+
+        JavaScript + Type System = TypeScript
+
+        TypeScript ka extension .ts hota hai, aur jab compile hota hai to .js file me convert ho jata hai.
+        Isko Microsoft ne develop kiya hai aur ye Open Source hai.
+
+    Why is TypeScript Used?
+        Static Typing – TypeScript me variables ka type define kar sakte hain (string, number, boolean, etc.), jo errors ko prevent karta hai.
+        Better Code Readability – Code zyada structured aur easy-to-read hota hai.
+        Error Detection Before Execution – JavaScript me runtime pe errors milte hain, TypeScript me compile time pe hi error detect ho jata hai.
+        OOPs Support – Classes, Interfaces, and Modifiers ka support deta hai.
+        Better IntelliSense & Autocompletion – VS Code me TypeScript likhne pe better suggestions aur autocomplete milta hai.
+        Code Scalability – Large projects ke liye best hai, kyunki code maintainable aur error-free hota hai.
+
+
+2. Setting Up TypeScript
+        A. Installation and Configuration
+        TypeScript ko system pe install karne ke liye:
+        
+        1️ Node.js Install Karo (Agar pehle se nahi hai)
+            Download Node.js
+            Install karne ke baad check karo:
+            node -v
+        
+        2️ TypeScript Install Karo
+            Global install karne ke liye ye command run karo:
+            npm install -g typescript
+            
+            Check karo install hua ya nahi:
+            tsc -v
+            
+            Agar version number show ho raha hai, to TypeScript install ho gaya.
+
+        3 Agar tum chahte ho ki jaise hi .ts file update ho, waise hi automatically compile aur run ho jaye, to nodemon use karo:
+            npm install -g nodemon
+
+        4. To Run .ts file
+                tsc index.ts
+                node index.js
+
+
+3.Exploring Data Types in TypeScript
+    TypeScript statically typed language hai, to har variable ka type define hota hai.
+    Agar variable ka type nahi diya, to TypeScript automatically infer kar leta hai.
+
+        Types of Data Types in TypeScript:
+            Primitive Types (Basic Data Types)
+            Reference Types (Object, Array, Function, Class, etc.)
+
+        1. Primitive Data Types (7 Types)
+            Data Type	Example
+            string	    "Aman"
+            number	    25, 3.14
+            boolean	    true, false
+            null	    null
+            undefined	undefined
+            bigint	    BigInt(1234567890123456789n)
+            symbol	    Symbol("id")
+
+        
+
+
+
+Note:
+    1. agar JavaScript me name variable declare karte ho aur uspe ek scroll line (wavy underline ya strikethrough) aa rahi hai, to iska reason hai:
+        Reason: name is a Global Object in Browser
+            JavaScript me name ek built-in global object hai jo browser environment me use hota hai.
+            Agar tum name variable declare karte ho, to VS Code warning deta hai ki tum ek existing global object ko overwrite kar rahe ho.
+
+        Solution: Variable ka naam change karo
+            Name ki jagah kuch aur use karo
+            Alternative Solution: Strict Mode Enable Karo
+            "use strict";
+            console.log(window.name);
+        Isliye name ka variable declare karna avoid karo.
+
+    2. TypeScript me Primitive vs Object Types ka Difference
+        TypeScript me primitive types aur wrapper object types dono hote hain.
+        Primitive types faster aur memory-efficient hote hain, jabki wrapper object types extra memory use karte hain aur avoid karne chahiye.
+
+        Primitive Types (Recommended)
+        TypeScript Type	    Example	                    typeof Output       Performance
+        string	            let a: string = "Hello";	"string"            Fast & Efficient
+        number	            let b: number = 42;	        "number"	        Fast & Efficient
+        boolean	            let c: boolean = true;	    "boolean"	        Fast & Efficient
+
+        Key Points
+            Directly store value aur memory-efficient hote hain.
+            Faster execution hota hai, kyunki ye primitive values hain.
+            Hamesha inka hi use recommended hota hai.
+
+        Wrapper Object Types (Avoid)
+        TypeScript Type     Example	                                typeof Output	Performance
+        String	            let a: String = new String("Hello");	"object"	    Slow & Memory-heavy
+        Number	            let b: Number = new Number(42);	        "object"	    Slow & Memory-heavy
+        Boolean	            let c: Boolean = new Boolean(true);	    "object"	    Slow & Memory-heavy
+
+        Key Points
+            Wrapper objects extra memory consume karte hain.
+            typeof check karne par "object" return hota hai, jo problems create kar sakta hai.
+            new keyword se primitive type automatically object ban jata hai, jo inefficient hai.
+
+
+
+
+
+
+
+
+

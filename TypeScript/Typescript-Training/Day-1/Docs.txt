@@ -1,0 +1,205 @@
+TypeScript Tasks for Today:
+1. Basic Understanding of TypeScript
+    What is TypeScript and why is it used?
+
+2. Setting Up TypeScript
+    Installation and configuration.
+    Using the TypeScript Playground for hands-on practice.
+    
+3. Basic TypeScript Syntax
+    Understanding variables and their declaration.
+    Exploring data types (Primitive and Reference types).
+    Writing functions in TypeScript.
+
+4. Functions in TypeScript
+    Function Declarations.
+    Function Types.
+    Optional and Default Parameters.
+    Rest Parameters.
+
+
+
+/*********************************** Detailed Exaplanaiton  ************************************/
+1. Basic Understanding of TypeScript
+    What is TypeScript?
+        TypeScript ek superset hai JavaScript ka, jo strongly typed features add karta hai.
+        Iska matlab hai ki TypeScript ka code JavaScript se extra hota hai, lekin jab compile hota hai, to pure JavaScript me convert ho jata hai.
+
+        JavaScript + Type System = TypeScript
+
+        TypeScript ka extension .ts hota hai, aur jab compile hota hai to .js file me convert ho jata hai.
+        Isko Microsoft ne develop kiya hai aur ye Open Source hai.
+
+    Why is TypeScript Used?
+        Static Typing – TypeScript me variables ka type define kar sakte hain (string, number, boolean, etc.), jo errors ko prevent karta hai.
+        Better Code Readability – Code zyada structured aur easy-to-read hota hai.
+        Error Detection Before Execution – JavaScript me runtime pe errors milte hain, TypeScript me compile time pe hi error detect ho jata hai.
+        OOPs Support – Classes, Interfaces, and Modifiers ka support deta hai.
+        Better IntelliSense & Autocompletion – VS Code me TypeScript likhne pe better suggestions aur autocomplete milta hai.
+        Code Scalability – Large projects ke liye best hai, kyunki code maintainable aur error-free hota hai.
+
+
+2. Setting Up TypeScript
+        A. Installation and Configuration
+        TypeScript ko system pe install karne ke liye:
+        
+        1️ Node.js Install Karo (Agar pehle se nahi hai)
+            Download Node.js
+            Install karne ke baad check karo:
+            node -v
+        
+        2️ TypeScript Install Karo
+            Global install karne ke liye ye command run karo:
+            npm install -g typescript
+            
+            Check karo install hua ya nahi:
+            tsc -v
+            
+            Agar version number show ho raha hai, to TypeScript install ho gaya.
+
+        3 Agar tum chahte ho ki jaise hi .ts file update ho, waise hi automatically compile aur run ho jaye, to nodemon use karo:
+            npm install -g nodemon
+
+        4. To Run .ts file
+                tsc index.ts
+                node index.js
+
+        5. Setup a typeScript projects
+            1. creat folder
+            2. run `npm init -y` ----------------->generate package.json
+            3. run `npm install -g typescript`
+            4. run `tsc --init`  ----------------->generate typescript.json
+            5. set directory
+                                    {
+                        "compilerOptions": {
+                            "target": "ES6",
+                            "module": "CommonJS",
+                            "rootDir": "./src",
+                            "outDir": "./dist",
+                            "strict": true
+                        }
+                    }
+            6. run `tsc` to compile all projects
+            7. to execute file without compile run `npm install -g ts-node`, now you can execute file with code runner.
+            8. for execute and run: tsc 'filename.ts' then node 'filename.js'
+
+3.Exploring Data Types in TypeScript
+    TypeScript statically typed language hai, to har variable ka type define hota hai.
+    Agar variable ka type nahi diya, to TypeScript automatically infer kar leta hai.
+
+        Types of Data Types in TypeScript:
+            Primitive Types (Basic Data Types)
+            Reference Types (Object, Array, Function, Class, etc.)
+
+        1. Primitive Data Types (7 Types)
+            Data Type	Example
+            string	    "Aman"
+            number	    25, 3.14
+            boolean	    true, false
+            null	    null
+            undefined	undefined
+            bigint	    BigInt(1234567890123456789n)
+            symbol	    Symbol("id")
+
+        2. Reference Data Types (Objects, Arrays, Functions, etc.)
+            Reference Type	Example
+            Object	        { name: "Aman", age: 24 }
+            Array	        [1, 2, 3]
+            Tuple	        [string, number]
+            Function	    (a: number, b: number) => number
+            Class	        class Student {}
+
+        3. Writing Functions in TypeScript
+            Function with return type
+            Function without return type (void)
+            Function with optional parameters & default values
+
+        4. Array
+            TypeScript me array ek same type ke elements ka ordered collection hota hai.
+
+        5. Tuple
+            Tuple ek heterogeneous collection hota hai, matlab alag-alag type ke elements store kar sakta hai aur fix order me hone chahiye.
+                Different data types allowed
+                Fixed length hoti hai (jitne elements define kiye utne hi hone chahiye)
+                Position matter karti hai (Pehle string, phir number, phir boolean)
+
+Note:
+    1. agar JavaScript me name variable declare karte ho aur uspe ek scroll line (wavy underline ya strikethrough) aa rahi hai, to iska reason hai:
+        Reason: name is a Global Object in Browser
+            JavaScript me name ek built-in global object hai jo browser environment me use hota hai.
+            Agar tum name variable declare karte ho, to VS Code warning deta hai ki tum ek existing global object ko overwrite kar rahe ho.
+
+        Solution: Variable ka naam change karo
+            Name ki jagah kuch aur use karo
+            Alternative Solution: Strict Mode Enable Karo
+            "use strict";
+            console.log(window.name);
+        Isliye name ka variable declare karna avoid karo.
+
+    2. TypeScript me Primitive vs Object Types ka Difference
+        TypeScript me primitive types aur wrapper object types dono hote hain.
+        Primitive types faster aur memory-efficient hote hain, jabki wrapper object types extra memory use karte hain aur avoid karne chahiye.
+
+        Primitive Types (Recommended)
+        TypeScript Type	    Example	                    typeof Output       Performance
+        string	            let a: string = "Hello";	"string"            Fast & Efficient
+        number	            let b: number = 42;	        "number"	        Fast & Efficient
+        boolean	            let c: boolean = true;	    "boolean"	        Fast & Efficient
+
+        Key Points
+            Directly store value aur memory-efficient hote hain.
+            Faster execution hota hai, kyunki ye primitive values hain.
+            Hamesha inka hi use recommended hota hai.
+
+        Wrapper Object Types (Avoid)
+        TypeScript Type     Example	                                typeof Output	Performance
+        String	            let a: String = new String("Hello");	"object"	    Slow & Memory-heavy
+        Number	            let b: Number = new Number(42);	        "object"	    Slow & Memory-heavy
+        Boolean	            let c: Boolean = new Boolean(true);	    "object"	    Slow & Memory-heavy
+
+        Key Points
+            Wrapper objects extra memory consume karte hain.
+            typeof check karne par "object" return hota hai, jo problems create kar sakta hai.
+            new keyword se primitive type automatically object ban jata hai, jo inefficient hai.
+
+    3. Difference between null vs undefined
+        Feature	            null	        undefined
+        Meaning	            Value           intentionally empty	Value not assigned
+        Type	            object	        undefined
+        Default	            No	            Yes
+        Example	            let a = null;	let b; console.log(b);
+
+
+    4. Strong vs. Weak Typing
+        Typing Type	            Description	                                Example
+        Strongly Typed	        Prevents implicit type conversions.	        "5" + 2 // Error (in strongly typed languages)
+        Weakly Typed	        Allows implicit type conversions.	        "5" + 2 // "52" (in JavaScript)
+
+        JavaScript is weakly typed because it allows implicit conversions ("5" + 2 → "52").
+        TypeScript is stronger than JavaScript
+
+    5. Dynamic Typed and Static Typed
+        Dynamically Typed Language Kya Hota Hai?
+            Dynamically typed language runtime par variable ki type decide karta hai. Iska matlab hai ki aap variable declare karne ke waqt uski type specify nahi karte, aur woh alag-alag types ke values hold kar sakta hai.
+
+        JavaScript → Dynamic Typed
+            JavaScript completely dynamically typed hai kyunki variables ki type runtime par automatically decide hoti hai.
+            bina kisi type declaration ke variable bana sakte ho.
+            
+
+        TypeScript → Static Typed (Not Dynamic)
+            TypeScript static typed hai kyunki yeh compile-time par types check karta hai.
+            Aapko type specify karni padti hai, ya TypeScript khud infer karta hai.
+
+            Language	        Type Checking	         Type Inference     	Dynamic Typed?
+            JavaScript	        Runtime	                 No (Always dynamic)	Yes
+            TypeScript	        Compile-time	         Yes	                No
+
+            Agar TypeScript me type explicitly nahi diya, toh woh type infer kar leta hai!
+            TypeScript dynamically typed nahi hai, balki statically typed hai, lekin uska type inference system use karke dynamic jaisa lag sakta hai.
+
+            Dynamically typed languages (like JavaScript) runtime par type decide karte hain, TypeScript compile-time par check karta hai.
+
+            TypeScript static typed hai, kyunki wo compile-time par type check karta hai.
+            Agar TypeScript dynamic hota, toh variable ki type change karne par error nahi deta.
+            TypeScript is statically typed, but has some flexibility with type inference!
