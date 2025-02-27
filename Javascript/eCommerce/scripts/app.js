@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         indicator.style.height = "50px"
         indicator.classList.add("page-indicator");
         productContainer.appendChild(indicator);
-        console.log("adsfasdfdfddsf___asfadsfad",indicator);
+        console.log("adsfasdfdfddsf___asfadsfad", indicator);
     }
 
 
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log("Rendering products...");
         if (products.length > 0) {
             console.log("asfasdfasdfasdf____asdfsadf", products[0]);
-            productContainer.innerHTML = products?.map(product =>`
+            productContainer.innerHTML = products?.map(product => `
                 <div class="product-card">
                 <img src="${product?.thumbnail}" alt="${product.title}">
                 <h3>${product?.title}</h3>
