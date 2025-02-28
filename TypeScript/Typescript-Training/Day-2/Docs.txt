@@ -1,0 +1,335 @@
+Today's TypeScript Tasks
+
+
+1. Object Type
+Understanding any type.
+Type Aliases.
+Index Signatures.
+
+2. Enumerations (Enums) in TypeScript
+Numeric Enums.
+String Enums.
+Heterogeneous Enums (Can skip).
+Auto Increment (Can skip).
+Reverse Mapping (Can skip).
+
+
+3. Advanced Types
+Union Types.
+Intersection Types.
+keyof Operator.
+typeof Operator.
+Tuples.
+
+
+4. Very Advanced Types (Can skip)
+Conditional Types.
+Mapped Types.
+Template Literal Types.
+
+
+
+5. Understanding the Type System
+Type Annotations.
+Type Inference.
+
+6. Working with Literals
+Understanding Literals.
+Type Inference in Literals.
+
+7. Understanding and Creating Interfaces
+Difference between Types and Interfaces.
+Extending Interfaces.
+Interface with Class Types.
+Implementing Interfaces.
+
+
+
+/************************************************ Detail Explanation **********************************/
+Best Practices:
+
+TypeScript me enums, types aur classes ke naam capital letter se start karna ek best practice hai, par ye mandatory nahi hai.
+Yeh code readability aur maintainability ke liye follow kiya jata hai.
+
+Interface use karo jab objects ya classes ka structure define karna ho.
+Type use karo jab unions, intersections ya complex types define karni ho.
+
+any ka use avoid karo jab tak zarurat na ho.
+unknown type use karna better hai agar strict type checking chahiye.
+
+
+1. Object Type in TypeScript
+TypeScript me objects ko define karne ke liye hum specific types ka use karte hain.
+TypeScript me object type ek tarika hai jisme hum ek object ka structure define karte hain, taki usme sirf wahi properties ho jo expected hain.
+
+
+(i) Understanding any Type
+any type ka use tab hota hai jab hume kisi variable ka type sure nahi hota.
+Iska use avoid karna chahiye kyunki ye TypeScript ka advantage khatam kar deta hai.
+any type ka use tab hota hai jab hume kisi variable ka type pehle se nahi pata hota ya usme multiple types aa sakti hain. Ye TypeScript ke strict type checking ko bypass kar deta hai.
+Lekin any ka jyada use karna achha practice nahi hai, kyunki ye TypeScript ke benefits ko kam kar deta hai.
+
+
+Type Aliases
+Type aliases ka use tab hota hai jab hume ek type ko multiple jagah reuse karna ho.
+iska syntax object ke hee jaisa hota hai.
+TypeScript me agar tum ek type ko extend karna chahte ho, toh intersection (&) operator ka use kar sakte ho.
+Type aliases ka use function parameters ya return types define karne me bhi hota hai.
+
+Index Signatures
+Index signatures tab use hote hain jab hume object me dynamic properties rakhni ho jinme har key ek string ho sakti hai aur uska value ek specific type ka hoga.
+Index signatures se hum ek flexible object bana sakte hain jisme predefined properties ka restriction nahi hota.
+
+Readonly Index Signature
+Agar object ki properties ko modify hone se bachana ho, toh readonly use kar sakte ho
+readonly lagane se object ki properties change nahi ho sakti.
+
+Index signatures dynamic properties handle karne ke liye use hoti hain.
+Keys ka type string ya number ho sakta hai.
+readonly se properties ko modify hone se roka ja sakta hai.
+Fixed aur dynamic properties ek saath use kar sakte ho.
+
+Conclusion
+Index Signature ka use unpredictable properties wale objects ke liye hota hai, jaise:
+
+API responses
+Configurations
+User-defined key-value objects
+Dynamic form fields
+
+
+2. Enumerations (Enums) in TypeScript
+Enums ek special type hota hai jo ek variable ko predefined constant values assign karta hai.
+Enums ke values sirf number ya string ho sakti hain, boolean nahi.
+Enum ka key hamesha string hota zaroori nahi hai, balki identifier hota hai.
+Identifier ka matlab hai koi valid variable name, jo camelCase, PascalCase, snake_case ya UPPER_CASE me ho sakta hai.
+
+
+TypeScript Enums Applications:
+
+Numeric Enums:
+Role-based Access Control (RBAC)
+HTTP Status Codes
+Game State Management
+Error Code Handling
+Month or Weekday Representation
+
+String Enums:
+API Request Methods (GET, POST, etc.)
+User Roles & Permissions
+Redux Action Types
+Theme Management (Dark, Light)
+Form Input Validation Types
+
+
+Numeric Enums
+By default, enums numeric values se start hote hain jo automatically increment hote hain.
+Hum custom values bhi assign kar sakte hain.
+
+String Enums
+String enums me hum har value ko ek string assign kar sakte hain.
+String enums ka advantage hota hai ki ye debugging me easy hote hain, kyunki direct readable values store hoti hain.
+
+Heterogeneous Enums (Can skip)
+Heterogeneous enums numeric aur string values dono ko mix kar sakte hain, lekin ye best practice nahi hoti.
+
+Auto Increment (Can skip)
+Numeric enums me agar hum sirf pehli value define karte hain, to baaki automatically increment hoti hain.
+
+Reverse Mapping (Can skip)
+TypeScript me numeric enums ka ek special feature hota hai reverse mapping, jo ek value se key ko dhoondhne me madad karta hai.
+
+3. Advanced Types
+
+Union Types
+Union types allow a variable to have multiple possible types. This is useful when a variable can hold more than one type of value.
+Use Case:
+When a function can return multiple types.
+When handling API responses that can return different types.
+
+Intersection Types
+Intersection type ka matlab hota hai ki ek type multiple types ko combine karega, aur usme sabhi properties honi chahiye.
+Use case: Jab ek object me multiple types ki properties combine karni ho, jaise kisi employee ke details aur uska role.
+
+keyof operator
+keyof operator ek object ke sabhi keys ka union type return karta hai.
+keyof operator TypeScript me objects ke keys ka union type banane ke liye use hota hai.
+Iska matlab hai ki agar hum kisi object ka type define karte hain, to keyof ka use karke us object ke keys ka ek type generate kar sakte hain.
+    
+    keyof ka Basic Use
+    Agar hum ek object type define karein, aur keyof ka use karein, to hume ek union type milega jo sirf object ke keys ka collection hoga.
+
+    keyof with Generics
+    Agar hume kisi generic function me object ki sirf valid keys access karni ho to keyof ka use helpful hota hai.
+
+    keyof with Mapped Types
+    Agar hume ek object ke sabhi keys ko loop karke kisi naye type me map karna ho to keyof ka use hota hai.
+
+    keyof with Arrays and Tuples
+    Agar keyof kisi array ya tuple ke sath use karein, to ye index values return karega.
+
+    Summary
+        keyof ek object ke keys ka union type return karta hai.
+        keyof ka use dynamically keys access karne aur validate karne ke liye hota hai.
+        keyof generics, mapped types aur classes ke sath powerful hota hai.
+        Arrays aur tuples me keyof sirf valid indexes return karega.
+
+typeof Operator
+typeof operator kisi value ya variable ka type check karne ke liye use hota hai.
+
+Tuples
+Tuple ek special type ka array hota hai jo fixed length aur fixed types ke sath define hota hai.
+
+
+4. Very Advanced Types (Can skip)
+
+Conditional Types
+Conditional types TypeScript me ternary operator ki tarah kaam karte hain. Yeh types ko dynamically decide karne ke liye use hote hain.
+Application:
+Function ke return type ko condition ke basis par change karna.
+Generics me type inference improve karna.
+
+Mapped Types
+Mapped types se hum existing types ko modify ya extend kar sakte hain. Yeh keyof operator ke sath kaam karte hain.
+Application:
+Object ke properties ko optional ya readonly banana.
+Kisi type ka transformed version create karna.
+
+Template Literal Types in TypeScript
+Template Literal Types TypeScript me ek advanced type feature hai jo string manipulation aur dynamic type generation ke liye use hota hai. Yeh feature JavaScript ke template literals (``${}`) ki tarah kaam karta hai, lekin type level par.
+
+Use Cases (Where to Use Template Literal Types?)
+String formatting enforce karne ke liye (e.g., "Hello, XYZ!")
+API endpoints define karne ke liye ("/api/users")
+Dynamic property keys banane ke liye ("label-name")
+Error messages define karne ke liye ("Error: Not Found")
+Role-based permissions generate karne ke liye ("can-admin")
+
+
+5. Understanding the Type System in TypeScript
+TypeScript ka Type System JavaScript ke upar ek type safety layer add karta hai, jo development ko error-free aur maintainable banata hai.
+Yeh Type System do tarike se kaam karta hai:
+
+Type Annotations (Explicit Typing) - Jab hum khud type specify karte hain.
+Type Inference (Implicit Typing) - Jab TypeScript automatically type detect karta hai.
+
+Type Annotations (Explicit Typing)
+Type Annotations ka matlab hai variables, functions, aur objects ke types ko explicitly define karna, taaki TypeScript unnecessary type errors ko catch kar sake.
+
+Type Inference (Implicit Typing)
+TypeScript automatically type detect kar leta hai bina kisi annotation ke, is process ko Type Inference kehte hain.
+
+Type Inference development ko faster aur cleaner banata hai.
+Dono ka balance use karna best practice hai.
+Agar project complex hai, toh Type Annotations use karo. Agar simple variables hai, toh TypeScript ko automatically detect karne do.
+
+
+6. Working with Literals in TypeScript
+Literals ka matlab fixed values hoti hain jo kisi variable, function parameter, ya return type ko restrict kar sakti hain taaki sirf ek specific value ya values ka hi use ho sake.
+
+Literals in TypeScript do tarike ke hote hain:
+Literal Values (Fixed values like "hello", 42, true, etc.)
+Literal Types (Specific values ko type system me use karna)
+Literals TypeScript me type inference aur strict type checking me kaam aate hain.
+
+Type Inference in Literals
+TypeScript automatically literals ka type infer kar leta hai.
+
+Using as const for Literal Type Inference
+Agar hum object ya array ke literals ko change nahi karna chahte, toh as const ka use kar sakte hain.
+
+Combining Literals with Union Types
+Hum literals ko union types ke saath combine kar sakte hain taaki multiple fixed values allow ho sakein.
+
+Literals TypeScript me type safety aur strict value enforcement ke liye kaam aate hain.
+Union types ke saath literals ka use karke zyada controlled environment bana sakte hain.
+as const ka use immutable data structures banane ke liye hota hai.
+
+
+7. Understanding and Creating Interfaces in TypeScript
+TypeScript me interfaces ek powerful concept hai jo hume object ka structure define karne ki suvidha dete hain. Yeh hume ensure karne me madad karte hain ki objects, functions, aur classes ek specific structure follow karein.
+
+Interface Kya Hai?
+Interfaces ek contract ki tarah kaam karte hain jo batata hai ki object ke andar kaun kaun si properties aur methods hone chahiye.
+Type safety provide karte hain taaki galat type ka data assign na ho.
+Reusable hote hain, jo ki code maintainability aur readability badhata hai.
+
+Basic Interface Example
+Agar hume ek object ka structure define karna ho, toh hum interface ka use kar sakte hain.
+
+Difference Between Type and Interface
+TypeScript me types aur interfaces dono kaafi similar hote hain, par inme kuch important differences hote hain.
+
+Feature	                    Interface	                                                Type
+Usage	                    Mostly objects aur class structures ke liye use hota hai	Objects, functions, unions, tuples, aur more ke liye use hota hai
+Extensibility	            extends keyword se extend kar sakte hain	                & (intersection) se extend kar sakte hain
+Merging	                    Multiple declaration ko merge kar sakta hai	                Multiple declarations ko merge nahi kar sakta
+Performance	                Better performance in compilation	                        Thoda slow ho sakta hai
+
+Extending Interfaces
+Agar kisi interface ko expand (inherit) karna ho, toh extends keyword ka use kar sakte hain.
+
+Interface with Class Types
+Agar kisi class ko ensure karna ho ki uske andar specific properties aur methods ho, toh hum interfaces ka use kar sakte hain.
+
+Implementing Multiple Interfaces
+Ek class ek se zyada interfaces implement kar sakti hai, jaise multiple inheritance ka concept hota hai.
+
+Readonly and Optional Properties in Interface
+Agar kisi property ko modify hone se bachana ho, toh readonly ka use kar sakte hain.
+Agar koi property optional ho toh ? ka use kar sakte hain.
+
+Function Types in Interface
+Interface me function ka structure bhi define kar sakte hain.
+
+
+Concept	Explanation
+Interfaces	                    Object ka structure define karne ke liye use hoti hain
+Type vs Interface	            Type ek flexible alias hai, Interface ek structured contract hai
+Extending Interface         	extends se interface expand kar sakte hain
+Class with Interface        	implements keyword se class kisi interface ko follow karti hai
+Readonly Property	            readonly keyword se values change nahi ho sakti
+Optional Property	            ? lagakar property optional bana sakte hain
+Function in Interface	        Function ka structure define karne ke liye use hota hai
+
+Bonus:
+never, any, unknown, aur Discriminated Union in TypeScript
+TypeScript me strict type system hone ki wajah se kabhi-kabhi hume specific aur dynamic types ka use karna padta hai.
+never, any, unknown, aur Discriminated Union inme se kuch advanced types hain jo code safety aur flexibility provide karte hain.
+
+never Type in TypeScript
+never ek special type hai jo kabhi bhi koi value return nahi karta. Iska matlab hai ki agar koi function kabhi complete nahi hoga, toh uska return type never hoga.
+Use cases of never
+Function jo error throw kare
+Function jo infinite loop me ho
+Unreachable code ko represent karne ke liye
+
+
+any Type in TypeScript
+any TypeScript ka sabse flexible aur dangerous type hai. Agar kisi variable ka type any hai, toh usme kisi bhi type ki value assign kar sakte hain.
+Use case:
+Jab kisi variable ka type unknown ho (e.g., JSON.parse()).
+Jab type checking avoid karni ho (lekin ye best practice nahi hai).
+Dynamic user input handle karne ke liye.
+any bypasses type checking
+TypeScript compile time me error nahi dega, lekin runtime pe crash ho sakta hai.
+
+
+unknown Type in TypeScript
+unknown any ki tarah flexible hota hai, lekin type safety provide karta hai. Agar kisi variable ka type unknown hai, toh uspar bina type checking ke koi operation nahi kar sakte.
+Use case:
+Jab value ka type pehle se confirm na ho (e.g., API responses).
+Jab dynamic values handle karni ho, lekin type safety maintain rakhni ho.
+unknown kisi bhi type ka data store kar sakta hai, lekin bina type checking ke uspar koi method call nahi kar sakte.
+
+
+
+Discriminated Union in TypeScript
+Discriminated Union ek powerful pattern hai jo TypeScript me type safety maintain karta hai. Isme multiple object types ka union hota hai, jo ek "discriminant" property se alag-alag pehchane jate hain.
+Use case:
+State management (e.g., success, error, loading state).
+Multiple types ke sath type safety ensure karne ke liye.
+
+
+
+
