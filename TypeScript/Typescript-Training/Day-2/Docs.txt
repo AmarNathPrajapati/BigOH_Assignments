@@ -79,6 +79,7 @@ Type aliases ka use function parameters ya return types define karne me bhi hota
 Index Signatures
 Index signatures tab use hote hain jab hume object me dynamic properties rakhni ho jinme har key ek string ho sakti hai aur uska value ek specific type ka hoga.
 Index signatures se hum ek flexible object bana sakte hain jisme predefined properties ka restriction nahi hota.
+Index signatures ke andar key ka type sirf string, number, ya symbol ho sakta hai—koi bhi generic type T use nahi kar sakte agar uska type string ya number properly define na ho.
 
 Readonly Index Signature
 Agar object ki properties ko modify hone se bachana ho, toh readonly use kar sakte ho

@@ -1,0 +1,44 @@
+function getLength(value: string | number) {
+    return value.length;
+}
+Yeh function sahi chalega? Agar nahi to kyun?
+
+
+const a = "hello";
+let b = "hello";
+typeof a aur typeof b me kya difference hoga?
+
+
+
+let something: any = "Hello";
+let strLength: number = (something as number).length;
+Yeh error dega ya sahi chalega?
+
+
+
+
+type User = { name: string; age: number };
+type ReadonlyUser = { readonly [K in keyof User]: User[K] };
+ReadonlyUser me kya change hoga?
+
+
+
+
+type User = { id: number; name: string };
+type NameType = User["name"];
+
+
+function identity<T>(arg: T): T {
+  return arg;
+}
+const result = identity("Hello");
+
+
+
+
+
+
+
+
+
+

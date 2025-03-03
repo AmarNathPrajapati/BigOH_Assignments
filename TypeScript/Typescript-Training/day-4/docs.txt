@@ -1,0 +1,186 @@
+Advance (Can Skip)
+ - ReturnType
+ - Exclude
+ - Extract
+
+Unknown (Helps dealing with dynamic data.)
+What is optional and readonly
+Satisfies
+
+Object-Oriented Programming (OOP) in TypeScript
+- Basics of classes and objects
+- Inheritance and polymorphism in TypeScript
+- Abstract classes
+
+
+Practice problem based on	
+Generics, Generic Function, Generic Type, Generic Interface, Generic Class and Constraints
+Record, Partial, Required, Omit, Pick and Nullable
+
+
+/*********************************** Detailed Explanation ****************************************************/
+1️. ReturnType<T>
+Kya hota hai?
+ReturnType utility type hota hai jo kisi function ke return type ko extract karta hai.
+Matlab agar tumhare paas ek function hai jo number, string ya koi aur type return kar raha hai, toh ReturnType us type ko deduce kar leta hai.
+
+Kaise kaam karta hai?
+ReturnType conditional types ka use karta hai aur internally infer keyword ka istemal karke function ka return type extract karta hai.
+
+Kaha useful hai?
+Agar tum reusable types banana chahte ho jo kisi function ke return type ke basis par ho.
+Agar tum APIs ya backend responses ke return type ko automatically infer karna chahte ho.
+
+2️. Exclude<T, U>
+Kya hota hai?
+Exclude utility type T se un sabhi types ko hata deta hai jo U me available hain.
+Matlab, agar tum ek type se kuch unwanted values exclude karna chahte ho, toh ye kaam aayega.
+
+Kaha useful hai?
+Agar tum kisi union type me se unwanted values hata kar filtered type banana chahte ho.
+Enum ke kisi specific state ko exclude karna ho.
+
+3️. Extract<T, U>
+Kya hota hai?
+Extract utility type T se sirf wahi types rakhta hai jo U ke andar hote hain.
+Matlab, agar tum common types chahiye ho dono me, toh Extract kaam aayega.
+
+Kaha useful hai?
+Agar tum kisi union type me se sirf valid values extract karna chahte ho.
+Enum ya roles me specific roles filter karna ho.
+
+
+4.unknown Type - Dynamic Data Handle Karne Ka Best Tarika
+unknown TypeScript me ek type-safe alternative hai any ka.
+Jab bhi hume koi dynamic data handle karna hota hai, jo kisi bhi type ka ho sakta hai, tab unknown ka use karna best practice hai.
+
+unknown aur any me key difference:
+
+any ka use karne se TypeScript koi type checking nahi karta, jo unsafe ho sakta hai.
+unknown me TypeScript strict hota hai aur bina proper type assertion ya type checking ke isse use nahi karne deta.
+Agar unknown type ka variable kisi specific type me chahiye, to pehle type check ya assertion lagana padega.
+unknown me pehle proper type check karna zaroori hai, warna TypeScript error dega.
+Warning: Assertion (as) ka use karne se TypeScript ka type checking bypass ho jata hai, isliye pehle typeof check karna best practice hai.
+
+5. readonly - Immutable Properties Ka Use
+readonly ka use kisi object ya array ke properties ko immutable (unchangeable) banane ke liye hota hai.
+`Matlab, ek baar value assign kar di, to usse badal nahi sakte.
+
+6. satisfies Operator - Type Safety Improve Karne Ka Tarika
+TypeScript ka satisfies operator ek naya feature hai jo Type Checking aur Inference dono ka fayda deta hai.
+Ye tab useful hota hai jab hume object ke structure ko follow karte hue type inference bhi chahiye.
+
+Summary (Ek Line Me Samjho)
+Concept	            Explanation
+unknown	            Safer any alternative jo strict type checking enforce karta hai.
+readonly	        Properties ya arrays ko immutable banata hai.
+optional(?)	        Kisi property ko optional banane ke liye use hota hai.
+satisfies	        Type Checking aur Type Inference ka best combination provide karta hai.
+
+
+/************** Object Oriented *****************/
+TypeScript me Object-Oriented Programming (OOP) ka use reusability, scalability, aur modular programming ke liye kiya jata hai.
+
+OOP ke 4 pillars hote hain:
+Encapsulation - Data ko hide karna aur sirf specific methods se access dena.
+Abstraction - Unnecessary details ko hide karna aur sirf essential features expose karna.
+Inheritance - Ek class doosri class ke features inherit kar sakti hai.
+Polymorphism - Ek function ya method alag-alag forms me kaam kar sakta hai
+
+Basics of Classes and Objects
+TypeScript me class ek blueprint hoti hai jo objects create karti hai. Objects real-world entities hote hain jisme properties (variables) aur methods (functions) hote hain.
+constructor ek special method hai jo object create karne ke time properties initialize karta hai.
+
+1. Access Modifiers (public, private, protected)
+Access modifiers batate hain ki class ki properties/methods ko kaha access kiya ja sakta hai.
+
+Modifier	Access Inside Class	        Access in Derived Class	            Access Outside Class
+public	        Yes	                        Yes	                                Yes
+private	        Yes	                        No                                  No
+protected	    Yes	                        Yes	                                No
+
+2️. Inheritance and Polymorphism in TypeScript
+super() ka use parent class ke constructor ko call karne ke liye hota hai.
+Inheritance ka matlab hota hai ek class dusri class ke features ko inherit kare, jisse code reusability badhti hai.
+Polymorphism ka matlab hai same method ka alag-alag classes me different behavior hona.
+
+
+3. Abstract Classes - Blueprint for Other Classes
+Agar ek class sirf dusri classes ke liye ek blueprint ki tarah kaam kare aur uska direct object create na ho sake, to usse abstract class banaya jata hai.
+
+Abstract class me:
+
+Concrete methods (normal functions) bhi ho sakte hain.
+Abstract methods (without implementation) bhi ho sakte hain jo subclasses me implement karne padenge.
+
+
+
+
+
+Note:
+keyof typeof Kya Karta Hai?
+Agar hume kisi object ya enum ke keys ka union type chahiye, jo runtime me define hai, tab keyof typeof ka use hota hai.
+
+Matlab:
+
+typeof object ka type dega.
+keyof us type ke keys ka union type bana dega.
+
+
+Concept	                Explanation
+typeof	                Kisi variable/object ka type nikalta hai.
+keyof	                Kisi object/type ke keys ka union type return karta hai.
+keyof typeof	        Pehle object ka type lo (typeof), fir uske keys ka union type banao (keyof).
+
+
+
+
+
+
+
+
+
+
+1. string
+2. error, because "done" is not any of them from 
+3. error, return type is not defined
+4. error, age is not defined
+5. Arr1 is tuple contain two value number and string and Arr2 is array of string or number type
+6**. both type is string (agar const hai toh literal type otherwise common type)
+7. error, id is readonly can't be change
+8.** error
+9. error, because function is returing string
+10. never, means function never return anything like error, infinite looping and so on.
+11. interface ko extend karana easy hai, type ko nahi.
+12.** error, number not have property length
+13. Invalid, x can be only "hello" or 42
+14. A: "yes", B: "No"
+15. name | age
+16. Not soloved, please Explanation
+17. type UserPreview = {
+    name: string,
+    age: number
+}
+18. type userWitoutid = {
+    name:string,
+    age:number
+}
+19. type PartialUser = {
+    id?:number,
+    name?:string,
+    age?:number
+}
+20. type CompleteUser = {
+    id:number,
+    name:string,
+    age:number
+}
+21. type Permission = {
+    "admin":boolean,
+    "user":boolean
+}
+22** type NameType = string
+
+23. Invalid, age is not defined
+24. Error, modification is not possible
+25. Error, <template> missing
