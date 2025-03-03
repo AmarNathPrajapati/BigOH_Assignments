@@ -25,13 +25,13 @@ interface SuccessResponse {
   handleResponse(res2); // Error: Failed to load data
   
 
-type Params = {
-  status:'ACTIVE' | 'DELETED'
-}
+// type Params = {
+//   status:'ACTIVE' | 'DELETED'
+// }
 
-function generator<T extends Params['status']>(status:T):(T extends 'ACTIVE'? 'Aditya':'arun'){
-  return 'a'
-}
+// function generator<T extends Params['status']>(status:T):(T extends 'ACTIVE'? 'Aditya':'arun'){
+//   return 'a'
+// }
 
   
-const d = generator('ACTIVE')
+// const d = generator('ACTIVE')

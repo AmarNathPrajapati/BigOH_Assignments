@@ -1,167 +1,167 @@
-// Discriminant union
+// // Discriminant union
 
-// Type Restriction
+// // Type Restriction
 
-// Dynamic typing
+// // Dynamic typing
 
-// use case
-
-
+// // use case
 
 
 
-// Product--> superset
 
-type Product = {
 
-    id:number
+// // Product--> superset
+
+// type Product = {
+
+//     id:number
   
-    price:number
+//     price:number
   
-    typeOfProd: 'ELECTROCNICS' | 'FRAGNACE'
+//     typeOfProd: 'ELECTROCNICS' | 'FRAGNACE'
   
   
   
-  } & TV | Fragance
+//   } & TV | Fragance
   
   
   
   
   
-  type TV = {
+//   type TV = {
   
-    typeOfProd: 'ELECTROCNICS'
+//     typeOfProd: 'ELECTROCNICS'
   
-    screenSize: number
+//     screenSize: number
   
-    maxVol: number
+//     maxVol: number
   
-  }
+//   }
   
   
   
-  type Fragance = {
+//   type Fragance = {
   
-    typeOfProd:'FRAGNACE'
+//     typeOfProd:'FRAGNACE'
   
-    baseTime: number
+//     baseTime: number
   
-    volumner:string
+//     volumner:string
   
-  }
+//   }
   
   
   
+                    
   
+//   const samsung:Product = {
   
-  const samsung:Product = {
+//     typeOfProd:'FRAGNACE',
   
-    typeOfProd:'FRAGNACE',
+//     baseTime:12,
   
-    baseTime:12,
+//     volumner:'sdf'
   
-    volumner:'sdf'
+//   }
   
-  }
   
   
   
   
+//   type Aditya = {
   
-  type Aditya = {
+//     name:'Aditya'
   
-    name:'Aditya'
+//   }
   
-  }
   
   
+//   interface Man {
   
-  interface Man {
+//     hiehgt:number
   
-    hiehgt:number
+//     weight:number
   
-    weight:number
+//   }
   
-  }
   
   
+//   interface Arun extends Man {
   
-  interface Arun extends Man {
+//     name:'ARUN'
   
-    name:'ARUN'
+//   }
   
-  }
   
   
+//   interface Man {
   
-  interface Man {
+//     roll:number
   
-    roll:number
+//   }
   
-  }
   
   
+//   //&nbsp; type restirction
   
-  //&nbsp; type restirction
+//   // const obj = {
   
-  // const obj = {
+//   //&nbsp;&nbsp; name:'Aditya',
   
-  //&nbsp;&nbsp; name:'Aditya',
+//   //&nbsp;&nbsp; roll:12,
   
-  //&nbsp;&nbsp; roll:12,
+//   //&nbsp;&nbsp; shouldGiveExam:true
   
-  //&nbsp;&nbsp; shouldGiveExam:true
   
   
+//   // }
   
-  // }
   
   
+//   function genrateor<T extends boolean,C = T extends true ? 'Can give exam':'can not give exam' >(key:T,should:C ){
   
-  function genrateor<T extends boolean,C = T extends true ? 'Can give exam':'can not give exam' >(key:T,should:C ){
   
   
+//   }
   
-  }
   
   
+//   genrateor(true,'')
   
-  genrateor(true,'')
   
   
   
   
+//   type Parms = {
   
-  type Parms = {
+//     status:'ACTIVE' |'DELETED'
   
-    status:'ACTIVE' |'DELETED'
+//   }
   
-  }
   
   
+//   type ActiveResponse = {
   
-  type ActiveResponse = {
+//     name:'Aditya';
   
-    name:'Aditya';
+//   }
   
-  }
+//   type DeletedResponse = {
   
-  type DeletedResponse = {
+//     tab:'Aditya';
   
-    tab:'Aditya';
+//   }
   
-  }
   
   
+//   // function nodeGenrator<T extends Parms['status']>(key:T):T extends 'ACTIVE' ? ActiveResponse :DeletedResponse{
   
-  function nodeGenrator<T extends Parms['status']>(key:T):T extends 'ACTIVE' ? ActiveResponse :DeletedResponse{
+//   //   return 'data';
   
-    return 'data';
+//   // }
   
-  }
   
   
   
   
-  
-  const daata = nodeGenrator('ACTIVE')
+//   // const daata = nodeGenrator('ACTIVE')

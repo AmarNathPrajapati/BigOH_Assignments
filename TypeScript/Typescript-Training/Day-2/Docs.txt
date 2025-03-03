@@ -259,6 +259,7 @@ Agar hume ek object ka structure define karna ho, toh hum interface ka use kar s
 
 Difference Between Type and Interface
 TypeScript me types aur interfaces dono kaafi similar hote hain, par inme kuch important differences hote hain.
+TypeScript में type को सीधे extend नहीं कर सकते जैसे कि interface में extends से करते हैं। लेकिन & (intersection) operator से हम किसी existing type को extend कर सकते हैं।
 
 Feature	                    Interface	                                                Type
 Usage	                    Mostly objects aur class structures ke liye use hota hai	Objects, functions, unions, tuples, aur more ke liye use hota hai
@@ -329,6 +330,36 @@ Discriminated Union ek powerful pattern hai jo TypeScript me type safety maintai
 Use case:
 State management (e.g., success, error, loading state).
 Multiple types ke sath type safety ensure karne ke liye.
+
+
+
+
+bhai, meri type script ki pratical practice karava do...
+mai kuch topics dunga aur tum un topics par practical 2basic 2mediu question do
+fir mai question aur code submit karung aur tum check kar dena
+
+topics lo bhai
+object types
+any type
+typ alias
+index signatures
+numeric enums
+string enums
+Heterogeneous enums
+automatic enums
+reversechecking enum
+
+
+bhai, question ko english me dena, taki mai apne senior ko bhi dikha sakoo
+
+
+
+
+
+
+
+
+
 
 
 

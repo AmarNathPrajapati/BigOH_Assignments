@@ -1,0 +1,120 @@
+Generics
+ - What are Generics.
+ - How to craete generic Function
+ - How to create Generic Types
+
+
+
+
+
+
+/************************************* Detailed Explanatio *********************************/
+1. What are Generics?
+Generics ek powerful feature hai jo humein reusable, type-safe, and flexible code likhne me madad karta hai. 
+Generics ka use karke hum same function, class, ya type ko multiple data types ke saath reuse kar sakte hain.
+
+Kyu zaroori hai Generics?
+Agar humein koi function ya class likhni ho jo multiple types ke saath kaam kare aur har baar naye type ke liye alag-alag function banane ki zaroorat na pade, toh generics best solution hai.
+
+2.How to Create a Generic Function
+Generic functions me <T> ya koi bhi custom placeholder use kar sakte hain jo type-safe hota hai aur reuse bhi ho sakta hai.
+
+Generic Function with Constraints
+Agar hum kisi specific type ko allow karna chahein toh extends ka use kar sakte hain.
+
+3.How to Create Generic Types
+Generic types ka use karke hum type alias ya interface me dynamic types define kar sakte hain.
+
+
+Feature	Explanation
+Generics	            TypeScript me reusability aur type safety badhane ka ek tareeka
+Generic Function	    Ek function jo multiple types ke saath kaam kar sake
+Generic Type Alias	    Type alias me dynamic types allow karna
+Generic Interface	    Interface ko generic banana
+Generic Class	        Class ko generic banana taki wo multiple types ke saath kaam kare
+Generic Constraints	    extends ka use karke specific types ko restrict karna
+
+
+How to Create Generic Classes in TypeScript
+Generic Classes ka use flexible aur reusable class banane ke liye hota hai jo different types ke saath kaam kar sake bina type safety lose kiye.
+
+Agar hum non-generic class likhte hain, toh usme ek fixed type define karni padti hai. Par generic class me hum dynamic type use kar sakte hain jo object create karte waqt specify kiya ja sakta hai.
+
+
+Generic Constraints (Using extends)
+Agar humein kisi generic type ko restrict karna ho taki sirf kuch specific types hi allow ho sake, toh extends ka use karte hain.
+
+Agar bina constraint ke generic class likhi jaaye, toh koi bhi type allow ho jayegi, jo kabhi-kabhi error cause kar sakti hai.
+
+--------------------------------------- Utility function --------------------------------------------------
+1. Record<Type, Keys>
+Definition:
+Record<K, T> ek utility type hai jo specific keys (K) aur value types (T) se milkar banta hai.
+
+Kab Use Karte Hain?
+Jab hume ek object ka structure define karna ho jisme specific keys ho aur unki values ek hi type ki ho.
+Jab hum dynamic objects create karna chahte hain jisme keys predefined ho par unki values ek type ki ho.
+
+2. Partial<Type>
+Definition:
+Partial<T> ek utility type hai jo kisi bhi existing type ki sari properties ko optional bana deta hai.
+
+Kab Use Karte Hain?
+Jab hume kisi type ka ek partial version chahiye jisme saari properties optional ho.
+Jab hume object create karte waqt kuch properties ko chhodne ki flexibility chahiye.
+
+3. Required<Type>
+Definition:
+Required<T> ek utility type hai jo kisi bhi existing type ki saari optional properties ko required bana deta hai.
+
+Kab Use Karte Hain?
+Jab hume ensure karna ho ki object me sari properties present ho.
+Jab hume Partial se wapas original required type banana ho.
+
+Utility Type	        Use Case	                                                        Effect
+Record<K, T>	        Predefined keys ke saath dynamic objects banane ke liye	            Saari keys predefined hoti hain aur values ek type ki hoti hain
+Partial<T>	            Kisi bhi type ki saari properties ko optional banane ke liye	    Objects ko flexible banata hai
+Required<T>	            Kisi bhi type ki saari properties ko required banane ke liye	    Objects ko strict banata hai
+
+4. Omit<Type, Keys>
+Definition:
+Omit<T, K> ek utility type hai jo kisi existing type T ki specific properties (K) ko hata deta hai aur baaki properties ko retain karta hai.
+
+Kab Use Karte Hain?
+Jab hume kisi type me se kuch properties hata kar ek naya type banana ho.
+Jab sensitive ya unnecessary properties ko remove karna ho.
+
+5. Pick<Type, Keys>
+Definition:
+Pick<T, K> ek utility type hai jo kisi existing type T ki sirf wahi properties (K) ko select karta hai jo hume chahiye.
+
+Kab Use Karte Hain?
+Jab hume kisi type me se sirf kuch properties select karni ho.
+Jab hume kisi existing type ka ek subset banana ho.
+
+6. NonNullable<Type>
+Definition:
+NonNullable<T> ek utility type hai jo kisi type me se null aur undefined ko remove kar deta hai.
+
+Kab Use Karte Hain?
+Jab hume ensure karna ho ki kisi variable me null ya undefined na aaye.
+Jab hume strict type safety chahiye ho.
+
+
+Utility Type	            Use Case	                                                        Effect
+Omit<T, K>	                Kisi type me se kuch properties remove karne ke liye	            Defined properties remove hoti hain, baaki properties same rehti hain
+Pick<T, K>	                Kisi type me se sirf specific properties select karne ke liye	    Sirf selected properties ka subset create hota hai
+NonNullable<T>	            Kisi type me se null aur undefined remove karne ke liye	            Sirf valid values bachi rehti hain
+
+
+
+
+
+
+
+
+
+
+
+
+
