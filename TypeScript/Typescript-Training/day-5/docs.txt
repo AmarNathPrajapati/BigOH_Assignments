@@ -1,0 +1,128 @@
+Today's TypeScript Tasks
+Working with Modules and Namespaces
+Importing and Exporting in TypeScript
+Introduction to Decorators
+Practice Problems On:
+Generics: Generic Classes, Generics with Constraints
+Utility Types: Record, Partial, Required, Omit, Pick, Nullable, ReturnType, Exclude, Extract
+Type System: Unknown, Satisfies, Keyof Operator
+Core TypeScript Features: Interfaces, Object Types, Enums, Literals
+
+
+/****************************************** Detailed Explanation **************************************************/
+
+1. Working with Modules and Namespaces in TypeScript
+TypeScript me code ko organize karne ke liye Modules aur Namespaces ka use hota hai.
+
+Modules in TypeScript
+Module ek independent block of code hota hai jo alag file me likha jata hai aur import/export karke use hota hai.
+Yeh Encapsulation provide karta hai, taki scope pollution na ho.
+
+Types of Modules
+TypeScript me mainly do tarah ke modules hote hain:
+Internal Modules → (Namespaces ka use karke)
+External Modules → (ES6 Modules - Import/Export ka use karke)
+
+Namespaces in TypeScript
+Namespace ka use large projects me hota hai jisme multiple modules hote hain.
+Namespace ek logical grouping provide karta hai taki same naam wale variables ya functions ka conflict na ho.
+Namespace ka internal modules ka purana version maana jata hai. Aajkal mostly ES6 modules hi use hote hain.
+Namespace ke andar jo export nahi hai, wo bahar access nahi hoga.
+
+Key Differences Between Modules & Namespaces
+Feature	            Modules (ES6)	                Namespaces
+Scope	            File-based	                    Global scope maintain karta hai
+Import/Export	    Required	                    Nahi chahiye
+Usage	            Preferred in modern TypeScript	Purane large codebase me useful
+File Handling	    Different files	                Ek hi file me work kar sakte hain
+
+2. Importing and Exporting in TypeScript
+ES6 modules ka use TypeScript me hota hai code ko reuse karne ke liye.
+
+Exporting from a Module
+Agar kisi file ke andar variable, function, ya class ko doosri file me use karna hai to usko export karna padta hai.
+
+Default Export (Single Export)
+Agar ek hi function ya class export karna ho, to default export ka use karte hain.
+Default export me {} lagane ki zaroorat nahi hoti import karte time.
+kisi file me keval ek hee function ko export default kiya ja sakata hai
+
+Importing Everything from a Module
+Agar hume poora module import karna ho ek variable ke andar, to * ka use hota hai.
+
+3. Introduction to Decorators in TypeScript
+Decorators ek special feature hain jo TypeScript me Classes, Methods, Properties aur Parameters ko modify karne ke liye use hote hain.
+
+What are Decorators?
+Decorators ek function hote hain jo kisi class ya method ke behavior ko modify kar sakte hain.
+Yeh meta-programming ka ek part hai jo code ko dynamically modify kar sakta hai.
+Angular, NestJS jaise frameworks me bahut use hote hain.
+Decorator likhne ke liye @ ka use hota hai.
+
+Enabling Decorators in TypeScript
+By default Decorators TypeScript me enable nahi hote, isko enable karne ke liye tsconfig.json me yeh change karna hota hai:
+
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+
+Types of Decorators
+Class Decorator
+Method Decorator
+Property Decorator
+Parameter Decorator
+
+
+Class Decorator
+Class Decorator poori class ke behavior ko modify karne ke liye use hota hai.
+
+Method Decorator
+Method decorator kisi specific method ke behavior ko modify karne ke liye use hota hai.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
