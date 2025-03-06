@@ -5,7 +5,7 @@
 // import { Box,  Grid  } from "@mui/material";
 // import { WrapperStyled } from "./styles.compoents";
 
-import Home from "../features/home/Home";
+import Home from "../features/home/ProductSection";
 
 // const Home = () => {
 //   const [products, setProducts] = useState<Product[]>([]);
@@ -128,6 +128,7 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
 
 
 

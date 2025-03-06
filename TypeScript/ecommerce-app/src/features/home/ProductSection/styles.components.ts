@@ -60,3 +60,58 @@ export const Button = styled("button")({
     cursor: "not-allowed",
   },
 });
+export const ButtonBase = styled("button")({
+  margin: "5px",
+  padding: "10px 16px",
+  fontSize: "16px",
+  fontWeight: "bold",
+  borderRadius: "8px",
+  cursor: "pointer",
+  transition: "all 0.3s ease",
+  background: "transparent",
+  border: "2px solid #007bff",
+  color: "#007bff",
+  "&:hover": {
+    background: "#007bff",
+    color: "white",
+  },
+  "&:active": {
+    transform: "translateY(1px)",
+  },
+  "&:disabled": {
+    border: "2px solid #ddd",
+    color: "#ddd",
+    cursor: "not-allowed",
+    background: "transparent",
+  },
+});
+
+export const AddToCartButton = styled(ButtonBase)({});
+
+export const AddToWishlistButton = styled(ButtonBase)({
+  border: "2px solid #28a745",
+  color: "#28a745",
+  "&:hover": {
+    background: "#28a745",
+    color: "white",
+  },
+});
+
+// Remove Buttons
+export const RemoveFromCartButton = styled(ButtonBase)({
+  border: "2px solid #dc3545",
+  color: "#dc3545",
+  "&:hover": {
+    background: "#dc3545",
+    color: "white",
+  },
+});
+
+export const RemoveFromWishlistButton = styled(ButtonBase)({
+  border: "2px solid #ffc107",
+  color: "#ffc107",
+  "&:hover": {
+    background: "#ffc107",
+    color: "black",
+  },
+});

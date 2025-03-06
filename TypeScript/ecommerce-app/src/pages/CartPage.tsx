@@ -1,9 +1,7 @@
-const Cart = () => {
-  return (
-    <div>
-      this is Cart
-    </div>
-  )
+import Cart from "../features/cart/Cart"
+
+const CartPage = () => {
+  return <Cart/>
 }
 
-export default Cart
+export default CartPage

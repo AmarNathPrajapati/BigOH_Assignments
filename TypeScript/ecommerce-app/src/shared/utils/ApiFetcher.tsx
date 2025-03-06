@@ -33,7 +33,7 @@ export default class ApiFetcher {
   
     // 🔹 Fetch Products by Category
     async fetchProductsByCategory(category: string, limit: number = 30, skip: number = 0) {
-      return this.request<{ products: Product[] }>(`/products/category/${category}?limit=${limit}&skip=${skip}`);
+      return this.request<{ products: Product[] }>(`/products/category/${category}?limit=${limit}&skip=${skip}`); //remove query parama from here
     }
   
     // 🔹 Search Products

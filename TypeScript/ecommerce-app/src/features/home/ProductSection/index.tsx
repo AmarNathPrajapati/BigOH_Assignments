@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import api from "../../shared/utils/api";
-import Pagination from "../../shared/utils/Pagination";
-import { Product } from "../../shared/types";
-import { Container, ProductGrid, ProductCard, Image, Title, Price, PaginationContainer, Button } from "./styles.components";
+import { useEffect, useRef, useState } from "react";
+import api from "../../../shared/utils/api";
+import Pagination from "../../../shared/utils/Pagination";
+import { Product } from "../../../shared/types";
+import { Container, ProductGrid, ProductCard, Image, Title, Price, PaginationContainer, Button, AddToCartButton, AddToWishlistButton, RemoveFromCartButton, RemoveFromWishlistButton } from "./styles.components";
+import { useCart } from "../../../shared/context/CartContext";
+import { useWishlist } from "../../../shared/context/WishlistContext";
 
-const Home = () => {
+export const ProductSection = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [pageOffset, setPageOffset] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,6 +14,10 @@ const Home = () => {
   const pagination = useRef(new Pagination(1));
   const observer = useRef<IntersectionObserver | null>(null);
   const lastProductRef = useRef<HTMLDivElement | null>(null);
+
+  const { cart, addToCart, removeFromCart } = useCart();
+  const { wishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
 
   useEffect(() => {
     fetchProducts(1, pageOffset);
@@ -69,13 +75,32 @@ const Home = () => {
       </div>
 
       <ProductGrid>
-        {products.map((product, index) => (
-          <ProductCard key={product.id} ref={index === products.length - 1 ? lastProductRef : null}>
-            <Image src={product.thumbnail} alt={product.title} />
-            <Title>{product.title}</Title>
-            <Price>${product.price}</Price>
-          </ProductCard>
-        ))}
+        {products.map((product, index) => {
+          const isInCart = cart.some((item) => item.id === product.id);
+          const isInWishlist = wishlist.some((item) => item.id === product.id);
+
+          return (
+            <ProductCard key={product.id} ref={index === products.length - 1 ? lastProductRef : null}>
+              <Image src={product.thumbnail} alt={product.title} />
+              <Title>{product.title}</Title>
+              <Price>${product.price}</Price>
+
+              {/* Cart Button */}
+              {isInCart ? (
+                <RemoveFromCartButton onClick={() => removeFromCart(product.id)}>Remove from Cart</RemoveFromCartButton>
+              ) : (
+                <AddToCartButton onClick={() => addToCart(product)}>Add to Cart</AddToCartButton>
+              )}
+
+              {/* Wishlist Button */}
+              {isInWishlist ? (
+                <RemoveFromWishlistButton onClick={() => removeFromWishlist(product.id)}>Remove from Wishlist</RemoveFromWishlistButton>
+              ) : (
+                <AddToWishlistButton onClick={() => addToWishlist(product)}>❤️ Add to Wishlist</AddToWishlistButton>
+              )}
+            </ProductCard>
+          );
+        })}
       </ProductGrid>
         
       <PaginationContainer>
@@ -95,4 +120,3 @@ const Home = () => {
   );
 };
 
-export default Home;

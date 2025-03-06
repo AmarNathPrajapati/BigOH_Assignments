@@ -1,9 +1,7 @@
-const Wishlist = () => {
-  return (
-    <div>
-      this is wishlist page
-    </div>
-  )
+import Wishlist from "../features/wishlist/Wishlist"
+
+const WishlistPage = () => {
+  return <Wishlist/>
 }
 
-export default Wishlist
+export default WishlistPage

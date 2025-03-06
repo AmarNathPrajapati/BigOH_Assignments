@@ -10,7 +10,7 @@ const Layout = () => {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <Navbar onSearch={setSearchQuery} onFilter={setSelectedCategory} />
+      <Navbar onSearch={setSearchQuery} onFilter={setSelectedCategory} /> // incomplete
       <Container sx={{ flex: 1, padding: 2 }}>
         <Outlet context={{ searchQuery, selectedCategory }} />
       </Container>
