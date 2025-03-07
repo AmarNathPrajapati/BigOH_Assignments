@@ -34,11 +34,57 @@ function identity<T>(arg: T): T {
 const result = identity("Hello");
 
 
+/*************************** String vs string ****************************/
+
+string:
+  Ye primitive data type hota hai jo sirf plain text value ko represent karta hai.
+Features:
+  Lightweight aur fast hota hai.
+  Immutable hota hai (value ko directly change nahi kar sakte).
+  Best Practice me string hi use karte hain.
+  Memory me kam jagah leta hai.
+
+String (Object Type)
+  Ye ek Object wrapper hota hai jo new String() constructor se banta hai.
+Features:
+  Yeh ek Object hota hai, isliye jyada memory consume karta hai.
+  Performance slow hoti hai.
+  Strict comparison (===) pe alag behave karta hai.
+
+Feature	        string	              String
+Type	          Primitive	            Object
+Memory	        Kam	                  Zyada
+Speed	          Fast	                Slow
+Comparison	    === me true	          === me false
+Recommended	    Recommended	          Not Recommended
 
 
+Agar String (capital S) ka use karne ke baad bhi agar new String() nahi likha, toh TypeScript isse primitive string ki tarah hi treat karta hai.
+
+TypeScript sirf Type Checking karta hai, Runtime pe JavaScript chalti hai
+let str: String = "Hello"; me "Hello" ek primitive string hai.
+TypeScript sirf check karega ki "Hello" String type ke compatible hai ya nahi, lekin runtime pe yeh sirf ek normal string hi rahega.
+JavaScript me types nahi hote, to typeof str "string" hi return karega.
+
+String sirf TypeScript ke liye annotation hai, JavaScript me kuch change nahi hota
+Jab tum let str: String = "Hello"; likhte ho, to TypeScript isse string ki tarah treat karta hai.
+Transpilation ke baad TypeScript ka String annotation remove ho jata hai, aur sirf JavaScript ka "Hello" bachta hai, jo primitive string hai.
 
 
+String
 
+1. Third-Party API Response Validation
+Use Case: Tum ek API consume kar rahe ho, jo kabhi kabhi primitive string return karti hai, aur kabhi object-wrapped string.
+Agar tum bina check kiye comparison karoge, to error aa sakti hai.
+Why Use String Here?
+Kabhi-kabhi APIs object-wrapped string bhejti hain (khas kar old JavaScript frameworks ya backend systems).
+Agar tum without check comparison (===) karoge, to bug aa sakta hai.
+Conclusion: Agar external API ka data validate karna ho, tab String object ka existence important ho jata hai.
 
-
-
+2.Dynamic String Extension in Prototypes
+Use Case: Tum ek custom utility library bana rahe ho jo String object ko extend karke extra methods provide kare. Primitive string ke prototype me directly methods nahi add kar sakte, lekin String object me kar sakte ho.
+Example: Custom String Utility
+Why Use String Here?
+Tum primitive string me directly method add nahi kar sakte, par String object me kar sakte ho.
+Ye library developers ya framework creators ke liye useful ho sakta hai.
+Conclusion: JavaScript ke prototypes modify karne ke liye kabhi kabhi String object ka use hota hai.
