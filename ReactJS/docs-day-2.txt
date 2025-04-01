@@ -1,0 +1,19 @@
+Two-Way Binding
+    Two-way binding ka matlab hai ki input field ka value state se controlled ho aur state bhi input field ke change hone par update ho.
+    React me useState ke saath onChange event listener ka use karke yeh achieve kar sakte hain.
+
+UseCallback:
+    Problem Without useCallback
+    React me agar koi function re-render hone par baar baar create ho raha hai, to yeh performance issue create kar sakta hai.
+    Isko avoid karne ke liye useCallback function ko cache (memoize) karta hai, taki har render par naya function create na ho.
+
+    Issue
+    Jaise hi count update hoga, App component re-render hoga.
+    Iske saath hi handleClick ka naya instance create hoga, jisse ChildComponent bhi re-render ho jayega.
+    Child component ka re-render hona unnecessary hai, kyunki function ka behavior change nahi ho raha
+
+    Optimized Code with useCallback
+    handleClick function ka reference cache ho gaya hai.
+    Jab count change hoga, tab bhi handleClick ka naya instance create nahi hoga.
+    ChildComponent unnecessary re-render nahi hoga.
+    Best Practice: Jab kisi function ko child component me prop ke roop me bhejna ho, aur wo baar baar re-create ho raha ho, tab useCallback use karna best hai.

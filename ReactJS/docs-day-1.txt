@@ -12,9 +12,6 @@ List & Keys
 Conditional Rendering
     Jab hume kisi cheez ko condition ke basis pe dikhana ya hide karna ho, tab conditional rendering ka use hota hai.
 
-Two-Way Binding
-    Two-way binding ka matlab hai ki input field ka value state se controlled ho aur state bhi input field ke change hone par update ho.
-    React me useState ke saath onChange event listener ka use karke yeh achieve kar sakte hain.
 
 Props & State: Props parent se aate hain, state component ke andar hoti hai.
 List & Keys: Arrays ko .map() se render karte hain aur key prop dena zaroori hota hai.
