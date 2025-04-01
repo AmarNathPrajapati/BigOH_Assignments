@@ -1,0 +1,64 @@
+Props & State
+    Props (Properties) aur State dono React ke core concepts hain.
+    Props: Immutable hote hain, jo parent component se child component ko diye jaate hain.
+    State: Component ke andar hoti hai aur component ke re-render hone par update hoti hai.
+
+List & Keys
+    Jab hume ek list render karni hoti hai React me, to map() function ka use karte hain. Saath hi, 
+    key prop dena zaroori hota hai taki React efficiently re-render kar sake.
+    .map() ka use karke har user ko <li> me render kiya.
+    key={user.id} dena zaroori hai taki React efficiently track kar sake ki kaunse elements change ho rahe hain.
+
+Conditional Rendering
+    Jab hume kisi cheez ko condition ke basis pe dikhana ya hide karna ho, tab conditional rendering ka use hota hai.
+
+Two-Way Binding
+    Two-way binding ka matlab hai ki input field ka value state se controlled ho aur state bhi input field ke change hone par update ho.
+    React me useState ke saath onChange event listener ka use karke yeh achieve kar sakte hain.
+
+Props & State: Props parent se aate hain, state component ke andar hoti hai.
+List & Keys: Arrays ko .map() se render karte hain aur key prop dena zaroori hota hai.
+Conditional Rendering: State ya conditions ke basis pe UI elements ko show/hide karna.
+Two-Way Binding: Input field aur state ko sync karna taki jo type kare wahi reflect ho.
+
+
+Lifecycle in React
+    Lifecycle ka matlab hai component ke different phases—
+    Mounting (Initial render)
+    Updating (Re-render)
+    Unmounting (Cleanup before component is removed)
+
+Class Components me lifecycle methods hote the jaise componentDidMount, componentDidUpdate, aur componentWillUnmount.
+Functional Components me useEffect ka use hota hai jo same kaam karta hai.
+
+Component Lifecycle with useEffect (Functional Component)
+    useEffect ek powerful hook hai jo side effects handle karta hai. Isko lifecycle methods ki jagah use karte hain.
+    Explanation:
+        useEffect(() => {...}, [])
+        Yeh component ke mount hone par API call karega (fetch function).
+        Dependency array [] khali hai, iska matlab yeh sirf ek baar chalega.
+        Cleanup Function (return () => {...})
+        Agar component unmount ho raha hai, to cleanup kaam karega (console.log se dikhaya).
+
+Component Lifecycle in Class Component
+Agar same logic class component me likhna ho to hume lifecycle methods ka use karna padega.
+
+Explanation:
+    componentDidMount()
+    Mount hone par API call karta hai.
+
+    componentWillUnmount()
+    Cleanup ka kaam karta hai.
+
+Comparison:
+Feature	            Functional (useEffect)	                Class (Lifecycle Methods)
+Initial render	    useEffect(() => {...}, [])	            componentDidMount()
+State Update	    useState()	                            this.setState()
+Cleanup	            return () => {...} inside useEffect	    componentWillUnmount()
+
+Lifecycle Methods: Class components me alag alag methods (componentDidMount, componentDidUpdate, componentWillUnmount).
+useEffect: Functional components me lifecycle handle karne ke liye use hota hai.
+Side Effects: API calls, timers, event listeners useEffect ke andar handle hote hain.
+Cleanup Function: Jab component unmount ho to memory leak na ho, iske liye cleanup (return () => {}) ka use karte hain.
+
+
