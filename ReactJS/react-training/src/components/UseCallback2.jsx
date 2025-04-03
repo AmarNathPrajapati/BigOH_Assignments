@@ -18,4 +18,3 @@ function ParentComponentUseCallback() {
 }
 
 export default ParentComponentUseCallback;
-

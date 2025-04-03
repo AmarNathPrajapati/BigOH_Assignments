@@ -54,8 +54,10 @@ State Update	    useState()	                            this.setState()
 Cleanup	            return () => {...} inside useEffect	    componentWillUnmount()
 
 Lifecycle Methods: Class components me alag alag methods (componentDidMount, componentDidUpdate, componentWillUnmount).
-useEffect: Functional components me lifecycle handle karne ke liye use hota hai.
-Side Effects: API calls, timers, event listeners useEffect ke andar handle hote hain.
-Cleanup Function: Jab component unmount ho to memory leak na ho, iske liye cleanup (return () => {}) ka use karte hain.
 
+useEffect: Functional components me lifecycle handle karne ke liye use hota hai.
+
+Side Effects: API calls, timers, event listeners useEffect ke andar handle hote hain.
+
+Cleanup Function: Jab component unmount ho to memory leak na ho, iske liye cleanup (return () => {}) ka use karte hain.
 
