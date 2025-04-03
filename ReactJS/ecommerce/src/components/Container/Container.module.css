@@ -1,0 +1,31 @@
+.container{
+    border: 2px solid black;
+    margin: 5px;
+    height: 80vh;
+    border-radius: 10px;
+    overflow: scroll;
+}
+.searchCategoryContainer{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    background-color: black;
+}
+.searchContainer{
+    padding: 2px;
+    border-radius: 4px;
+    width: 400px;
+    height: 30px;
+}
+.categoryContainer{
+    padding: 2px;
+    border-radius: 4px;
+    width: 400px;
+    height: 30px;
+}
+.productContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
