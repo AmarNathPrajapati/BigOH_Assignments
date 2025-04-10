@@ -26,3 +26,7 @@
     width: 20%;
     filter: invert(1)
 }
+.link{
+    color: white;
+    text-decoration: none;
+}

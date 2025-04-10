@@ -1,5 +1,5 @@
 import styles from './Footer.module.css'
-function Footer(){
+export function Footer(){
     let now = new Date();
     let currentYear = now.getFullYear()
     return(
@@ -12,4 +12,3 @@ function Footer(){
         </>
     )
 }
-export default Footer;
